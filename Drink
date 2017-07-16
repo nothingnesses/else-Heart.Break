@@ -5,7 +5,7 @@ string target = ""
 # index accepts an integer with a value >= 0 and represents an item in target room.
 number index = 0
 
-# copy = 1 when drinking, causes positionof, searchthing or searchroom's last result to be copied to clipboard.
+# copy = 1 when drinking, causes thingsin, positionof, searchthing or searchroom's last result to be copied to clipboard.
 number copy = 0
 # searchroom accepts any string and, when drinking, valid room names containing it are returned if found. Additionally, if the object string above is not empty, its content will be teleported to the room.
 string searchroom = ""
