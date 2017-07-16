@@ -1,0 +1,209 @@
+# object accepts a string containing the name of any person or item to teleport when drinking.
+string object = ""
+# target accepts a string containing the name of any person, item or room to teleport to when drinking.
+string target = ""
+# index accepts an integer with a value >= 0 and represents an item in target room.
+number index = 0
+
+# copy = 1 when drinking, causes positionof, searchthing or searchroom's last result to be copied to clipboard.
+number copy = 0
+# searchroom accepts any string and, when drinking, valid room names containing it are returned if found. Additionally, if the object string above is not empty, its content will be teleported to the room.
+string searchroom = ""
+# searchthing accepts any string and, when drinking, valid person or item names containing it as well as the respective positions are returned if found. Additionally, if the object string above is not empty, its content will be teleported to the person/item.
+string searchthing = ""
+# positionof accepts a string containing an person or item name and, when drinking, their/it's current position is returned.
+string positionof = ""
+# thingsin accepts a string containing a room name and, when drinking, their/it's current contents are returned. Not very useful as not all of the items are listed and/or copied.
+string thingsin = ""
+# sleep accepts an integer >= 0 and represents the duration of sleep that functions use.
+number sleep = 0
+
+# weather accepts an integer with a value >= 1 <= 4 and, when drinking, changes the severity of the weather depending on the value.
+number weather = 0
+
+# money accepts an integer and, when drinking, changes Sebastian's money to its value.
+number money = 9999
+
+# register accepts an integer and, when drinking, registers money to Wellspringer equal to its value.
+number register = 9999
+
+Drink(1)
+Sleepiness(-50)
+Drunkenness(-25)
+Corruption(-25)
+Smelliness(-25)
+
+### Refill ### Cafe_Room1_Poor_WaterTap_Poor_WaterTap_3 can be substituted for any other tap. Just make sure to modify it such that it doesn't clear the drink's code.
+Connect("Cafe_Room1_Poor_WaterTap_Poor_WaterTap_3").SetLiquidAmount(100)
+
+### Register ###
+Connect("Wellspringer").RegisterSeller("Sebastian", register)
+
+### Money ###
+Connect("FinanceComputer").ChangeBalance("Sebastian", money - Connect("FinanceComputer").GetBalanceForPerson("Sebastian"))
+
+### Weather ###
+if weather == 1
+Connect("MeteorologyServer").SetRain(0)
+Say("Weather changed to sunny.")
+end
+if weather == 2
+Connect("MeteorologyServer").SetRain(25)
+Say("Weather changed to drizzle.")
+end
+if weather == 3
+Connect("MeteorologyServer").SetRain(100)
+Say("Weather changed to rain.")
+end
+if weather == 4
+Connect("MeteorologyServer").SetRain(200)
+Say("Weather changed to storm.")
+end
+
+### Search for thing ###
+if searchthing != ""
+loop Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetAllRooms()
+loop thing in Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetThingsInRoom(@)
+if Connect("PoliceOfficeInterior_LargeRecorder_LargeRecorder_1").StringContains(thing, searchthing)
+if object == "" and copy == 1
+Connect("Hotel_ServerBasement_Extractor_1").CopyToClipboard(thing + " in " + Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetPosition(thing))
+Say(thing + " in " + Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetPosition(thing) + " copied.")
+Connect("PoliceOfficeInterior_LargeRecorder_LargeRecorder_1").Sleep(sleep)
+end
+
+if object == "" and copy != 1
+Say(thing + " found in " + Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetPosition(thing) + ".")
+Connect("PoliceOfficeInterior_LargeRecorder_LargeRecorder_1").Sleep(sleep)
+end
+
+if object != "" and Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetTypeOfThing(object) == "character"
+Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").SetPosition("PoliceOfficeInterior_LargeRecorder_LargeRecorder_1", object)
+Connect("PoliceOfficeInterior_LargeRecorder_LargeRecorder_1").MovePerson(object, thing)
+if copy == 1
+Connect("Hotel_ServerBasement_Extractor_1").CopyToClipboard(thing + " in " + Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetPosition(thing))
+Say(object + " transported to " + Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetPosition(thing) + " and location copied.")
+else
+Say(object + " transported to " + Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetPosition(thing) + ".")
+end
+
+break
+break
+end
+
+if object != "" and Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetTypeOfThing(object) != "character"
+Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").SetPosition(object, thing)
+if copy == 1
+Connect("Hotel_ServerBasement_Extractor_1").CopyToClipboard(thing + " in " + Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetPosition(thing))
+Say(object + " transported to " + Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetPosition(thing) + " and location copied.")
+else
+Say(object + " transported to " + Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetPosition(thing) + ".")
+end
+
+break
+break
+end
+
+else
+Say(searchthing + " not found in " + @ + ".")
+end
+
+end
+
+end
+
+end
+
+### Search for room ###
+if searchroom != ""
+loop room in Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetAllRooms()
+if Connect("PoliceOfficeInterior_LargeRecorder_LargeRecorder_1").StringContains(room, searchroom)
+if object == "" and copy == 1
+Connect("Hotel_ServerBasement_Extractor_1").CopyToClipboard(room)
+Say(room + " copied.")
+Connect("PoliceOfficeInterior_LargeRecorder_LargeRecorder_1").Sleep(sleep)
+end
+
+if object == "" and copy != 1
+Say(room + " found.")
+Connect("PoliceOfficeInterior_LargeRecorder_LargeRecorder_1").Sleep(sleep)
+end
+
+if object != "" and Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetTypeOfThing(object) == "character"
+array things = Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetThingsInRoom(room)
+Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").SetPosition("PoliceOfficeInterior_LargeRecorder_LargeRecorder_1", object)
+Connect("PoliceOfficeInterior_LargeRecorder_LargeRecorder_1").MovePerson(object, things[index])
+if copy == 1
+Connect("Hotel_ServerBasement_Extractor_1").CopyToClipboard(Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetPosition(things[index]))
+Say(object + " transported to " + Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetPosition(things[index]) + " and location copied.")
+else
+Say(object + " transported to " + Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetPosition(things[index]) + ".")
+end
+
+break
+end
+
+if object != "" and Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetTypeOfThing(object) != "character"
+array things = Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetThingsInRoom(room)
+Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").SetPosition(object, things[index])
+if copy == 1
+Connect("Hotel_ServerBasement_Extractor_1").CopyToClipboard(Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetPosition(things[index]))
+Say(object + " transported to " + Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetPosition(things[index]) + " and location copied.")
+else
+Say(object + " transported to " + Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetPosition(things[index]) + ".")
+end
+
+break
+end
+
+else
+Say(searchroom + " not found.")
+end
+
+end
+
+end
+
+### Teleport ###
+if target != "" and object != "" and Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetRoom(target) == "" and Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetTypeOfThing(object) == "character" and Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").Count(target) != 0
+array things = Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetThingsInRoom(target)
+Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").SetPosition("PoliceOfficeInterior_LargeRecorder_LargeRecorder_1", object)
+Connect("PoliceOfficeInterior_LargeRecorder_LargeRecorder_1").MovePerson(object, things[index])
+Say(object + " transported to " + Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetPosition(things[index]) + ".")
+end
+
+if target != "" and object != "" and Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetRoom(target) == "" and Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetTypeOfThing(object) != "character" and Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").Count(target) != 0
+array things = Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetThingsInRoom(target)
+Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").SetPosition(object, things[index])
+Say(object + " transported to " + Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetPosition(things[index]) + ".")
+end
+
+if target != "" and object != "" and Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetRoom(target) != "" and Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetTypeOfThing(object) == "character"
+Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").SetPosition("PoliceOfficeInterior_LargeRecorder_LargeRecorder_1", object)
+Connect("PoliceOfficeInterior_LargeRecorder_LargeRecorder_1").MovePerson(object, target)
+Say(object + " transported to " + Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetPosition(target) + ".")
+end
+
+if target != "" and object != "" and Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetRoom(target) != "" and Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetTypeOfThing(object) != "character" and Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetTypeOfThing(object) != ""
+Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").SetPosition(object, target)
+Say(object + " transported to " + Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetPosition(target) + ".")
+end
+
+### Get position ###
+if positionof != "" and copy == 1
+Connect("Hotel_ServerBasement_Extractor_1").CopyToClipboard(Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetPosition(positionof))
+Say(Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetPosition(positionof) + " copied.")
+end
+
+if positionof != "" and copy != 1
+Say(positionof + " is at " + Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetPosition(positionof))
+end
+
+### Things in room ###
+if thingsin != "" and copy == 1
+Connect("Hotel_ServerBasement_Extractor_1").CopyToClipboard(thingsin + " contains: " + Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetThingsInRoom(thingsin))
+Say(thingsin + " contains: " + Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetThingsInRoom(thingsin) + " copied.")
+end
+
+if thingsin != "" and copy != 1
+Say(thingsin + " contains: " + Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetThingsInRoom(thingsin))
+end
