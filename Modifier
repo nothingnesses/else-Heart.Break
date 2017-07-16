@@ -1,0 +1,10 @@
+bool Allow(string target, number level)
+number mode = 0 # Accepts any integer. If mode = 1, doors hacked will be locked, vice-versa if mode = 2.
+if mode == 1
+Connect("Hotel_Lobby_ComputerCashier").Unlock(target)
+end
+if mode == 2
+Connect("Hotel_Lobby_ComputerCashier").Lock (target)
+end
+return true
+end
