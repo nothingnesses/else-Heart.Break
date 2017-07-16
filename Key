@@ -1,0 +1,79 @@
+# mode accepts an integer with a value >= 1 <= 5 and alters the order in which values in the range are tried.
+number mode = 0
+# denominator accepts an integer with a value > 0 and is used as a constant in modes 3 and 4.
+number denominator = 100
+# max accepts an integer with a value > min and represents the upper limit of the range of numbers to be tried.
+number max = 100000
+# max accepts an integer with a value < max and represents the lower limit of the range of numbers to be tried.
+number min = 0
+# increment accepts an integer with a positive value and is used as a constant in mode 6. The value I used is the a prime number nearest to (max + min) / 4 which seems to produce random enough values.
+number increment = 24989
+# seed accepts an integer with a value < max and represents the starting value used in the PRNG.
+number seed = max - 1
+
+if mode == 0 # Tries values in the range in order.
+loop value from min to max
+if Toggle(value) == true
+break
+end
+end
+end
+
+if mode == 1 # Tries values in the range in reverse.
+loop value from min to max
+if Toggle((min + max) - value) == true
+break
+end
+end
+end
+
+if mode == 2 # Alternates between the remaining untried highest and lowest values in the range until the middle or correct value is reached.
+loop value from min to max
+if (Mod(value, 2) == 0)
+value = max - value
+end
+if value == (min + max) / 2
+break
+end
+if Toggle(value) == true
+break
+end
+end
+end
+
+if mode == 3 # Divides the range by denominator and tries values in each fragment in reverse, doing so until the correct value is reached or the range is exhausted.
+loop numerator from 1 to denominator
+loop value from Int(((numerator - 1) * (max - min)) / denominator) to Int((numerator * (max - min)) / denominator)
+if Toggle((Int((numerator * (max - min)) / denominator) + Int(((numerator - 1) * (max - min)) / denominator)) - value) == true
+break
+break
+end
+end
+end
+end
+
+if mode == 4 # Divides the range by denominator and alternates between the remaining untried highest and lowest values for each fragment, moving to the next fragment when the middle value of the current fragment is reached, doing so until the correct value is reached or the range is exhausted.
+loop numerator from 1 to denominator
+loop value from Int(((numerator - 1) * (max - min)) / denominator) to Int((numerator * (max - min)) / denominator)
+if (Mod(value, 2) == 0)
+value = Int((numerator * (max - min)) / denominator) - (value - Int(((numerator - 1) * (max - min)) / denominator))
+end
+if value == (Int(((numerator - 1) * (max - min)) / denominator) + Int((numerator * (max - min)) / denominator)) / 2
+break
+end
+if Toggle(value) == true
+break
+break
+end
+end
+end
+end
+
+if mode == 5 # Tries values in the range in pseudo-random order using a form of linear congruential generator.
+loop
+seed = Mod((seed + increment), max)
+if Toggle(seed) == true
+break
+end
+end
+end
