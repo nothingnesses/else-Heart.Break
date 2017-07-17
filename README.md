@@ -6,8 +6,8 @@ The codes are pretty well documented and should be easy enough to follow so read
 
 The Drink code allows any drink coded with it when drunk to:
 * Teleport anyone or anything to anyone or anything or anywhere.
-* Find the name or position of anyone or anything in the room or entire world, copy them if required.
-* Find the name of any room and copy it if required.
+* Find the name or position of anyone or anything in the room or entire world, copy them and/or teleport anything or anyone to them if required.
+* Find the name of any room and copy and/or teleport anything or anyone to it if required.
 * Change the weather.
 * Do basic maintenance - finance Sebastian, register money to Wellspringer so you keep your job, alleviate sleepiness, drunkenness, etc.
 * Self-replenish.
