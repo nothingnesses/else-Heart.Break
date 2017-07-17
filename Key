@@ -1,11 +1,11 @@
 # mode accepts an integer with a value >= 1 <= 5 and alters the order in which values in the range are tried.
 number mode = 0
-# denominator accepts an integer with a value > 0 and is used as a constant in modes 3 and 4.
-number denominator = 100
 # max accepts an integer with a value > min and represents the upper limit of the range of numbers to be tried.
 number max = 100000
 # max accepts an integer with a value < max and represents the lower limit of the range of numbers to be tried.
 number min = 0
+# denominator accepts an integer with a value > 0 and is used as a constant in modes 3 and 4.
+number denominator = 100
 # increment accepts an integer with a positive value and is used as a constant in mode 6. The value I used is the a prime number nearest to (max + min) / 4 which seems to produce random enough values.
 number increment = 24989
 # seed accepts an integer with a value < max and represents the starting value used in the PRNG.
