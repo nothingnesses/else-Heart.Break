@@ -1,5 +1,5 @@
 # else-Heart.Break
-Awesome code for items in the game else Heart.Break().
+Awesome code for items in the game [else Heart.Break()](http://elseheartbreak.com/ "else Heart.Break() Homepage").
 
 # Purpose
 The codes are pretty well commented and those should be easy enough to follow so reading them should give a pretty good gist of what the codes do. In general though:
