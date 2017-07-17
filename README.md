@@ -2,7 +2,7 @@
 Awesome code for items in the game else Heart.Break().
 
 # Purpose
-The codes are pretty well documented and should easy enough to follow so reading those should give a pretty good gist of what they do. In general though:
+The codes are pretty well documented and should be easy enough to follow so reading those should give a pretty good gist of what they do. In general though:
 
 The Drink code allows any drink coded with it when drunk to:
 * Teleport anyone or anything to anyone or anything or anywhere.
