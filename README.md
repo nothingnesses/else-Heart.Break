@@ -28,7 +28,7 @@ SetMhz(500)
 SetMaxTime(-2)
 ```
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;then use it on PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1 and &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PoliceOfficeInterior_LargeRecorder_LargeRecorder_1. If you don't know which ones these are, you can use an extractor on the computers in the Police Station or just use the screwdriver on all the computers to make sure they were done.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;then use it on PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1 and &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PoliceOfficeInterior_LargeRecorder_LargeRecorder_1. If you don't know which ones these are, you can use an extractor&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;on the computers in the Police Station or just use the screwdriver on all the computers to make sure they were done.
 
 * When copy is turned on, and especially for the "Search for thing" and "Search for room" functions, do note that even though everything will be copied, they will only be copied one at a time so it may be a good idea to have a text editor outside of the game ready to paste the contents of the clipboard in. Maybe use some macro program to automate the pasting process.
 
