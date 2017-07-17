@@ -1,7 +1,7 @@
 # else-Heart.Break
 Awesome code for items in the game else Heart.Break().
 
-# What is this for?
+# Purpose
 The codes are pretty well documented and should easy enough to follow so reading those should give a pretty good gist of what they do. In general though:
 
 The Drink code allows any drink coded with it when drunk to:
