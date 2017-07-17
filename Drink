@@ -34,7 +34,7 @@ Corruption(-25)
 Smelliness(-25)
 
 ### Refill ### Cafe_Room1_Poor_WaterTap_Poor_WaterTap_3 can be substituted for any other tap. Just make sure to modify it such that it doesn't clear the drink's code.
-Connect("Cafe_Room1_Poor_WaterTap_Poor_WaterTap_3").SetLiquidAmount(100)
+Connect("Cafe_Room1_Poor_WaterTap_Poor_WaterTap_3").SetLiquidAmount(1000)
 
 ### Register ###
 Connect("Wellspringer").RegisterSeller("Sebastian", register)
