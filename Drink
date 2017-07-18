@@ -5,6 +5,11 @@ string target = ""
 # index accepts an integer with a value >= 0 and represents an item in target room.
 number index = 0
 
+# zap = 1 when drinking, causes object to be zapped then knocked out.
+number zap = 0
+# zapgently = 1 when drinking, causes object to be zapped.
+number zapgently = 0
+
 # copy = 1 when drinking, causes thingsin, positionof, searchthing or searchroom's last result to be copied to clipboard.
 number copy = 0
 # searchroom accepts any string and, when drinking, valid room names containing it are returned if found. Additionally, if the object string above is not empty, its content will be teleported to the room.
@@ -13,7 +18,7 @@ string searchroom = ""
 string searchthing = ""
 # positionof accepts a string containing an person or item name and, when drinking, their/it's current position is returned.
 string positionof = ""
-# thingsin accepts a string containing a room name and, when drinking, their/it's current contents are returned. Not very useful as not all of the items are listed and/or copied.
+# thingsin accepts a string containing a room name and, when drinking, it's current contents are returned. This with copy = 1 is not very useful as not all of the items are copied.
 string thingsin = ""
 # sleep accepts an integer >= 0 and represents the duration of sleep that functions use.
 number sleep = 0
@@ -206,4 +211,15 @@ end
 
 if thingsin != "" and copy != 1
 Say(thingsin + " contains: " + Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetThingsInRoom(thingsin))
+end
+
+### Zap ###
+if zap == 1 and object != "" and Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetTypeOfThing(object) == "character"
+Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").SetPosition("PoliceOfficeInterior_LargeRecorder_LargeRecorder_1", object)
+Connect("PoliceOfficeInterior_LargeRecorder_LargeRecorder_1").ZapPerson(object)
+end
+
+### Zap gently ###
+if zapgently == 1 and object != "" and Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetTypeOfThing(object) == "character"
+Connect("Heart").ZapPersonGently(object)
 end
