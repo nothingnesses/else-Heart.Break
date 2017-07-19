@@ -232,7 +232,7 @@ end
 
 ### Zap ###
 if zap == 1 and object != "" and Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetTypeOfThing(object) == "character"
-Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").SetPosition("PoliceOfficeInterior_LargeRecorder_LargeRecorder_1", object)
+Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").SetPosition("PoliceOfficeInterior_LargeRecorder_LargeRecorder_1", target)
 Connect("PoliceOfficeInterior_LargeRecorder_LargeRecorder_1").ZapPerson(target)
 end
 
