@@ -16,7 +16,7 @@ The codes are pretty well commented and those should be easy enough to follow so
     * Do basic maintenance - finance Sebastian, register money to Wellspringer so you keep your job, alleviate sleepiness, drunkenness, etc.
     * Self-replenish.
 
-* The Key code allows any key coded with it when used on any door to toggle the door using values obtained from different bruteforce algorithms of choice, useful for when a second modifier has not yet been obtained.
+* The Key code allows any key coded with it when used on any door to toggle the door using values from a list (which contains all(?) the door values as of version 1.0.9 of the game) or values obtained from different bruteforce algorithms of choice, useful for when a second modifier has not yet been obtained.
 
 * The Modifier code allows any modifier coded with it to hack any hackable object as well as lock or unlock any door hacked with it.
 
