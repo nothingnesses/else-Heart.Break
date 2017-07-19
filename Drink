@@ -2,10 +2,11 @@
 string object = ""
 # target accepts a string containing the name of any person, item or room to teleport to when drinking.
 string target = ""
+# index accepts an integer with a value >= 0 and represents an item in target room that is used in the searchroom and teleport to room functions as an item in the room to teleport the content of the object string to.
+number index = 0
 
 # copy = 1 when drinking, causes thingsin, positionof, searchthing or searchroom's last result to be copied to clipboard.
 number copy = 0
-
 # searchroom accepts any string and, when drinking, valid room names containing it are returned if found. Additionally, if the object string is not empty, its content will be teleported to the room.
 string searchroom = ""
 # searchthing accepts any string and, when drinking, valid person or item names containing it as well as the respective positions are returned if found. If the object string is not empty, its content will be teleported to the people/items found. If the target string is not empty, the people/items found will be teleported to the location of the content of the string.
@@ -14,8 +15,6 @@ string searchthing = ""
 string positionof = ""
 # thingsin accepts a string containing a room name and, when drinking, it's current contents are returned. This with copy = 1 is not very useful as not all of the items are copied.
 string thingsin = ""
-# index accepts an integer with a value >= 0 and represents an item in target room that is used in the searchroom and teleport to room functions as an item in the room to teleport the content of the object string to.
-number index = 0
 # delay accepts an integer >= 0 and represents the duration of delay that the searchroom and searchthing functions use between results.
 number delay = 0
 
