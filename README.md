@@ -4,23 +4,26 @@ Awesome code for items in the game [else Heart.Break()](http://elseheartbreak.co
 # Purpose
 The codes are pretty well commented and those should be easy enough to follow so reading them should give a pretty good gist of what the codes do. In general though:
 
-1. The Drink code allows any drink coded with it when drunk to:
-    * Teleport anyone or anything to anyone or anything or anywhere.
+* The Drink code allows any drink coded with it when drunk to:
+    * Teleport anyone or anything to anyone or anything or anyplace.
+    * Find the name of anyone or anything in the world, copy the results and/or teleport anything or anyone to them or teleport them to anything or anyone or anyplace if required.
+    * Find the name of any room and copy the results and/or teleport anything or anyone to them if required.
+    * Find the position of anything in the world, copy the results if required.
+    * Get the names of everything and everyone in the room and copy the results if required.
+    * Cause anyone to try to interact with anyone or anything.
     * Zap or knock out anyone.
-    * Find the name or position of anyone or anything in the room or entire world, copy them and/or teleport anything or anyone to them if required.
-    * Find the name of any room and copy and/or teleport anything or anyone to it if required.
     * Change the weather.
     * Do basic maintenance - finance Sebastian, register money to Wellspringer so you keep your job, alleviate sleepiness, drunkenness, etc.
     * Self-replenish.
 
-2. The Key code allows any key coded with it when used on any door to toggle the door using values obtained from different bruteforce algorithms of choice, useful for when a second modifier has not yet been obtained.
+* The Key code allows any key coded with it when used on any door to toggle the door using values obtained from different bruteforce algorithms of choice, useful for when a second modifier has not yet been obtained.
 
-3. The Modifier code allows any modifier coded with it to hack any hackable object as well as lock or unlock any door hacked with it.
+* The Modifier code allows any modifier coded with it to hack any hackable object as well as lock or unlock any door hacked with it.
 
 # Notes
 * The codes accept variables located near the top which should be edited as required to alter the behaviour of the items. As mentioned, reading the comments should help.
 
-* The scripts for Key and Drink's "Search for thing" and "Search for room" functions have a long execution duration and will inevitably stop after 60 seconds. To prevent this, pause the game when running them as scripts continue to run (and at a faster rate) even when the game is paused.
+* The scripts for Key and Drink's "Search for thing" and "Search for room" functions have a long execution duration and will inevitably stop after 60 seconds. To prevent this, pause the game when running them because scripts continue to run (and at a faster rate) even when the game is paused.
 
 * Additionally, to speed up "Search for thing" and "Search for room" you can obtain a screwdriver, change its code to:
 
