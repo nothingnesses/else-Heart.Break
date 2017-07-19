@@ -16,15 +16,15 @@ string positionof = ""
 string thingsin = ""
 # index accepts an integer with a value >= 0 and represents an item in target room that is used in the searchroom and teleport to room functions as an item in the room to teleport the content of the object string to.
 number index = 0
-# sleep accepts an integer >= 0 and represents the duration of delay that the searchroom and searchthing functions use between results.
-number sleep = 0
+# delay accepts an integer >= 0 and represents the duration of delay that the searchroom and searchthing functions use between results.
+number delay = 0
 
 # interact accepts a string containing a person or thing and, when drinking, causes causes the content of the object string (should contain the name of a person in this case) to interact with them/it.
 string interact = ""
 
-# zap = 1 when drinking, causes the content of the target string (should contain the name of a person in this case) to be zapped then knocked out.
+# zap accepts an integer >= 1 <= 8 and, when drinking, causes the content of the target string (should contain the name of a person in this case) to be zapped then knocked out for the duration of its value in seconds.
 number zap = 0
-# zapgently = 1 when drinking, causes the content of the target string (should contain the name of a person in this case) to be zapped.
+# zapgently accepts an integer >= 1 <= 8 and, when drinking, causes the content of the target string (should contain the name of a person in this case) to be zapped for the duration of its value in seconds.
 number zapgently = 0
 
 # weather accepts an integer with a value >= 1 <= 4 and, when drinking, changes the severity of the weather depending on the value.
@@ -89,12 +89,12 @@ end
 if object == "" and copy == 1
 Connect("Hotel_ServerBasement_Extractor_1").CopyToClipboard(thing + " in " + Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetPosition(thing))
 Say(thing + " in " + Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetPosition(thing) + " copied.")
-Connect("PoliceOfficeInterior_LargeRecorder_LargeRecorder_1").Sleep(sleep)
+Connect("PoliceOfficeInterior_LargeRecorder_LargeRecorder_1").Sleep(delay)
 end
 
 if object == "" and copy != 1
 Say(thing + " found in " + Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetPosition(thing) + ".")
-Connect("PoliceOfficeInterior_LargeRecorder_LargeRecorder_1").Sleep(sleep)
+Connect("PoliceOfficeInterior_LargeRecorder_LargeRecorder_1").Sleep(delay)
 end
 
 if object != "" and Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetTypeOfThing(object) == "character"
@@ -142,12 +142,12 @@ if Connect("PoliceOfficeInterior_LargeRecorder_LargeRecorder_1").StringContains(
 if object == "" and copy == 1
 Connect("Hotel_ServerBasement_Extractor_1").CopyToClipboard(room)
 Say(room + " copied.")
-Connect("PoliceOfficeInterior_LargeRecorder_LargeRecorder_1").Sleep(sleep)
+Connect("PoliceOfficeInterior_LargeRecorder_LargeRecorder_1").Sleep(delay)
 end
 
 if object == "" and copy != 1
 Say(room + " found.")
-Connect("PoliceOfficeInterior_LargeRecorder_LargeRecorder_1").Sleep(sleep)
+Connect("PoliceOfficeInterior_LargeRecorder_LargeRecorder_1").Sleep(delay)
 end
 
 if object != "" and Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetTypeOfThing(object) == "character"
@@ -231,14 +231,20 @@ Say(thingsin + " contains: " + Connect("PoliceOfficeInterior_MinistryOfficeWorks
 end
 
 ### Zap ###
-if zap == 1 and target != "" and Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetTypeOfThing(target) == "character"
+if zap >= 1 and target != "" and Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetTypeOfThing(target) == "character"
 Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").SetPosition("PoliceOfficeInterior_LargeRecorder_LargeRecorder_1", target)
+loop from 0 to zap
 Connect("PoliceOfficeInterior_LargeRecorder_LargeRecorder_1").ZapPerson(target)
+Connect("PoliceOfficeInterior_LargeRecorder_LargeRecorder_1").Sleep(1)
+end
 end
 
 ### Zap gently ###
-if zapgently == 1 and target != "" and Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetTypeOfThing(target) == "character"
+if zapgently >= 1 and target != "" and Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetTypeOfThing(target) == "character"
+loop from 0 to zapgently
 Connect("Heart").ZapPersonGently(target)
+Connect("PoliceOfficeInterior_LargeRecorder_LargeRecorder_1").Sleep(1)
+end
 end
 
 ### Interact ###
