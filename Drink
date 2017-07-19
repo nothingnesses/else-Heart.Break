@@ -231,17 +231,17 @@ Say(thingsin + " contains: " + Connect("PoliceOfficeInterior_MinistryOfficeWorks
 end
 
 ### Zap ###
-if zap == 1 and target != "" and Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetTypeOfThing(object) == "character"
+if zap == 1 and target != "" and Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetTypeOfThing(target) == "character"
 Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").SetPosition("PoliceOfficeInterior_LargeRecorder_LargeRecorder_1", target)
 Connect("PoliceOfficeInterior_LargeRecorder_LargeRecorder_1").ZapPerson(target)
 end
 
 ### Zap gently ###
-if zapgently == 1 and target != "" and Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetTypeOfThing(object) == "character"
+if zapgently == 1 and target != "" and Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetTypeOfThing(target) == "character"
 Connect("Heart").ZapPersonGently(target)
 end
 
 ### Interact ###
-if interact != "" and target != "" and Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetTypeOfThing(object) == "character"
+if interact != "" and object != "" and Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetTypeOfThing(object) == "character"
 Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").InteractWith(object, interact)
 end
