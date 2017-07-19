@@ -9,9 +9,9 @@ The codes are pretty well commented and those should be easy enough to follow so
     * Find the name of anyone or anything in the world, copy the results and/or teleport anything or anyone to them or teleport them to anything or anyone or anyplace if required.
     * Find the name of any room and copy the results and/or teleport anything or anyone to them if required.
     * Find the position of anything in the world, copy the results if required.
-    * Get the names of everything and everyone in the room and copy the results if required.
+    * Get the names of everything and everyone in the room and copy the results if required (not working as intended).
     * Cause anyone to try to interact with anyone or anything.
-    * Zap or knock out anyone.
+    * Knock out and/or zap anyone.
     * Change the weather.
     * Do basic maintenance - finance Sebastian, register money to Wellspringer so you keep your job, alleviate sleepiness, drunkenness, etc.
     * Self-replenish.
