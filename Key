@@ -1,4 +1,4 @@
-# mode accepts an integer with a value >= 1 <= 5 and alters the order in which values in the range are tried.
+# mode accepts an integer with a value >= 0 <= 6 and alters the order in which values in the range are tried.
 number mode = 0
 # list accepts an array containing integer values separated by a comma and space each and together delimited by square brackets.
 array list = [-1, 0, 13, 344, 666, 1111, 1234, 1337, 2358, 4991, 5611, 7471, 7472, 9788, 34711, 45914, 54321, 112358, 424242, 38984312]
