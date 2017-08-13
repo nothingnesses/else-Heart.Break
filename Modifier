@@ -1,5 +1,5 @@
 bool Allow(string target, number level)
-number mode = 0 # Accepts any integer. If mode = 1, doors hacked will be locked, vice-versa if mode = 2.
+number mode = 0 # Accepts any integer. If mode = 1, doors hacked will be unlocked, vice-versa if mode = 2.
 if mode == 1
 Connect("Hotel_Lobby_ComputerCashier").Unlock(target)
 end
