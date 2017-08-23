@@ -34,7 +34,8 @@ SetMhz(500)
 SetMaxTime(-2)
 ```
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;then use it on the computer you have modified with the Computer code, on &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1, and on &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PoliceOfficeInterior_LargeRecorder_LargeRecorder_1. If you don't know which ones these are, you can use the Drink code to teleport Sebastian directly to them.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;then use it on the computer you have modified with the Computer code, on &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1, and on &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PoliceOfficeInterior_LargeRecorder_LargeRecorder_1. If you don't know which ones these are, you can use the 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Drink code to teleport Sebastian directly to them.
 
 * Additionally, because the Computer code requires a computer with the Floppy API enabled, you can use a screwdriver containing the code:
 
