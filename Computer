@@ -1,7 +1,9 @@
 # Clear the currently held floppy then write a list containing the names of everything in the world, along with the names of the rooms containing them, and their coordinates into the floppy.
 ClearData()
+SaveData("At time " + Time() + ":")
 loop Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetAllRooms()
 loop thing in Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetThingsInRoom(@)
 SaveData(thing + " is in " + Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetPosition(thing) + ".")
 end
 end
+Connect("Hotel_ServerBasement_Extractor_1").CopyToClipboard(LoadData()) # This line doesn't work. Not sure why.
