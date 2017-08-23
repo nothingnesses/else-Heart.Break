@@ -18,7 +18,7 @@ string searchthing = ""
 # delay accepts an integer >= 0 and represents the duration of delay that the searchroom and searchthing functions use between results.
 number delay = 0
 
-# interact accepts a string containing a person or thing and, when drinking, causes causes the content of the object string (should contain the name of a person in this case) to interact with them/it.
+# interact accepts a string containing a person or thing and, when drinking, causes the content of the object string (should contain the name of a person in this case) to interact with them/it.
 string interact = ""
 
 # zap accepts an integer >= 1 <= 8 and, when drinking, causes the content of the target string (should contain the name of a person in this case) to be zapped then knocked out for the duration of its value in seconds.
