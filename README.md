@@ -20,12 +20,14 @@ The codes are pretty well-commented so reading the comments should give a pretty
 
 * The Modifier code allows any modifier coded with it to hack any hackable object as well as lock or unlock any door hacked with it.
 
+* The Computer code allows a computer (which has the Floppy API enabled) coded with it to clear the currently held floppy then write a list containing the names of everything in the world, along with the names of the rooms containing them, and their coordinates into the floppy.
+
 # Notes
-* The codes accept variables located near the top which should be edited as required to alter the behaviour of the items. As mentioned, reading the comments should help.
+* The codes (bar the Computer code) accept variables located near the top which should be edited as required to alter the behaviour of the items. As mentioned, reading the comments should help.
 
-* The scripts for Key and Drink's "Search for thing" and "Search for room" functions have a long execution duration and will inevitably stop after 60 seconds. To prevent this, pause the game when running them because scripts continue to run (and at a faster rate) even when the game is paused.
+* The codes for the Computer, Key, and Drink (specifically, the latter's "Search for thing" and "Search for room" functions) have a long execution duration and will inevitably stop after 60 seconds. To prevent this, pause the game when running them because they continue to run (and at a faster rate) even when the game is paused.
 
-* Additionally, to speed up "Search for thing" and "Search for room" you can obtain a screwdriver, change its code to:
+* Additionally, to speed up the Computer code and the Drink code's "Search for thing" and "Search for room" functions you can obtain a screwdriver, change its code to:
 
 ```
 SetMhz(500)
@@ -37,6 +39,15 @@ SetMaxTime(-2)
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extractor on the computers in the Police Station or just use the screwdriver on all the computers there to make sure
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;they were done. Alternatively, you can use the Drink code to teleport Sebastian directly to them.
 
-* When copy is turned on, and especially for the "Search for thing" and "Search for room" functions, do note that even though everything will be copied, they will only be copied one at a time so it may be a good idea to have a text editor outside of the game ready to paste the contents of the clipboard in. Maybe use some macro program to automate the pasting process.
+* Additionally, because the Computer code requires a computer with the Floppy API enabled, you can use a screwdriver containing the code:
+
+```
+EnableAPI("floppy")
+```
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;on any computer without the API enabled to enable it such that floppies
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;can be used with it.
+
+* When the Drink code's "copy" variable is set to 1, and especially for the "Search for thing" and "Search for room" functions, do note that even though everything will be copied, they will only be copied one at a time so it may be a good idea to have a text editor outside of the game ready to paste the contents of the clipboard in. Maybe use some macro program to automate the pasting process.
 
 Happy hacking!
