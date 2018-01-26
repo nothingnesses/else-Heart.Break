@@ -1,48 +1,29 @@
-# object accepts a string containing the name of any person or item to teleport when drinking.
 string object = ""
-# target accepts a string containing the name of any person, item or room to teleport to when drinking.
 string target = ""
-# index accepts an integer with a value >= 0 and represents an item in target room that is used in the searchroom and teleport to room functions as an item in the room to teleport the content of the object string to.
 number index = 0
-
-# copy = 1 when drinking, causes thingsin, positionof, searchthing or searchroom's last result to be copied to clipboard.
-number copy = 0
-# positionof accepts a string containing an person or item name and, when drinking, their/it's current position is returned.
 string positionof = ""
-# thingsin accepts a string containing a room name and, when drinking, it's current contents are returned. This with copy = 1 is not very useful as not all of the items are copied.
 string thingsin = ""
-# searchroom accepts any string and, when drinking, valid room names containing it are returned if found. Additionally, if the object string is not empty, its content will be teleported to the room.
-string searchroom = ""
-# searchthing accepts any string and, when drinking, valid person or item names containing it as well as the respective positions are returned if found. If the object string is not empty, its content will be teleported to the people/items found. If the target string is not empty, the people/items found will be teleported to the location of the content of the string.
-string searchthing = ""
-# delay accepts an integer >= 0 and represents the duration of delay that the searchroom and searchthing functions use between results.
-number delay = 0
-
-# interact accepts a string containing a person or thing and, when drinking, causes the content of the object string (should contain the name of a person in this case) to interact with them/it.
-string interact = ""
-
-# zap accepts an integer >= 1 <= 8 and, when drinking, causes the content of the target string (should contain the name of a person in this case) to be zapped then knocked out for the duration of its value in seconds.
-number zap = 0
-# zapgently accepts an integer >= 1 <= 8 and, when drinking, causes the content of the target string (should contain the name of a person in this case) to be zapped for the duration of its value in seconds.
-number zapgently = 0
-
-# weather accepts an integer with a value >= 1 <= 4 and, when drinking, changes the severity of the weather depending on the value.
-number weather = 0
-
-# money accepts an integer and, when drinking, changes Sebastian's money to its value.
-number money = 9999
-
-# register accepts an integer and, when drinking, registers money to Wellspringer equal to its value.
-number register = 9999
-
 Drink(1)
 Sleepiness(-50)
+number copy = 0
+string interact = ""
+string zaptarget = ""
+number zap = 0
+number zapgently = 0
+string searchroom = ""
+string searchthing = ""
+number delay = 0
+number weather = 0
+number money = 9999
+number register = 9999
 Drunkenness(-25)
 Corruption(-25)
 Smelliness(-25)
+Connect("BarYvonne_Poor_WaterTap_Poor_WaterTap_1").SetLiquidAmount(1000)
 
-### Refill ### Cafe_Room1_Poor_WaterTap_Poor_WaterTap_3 can be substituted for any other tap. Just make sure to modify it such that it doesn't clear the drink's code.
-Connect("Cafe_Room1_Poor_WaterTap_Poor_WaterTap_3").SetLiquidAmount(1000)
+##################################################
+### Functions - No need to edit these, usually ###
+##################################################
 
 ### Register ###
 Connect("Wellspringer").RegisterSeller("Sebastian", register)
@@ -230,18 +211,18 @@ Say(thingsin + " contains: " + Connect("PoliceOfficeInterior_MinistryOfficeWorks
 end
 
 ### Zap ###
-if zap >= 1 and target != "" and Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetTypeOfThing(target) == "character"
-Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").SetPosition("PoliceOfficeInterior_LargeRecorder_LargeRecorder_1", target)
+if zap >= 1 and zaptarget != "" and Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetTypeOfThing(zaptarget) == "character"
+Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").SetPosition("PoliceOfficeInterior_LargeRecorder_LargeRecorder_1", zaptarget)
 loop from 0 to zap
-Connect("PoliceOfficeInterior_LargeRecorder_LargeRecorder_1").ZapPerson(target)
+Connect("PoliceOfficeInterior_LargeRecorder_LargeRecorder_1").ZapPerson(zaptarget)
 Connect("PoliceOfficeInterior_LargeRecorder_LargeRecorder_1").Sleep(1)
 end
 end
 
 ### Zap gently ###
-if zapgently >= 1 and target != "" and Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetTypeOfThing(target) == "character"
+if zapgently >= 1 and zaptarget != "" and Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetTypeOfThing(zaptarget) == "character"
 loop from 0 to zapgently
-Connect("Heart").ZapPersonGently(target)
+Connect("Heart").ZapPersonGently(zaptarget)
 Connect("PoliceOfficeInterior_LargeRecorder_LargeRecorder_1").Sleep(1)
 end
 end
