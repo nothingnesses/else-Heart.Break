@@ -1,10 +1,17 @@
 bool Allow(string target, number level)
-number mode = 0 # Accepts any integer. If mode = 1, doors hacked will be unlocked, vice-versa if mode = 2.
-if mode == 1
-Connect("Hotel_Lobby_ComputerCashier").Unlock(target)
+if Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetTypeOfThing(target) == "door"
+if Connect("Hotel_Lobby_ComputerCashier").LoadMemory("modifier_lock_state") == 1 # Hotel_Lobby_ComputerCashier can be replaced with the name of any other computer with the Memory API enabled and modifier_lock_state can be replaced with any other name you wish to use instead. Be sure to replace all occurences in the modifier's code.
+Connect("Hotel_Lobby_ComputerCashier").Lock(target)
+Connect(target).Say(target + " Locked.")
+Connect("Hotel_Lobby_ComputerCashier").SaveMemory("modifier_lock_state", 0)
+return true
 end
-if mode == 2
-Connect("Hotel_Lobby_ComputerCashier").Lock (target)
+if Connect("Hotel_Lobby_ComputerCashier").LoadMemory("modifier_lock_state") == 0 or Connect("Hotel_Lobby_ComputerCashier").LoadMemory("modifier_lock_state") != 1
+Connect("Hotel_Lobby_ComputerCashier").Unlock(target)
+Connect(target).Say(target + " Unlocked.")
+Connect("Hotel_Lobby_ComputerCashier").SaveMemory("modifier_lock_state", 1)
+return true
+end
 end
 return true
 end
