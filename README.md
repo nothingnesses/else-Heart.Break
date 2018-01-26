@@ -18,7 +18,7 @@ The codes are pretty well-commented so reading the comments should give a pretty
 
 * The Key code allows any key coded with it when used on any door to toggle the door using values from a list (which contains all(?) the door values as of version 1.0.9 of the game) or values obtained from different bruteforce algorithms of choice. Useful for when a second modifier has not yet been obtained.
 
-* The Modifier code allows any modifier coded with it to hack any hackable object as well as lock or unlock any door hacked with it.
+* The Modifier code allows any modifier coded with it to hack any hackable object as well as toggle the lock state of any door hacked with it, kind of (toggle state is dependent on a memory value stored in a computer and is independent to each door).
 
 * The Computer code allows a computer (which has the Floppy API enabled) coded with it to clear the currently held floppy then write a list containing the names of everything in the world, along with the names of the rooms containing them, and their coordinates into the floppy.
 
