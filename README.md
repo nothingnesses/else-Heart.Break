@@ -2,7 +2,7 @@
 Awesome code for items in the game [else Heart.Break()](http://elseheartbreak.com/ "else Heart.Break() Homepage").
 
 # Purpose
-The codes are pretty well-commented so reading the comments should give a pretty good gist of what the codes do. In general though:
+The codes are pretty well-commented so reading the comments should give a pretty good gist of what the codes do. There is a separate Drink Manual to be used as a guide when using the Drink code. In general though:
 
 * The Drink code allows any drink coded with it when drunk to:
     * Teleport anyone or anything to anyone or anything or anyplace.
