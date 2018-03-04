@@ -1,12 +1,16 @@
+The default values for the variables in the Drink code causes 9999 money to be registered to Wellspringer, causes Sebastian's money to be set to 9999, causes Sleepiness by to be decreased by -50, causes Drunkenness, Corruption and Smelliness to be decreased by -25, and causes the drink containing the code to be refilled when drunk. 
+
+The following shows the variables in the drink code, what value types/values they accept and what they do when drunk: 
+
 object accepts a string containing the name of any person or item to teleport when drinking.
 
 target accepts a string containing the name of any person, item or room to teleport to when drinking.
 
 index accepts an integer with a value >= 0 and represents an item in target room that is used in the searchroom and teleport to room functions as an item in the room to teleport the content of the object string to.
 
-positionof accepts a string containing an person or item name and, when drinking, causes their/it's current position to be returned.
+positionof accepts a string containing an person or item name and, when drinking, causes their/its current position to be returned.
 
-thingsin accepts a string containing a room name and, when drinking, causes it's current contents to be returned. This with copy = 1 is not very useful as not all of the items are copied.
+thingsin accepts a string containing a room name and, when drinking, causes its current contents to be returned. This with copy = 1 is not very useful as not all of the items are copied.
 
 Drink() is a drink function which accepts an integer argument and, when drinking, subtracts the integer from the drink's fill amount. This function has to be called and thus place before the other drink functions such as Sleepiness(), Drunkeness(), etc.
 
@@ -30,7 +34,7 @@ delay accepts an integer >= 0 and represents the duration of delay that the sear
 
 weather accepts an integer with a value >= 1 <= 4 and, when drinking, causes the severity of the weather to be changed according to the value.
 
-money accepts an integer and, when drinking, causes Sebastian's money to be changed to its value. You generally don't want it's value to be too large because the money is added incrementally and not all at once which means a large value takes a long time to be set. 
+money accepts an integer and, when drinking, causes Sebastian's money to be changed to its value. You generally don't want its value to be too large because the money is added incrementally and not all at once which means a large value takes a long time to be set. 
 
 register accepts an integer and, when drinking, causes money equal to its value to be registered to Wellspringer. You generally don't want to set this to a large value either for similar reasons as above.
 
@@ -40,4 +44,5 @@ Corruption() is a drink function which accepts an integer argument and, when dri
 
 Smelliness() is a drink function which accepts an integer argument and, when drinking, adds the integer to the user's smelliness counter. You generally want this as a negative number to alleviate Sebastian's smelliness.
 
-SetLiquidAmount() is a tap function which accepts an integer argument that, when used on a drink, changes its fill amount to the integer. You generally want this to be placed after the Drink() function so the drink gets refilled every time it's drunk.
+SetLiquidAmount() is a tap function which accepts an integer argument that, when used on a drink, changes its fill amount to the integer. You generally want this to be placed after the Drink() function so the drink gets refilled every time 
+drunk.
