@@ -1,16 +1,13 @@
 bool Allow(string target, number level)
 if Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetTypeOfThing(target) == "door"
-if Connect("Hotel_Lobby_ComputerCashier").LoadMemory("modifier_lock_state") == 0 # Hotel_Lobby_ComputerCashier can be replaced with the name of any other computer with the Memory API enabled and modifier_lock_state can be replaced with any other name you wish to use instead. Be sure to replace all occurences in the modifier's code.
+if Connect("Hotel_Lobby_ComputerCashier").LoadMemory("lock_state") == "unlocked" # Hotel_Lobby_ComputerCashier can be replaced with the name of any other computer with the Memory API enabled and lock_state can be replaced with any other name you wish to use instead. Be sure to replace all occurences in the modifier's code.
 Connect("Hotel_Lobby_ComputerCashier").Lock(target)
-Connect(target).Say(target + " Locked.")
-Connect("Hotel_Lobby_ComputerCashier").SaveMemory("modifier_lock_state", 1)
-return true
-end
-if Connect("Hotel_Lobby_ComputerCashier").LoadMemory("modifier_lock_state") != 0
+Connect(target).Say(target + " locked.")
+Connect("Hotel_Lobby_ComputerCashier").SaveMemory("lock_state", "locked")
+else
 Connect("Hotel_Lobby_ComputerCashier").Unlock(target)
-Connect(target).Say(target + " Unlocked.")
-Connect("Hotel_Lobby_ComputerCashier").SaveMemory("modifier_lock_state", 0)
-return true
+Connect(target).Say(target + " unlocked.")
+Connect("Hotel_Lobby_ComputerCashier").SaveMemory("lock_state", "unlocked")
 end
 end
 return true
