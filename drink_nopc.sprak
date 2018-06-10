@@ -1,0 +1,950 @@
+#################
+### variables ###
+#################
+# pc can be the name of any other computer as long as that computer isn't used in the thingwiththefunction() function in the computer code, otherwise connections to that computer will be blocked when the functions are used
+string pc = Connect("Yvonne_ArcadeMachine2")
+array movethese = []
+string destination = ""
+number index = 0
+# 98 is max sleepiness before falling asleep at 99
+number sleepiness = 0
+array wheres = []
+bool copying = false
+array whatsin = []
+array interactors = []
+string interactwith = ""
+bool zapothersinroomswitch = false
+bool gentlyzapothersinroomswitch = false
+number walkspeed = 10
+number weather = 0
+array zaptargets = []
+array gentlyzaptargets = []
+array setstatsfor = [GetUser()]
+array saystatsof = []
+number delayduration = 1
+array searchforthings = []
+array searchforrooms = []
+number cash = 999
+array givecashto = [GetUser()]
+# zapduration does not seem to be accurate
+number zapduration = 60
+number cashforwellspring = 999
+string wellspringcashsender = GetUser()
+number corruption = 0
+number drunkenness = 0
+number smelliness = 0
+number charisma = 0
+number happiness = 0
+number supremacy = 0
+array getlistsofthingsincategories = []
+bool getalistofeverything = false
+bool getalistofeverythingandtheirpositions = false
+string saylist = ""
+
+############
+### main ###
+############
+### stats ###
+if Count(setstatsfor) != 0
+	loop setstatsfor
+		if stringisaperson(@)
+			if thesleepinessof(@) != sleepiness
+				setthesleepinessof(@, sleepiness)
+				saylist += "The sleepiness of " + @ + " was set to " + sleepiness + ". "
+			end
+			if thewalkspeedof(@) != walkspeed
+				setthewalkspeedof(@, walkspeed)
+				saylist += "The walking speed of " + @ + " was set to " + walkspeed + ". "
+			end
+			if thecorruptionof(@) != corruption
+				setthecorruptionof(@, corruption)
+				saylist += "The corruption of " + @ + " was set to " + corruption + ". "
+			end
+			if thedrunkennessof(@) != drunkenness
+				setthedrunkennessof(@, drunkenness)
+				saylist += "The drunkenness of " + @ + " was set to " + drunkenness + ". "
+			end
+			if thesmellinessof(@) != smelliness
+				setthesmellinessof(@, smelliness)
+				saylist += "The smelliness of " + @ + " was set to " + smelliness + ". "
+			end
+			if thecharismaof(@) != charisma
+				setthecharismaof(@, charisma)
+				saylist += "The charisma of " + @ + " was set to " + charisma + ". "
+			end
+			if thehappinessof(@) != happiness
+				setthehappinessof(@, happiness)
+				saylist += "The happiness of " + @ + " was set to " + happiness + ". "
+			end
+			if thesupremacyof(@) != supremacy
+				setthesupremacyof(@, supremacy)
+				saylist += "The supremacy of " + @ + " was set to " + supremacy + ". "
+			end
+		else
+			saylist += @ + " is not a valid setstatsfor value. Use an array containing strings delimited by commas, each containing the name of a person. "
+		end
+	end
+end
+
+if Count(saystatsof) != 0
+	loop saystatsof
+		if stringisaperson(@)
+			saylist += @ + ": Sleepiness - " + thesleepinessof(@) + ", Corruption - " + thecorruptionof(@) + ", Drunkenness - " + thedrunkennessof(@) + ", Smelliness - " + thesmellinessof(@) + ", Charisma - " + thecharismaof(@) + ", Happiness - " + thehappinessof(@) + ", Supremacy - " + thesupremacyof(@) + ". "
+		else
+			saylist += @ + " is not a valid saystatsof value. Use an array containing strings delimited by commas, each containing the name of a person. "
+		end
+	end
+end
+
+### positions of things ###
+if Count(wheres) != 0
+	loop wheres
+		saylist += @ + " is at " + stringofpositionof(@, ", ") + ". "
+	end
+end
+
+### finance ###
+if cashforwellspring > 0
+	if stringisaperson(wellspringcashsender)
+		register(wellspringcashsender, cashforwellspring)
+	else
+		saylist += wellspringcashsender + " is not a valid wellspringcashsender value. Use a string containing the name of a person. "
+	end
+end
+
+if Count(givecashto) != 0
+	string recipientlist = ""
+	loop givecashto
+		if stringisaperson(@)
+			if thebalancedifferencebetween(@, cash) != 0
+				setcash(@, cash)
+				recipientlist += @ + ", "
+			end
+		else
+			saylist += @ + " is not a valid givecashto value. Use an array containing strings delimited by commas, each containing the name of a person. "
+		end
+	end
+	if recipientlist != 0
+		saylist += "For " + recipientlist + "cash was set to: $" + cash + ". "
+	end
+end
+
+### weather ###
+if weather != 0
+	if weather >= 1 && weather <= 4
+		setweather(weather)
+		if weather == 1
+			saylist += "Weather set to sunny. "
+		end
+		if weather == 2
+			saylist += "Weather set to drizzly. "
+		end
+		if weather == 3
+			saylist += "Weather set to rainy. "
+		end
+		if weather == 4
+			saylist += "Weather set to stormy. "
+		end
+	else
+		saylist += weather + " is not a valid weather value. Use integers >= 0 and <= 4. "
+	end
+end
+
+### interact ###
+if Count(interactors) != 0 && interactwith != ""
+	string interactorlist = ""
+	loop interactors
+		if stringisaperson(@)
+			interact(@, interactwith)
+			interactorlist += @ + ", "
+		else
+			saylist += @ + " is not a valid interactors value. Use an array containing strings delimited by commas, each containing the name of a person. "
+		end
+	end
+	if interactorlist != ""
+		saylist += interactorlist + " now interacting with" + interactwith + ". "
+	end
+end
+
+### teleport ###
+if Count(movethese) != 0 && destination != ""
+	loop movethese
+		if isroom(destination) == true
+			if index < 0
+				saylist += index + " is not a valid index. Use integers >= 0. "
+			else
+				if stringisaperson(@)
+					if hasfunction(thingwiththefunction("MovePerson"), "MovePerson")
+						movepersontoroom(@, destination, index)
+					else
+						saylist += thingwiththefunction("MovePerson") + " does not have MovePerson(). "
+					end
+				else
+					moveitemtoroom(@, destination, index)
+				end
+			end
+		else
+			if stringisaperson(@)
+				if hasfunction(thingwiththefunction("MovePerson"), "MovePerson")
+					movepersontothing(@, destination)
+				else
+					saylist += thingwiththefunction("MovePerson") + " does not have MovePerson(). "
+				end
+			else
+				moveitemtothing(@, destination)
+			end
+		end
+	end
+end
+
+### search rooms ###
+if Count(searchforrooms) != 0
+	string list = ""
+	loop searchforrooms
+		list += stringsearchforroom(@, ", ") + ". "
+	end
+	saylist += "Search for " + searchforrooms + " returned: " + list + "."
+end
+
+### search things ###
+if Count(searchforthings) != 0
+	string list = ""
+	loop searchforthings
+		list += stringsearchforthing(@, ", ") + ". "
+	end
+	saylist += "Search for " + searchforthings + " returned: " + list + "."
+end
+
+### list things ###
+if Count(whatsin) != 0
+	loop whatsin
+		if isroom(@) == true
+			saylist += @ + " contains: " + anarrayofthingsin(@) + ". "
+		else
+			saylist += @ + " is not a valid whatsin value. Use an array containing strings delimited by commas, each containing the name of a room. "
+		end
+	end
+end
+
+if Count(getlistsofthingsincategories) != 0
+	loop getlistsofthingsincategories
+		saylist += @ + " list: " + astringofthingsincategory(@, ", ") + ". "
+	end
+end
+
+if getalistofeverything
+	saylist += "World contains: " + astringofeverything(", ") + ". "
+end
+
+if getalistofeverythingandtheirpositions
+	saylist += "World contains: " + astringofeverythingandtheirpositions(" - ") + ". "
+end
+
+### zap ###
+if Count(zaptargets) != 0
+	if zapduration <= 0
+		saylist += zapduration + " is not a valid zapduration value. Use numbers > 0. "
+	else
+		if hasfunction(thingwiththefunction("ZapPerson"), "ZapPerson")
+			loop zaptargets
+				array actualtargets = []
+				if stringisaperson(@)
+					Append(actualtargets, @)
+				else
+					saylist += @ + " is not a valid zaptargets value. Use an array containing strings delimited by commas, each containing the name of a person. "
+				end
+				zapallinarray(actualtargets, zapduration, delayduration)
+			end
+		else
+			saylist += thingwiththefunction("ZapPerson") + " does not have ZapPerson(). "
+		end
+	end
+end
+
+if Count(gentlyzaptargets) != 0
+	if zapduration <= 0
+		saylist += zapduration + " is not a valid zapduration value. Use numbers > 0. "
+	else
+		loop gentlyzaptargets
+			array actualtargets = []
+			if stringisaperson(@)
+				Append(actualtargets, @)
+			else
+				saylist += @ + " is not a valid gentlyzaptargets value. Use strings delimited by commas, each containing the name of a person. "
+			end
+			gentlyzapallinarray(actualtargets, zapduration, delayduration)
+		end
+	end
+end
+
+if zapothersinroomswitch
+	if hasfunction(thingwiththefunction("ZapPerson"), "ZapPerson")
+		if zapduration <= 0
+			saylist += zapduration + " is not a valid zapduration value. Use numbers > 0. "
+		else
+			zapothersinroom(zapduration, delayduration)
+		end
+	else
+		saylist += thingwiththefunction("ZapPerson") + " does not have ZapPerson(). "
+	end
+end
+
+if gentlyzapothersinroomswitch
+	if zapduration <= 0
+		saylist += zapduration + " is not a valid zapduration value. Use numbers > 0. "
+	else
+		gentlyzapothersinroom(zapduration, delayduration)
+	end
+end
+
+if saylist != ""
+	if copying
+		copy(saylist)
+		Say("Copied: " + saylist)
+	else
+		Say(saylist)
+	end
+end
+
+#################
+### functions ###
+#################
+# returns the required thing for a function
+array thingwiththefunction(string function)
+	string bank = "FinanceComputer"
+	string weather = "MeteorologyServer"
+	string locktoggler = "Hotel_Lobby_ComputerCashier"
+	string largerecorder = "PoliceOfficeInterior_LargeRecorder_LargeRecorder_1"
+	string supercomputer = "PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1"
+	string ultracomputer = "Heart"
+	string memorystore = "Hotel_Lobby_ComputerCashier"
+	string thingwithchangebalance = bank
+	string thingwithchartoint = supercomputer
+	string thingwithcopytoclipboard = "Hotel_ServerBasement_Extractor_1"
+	string thingwithgetallrooms = supercomputer
+	string thingwithgetbalanceforperson = bank
+	string thingwithgetnumericdata = ultracomputer
+	string thingwithgetposition = supercomputer
+	string thingwithgetrain = weather
+	string thingwithgetroom = supercomputer
+	string thingwithgetthingsoftype = supercomputer
+	string thingwithgetthingsinroom = supercomputer
+	string thingwithgettypeofthing = supercomputer
+	string thingwithinteractwith = supercomputer
+	string thingwithinttochar = supercomputer
+	string thingwithloadmemory = memorystore
+	string thingwithlock = locktoggler
+	string thingwithmoveperson = largerecorder
+	string thingwithregisterseller = "Wellspringer"
+	string thingwithsavememory = memorystore
+	string thingwithsetnumericdata = ultracomputer
+	string thingwithsetposition = supercomputer
+	string thingwithsetweather = weather
+	string thingwithsleep = largerecorder
+	string thingwithstringcontains = largerecorder
+	string thingwithunlock = locktoggler
+	string thingwithzapperson = largerecorder
+	string thingwithzappersongently = ultracomputer
+	
+	if function == "ChangeBalance"
+		return thingwithchangebalance
+	end
+	if function == "CharToInt"
+		return thingwithchartoint
+	end
+	if function == "CopyToClipboard"
+		return thingwithcopytoclipboard
+	end
+	if function == "GetAllRooms"
+		return thingwithgetallrooms
+	end
+	if function == "GetBalanceForPerson"
+		return thingwithgetbalanceforperson
+	end
+	if function == "GetNumericData"
+		return thingwithgetnumericdata
+	end
+	if function == "GetPosition"
+		return thingwithgetposition
+	end
+	if function == "GetRain"
+		return thingwithgetrain
+	end
+	if function == "GetRoom"
+		return thingwithgetroom
+	end
+	if function == "GetThingsInRoom"
+		return thingwithgetthingsinroom
+	end
+	if function == "GetThingsOfType"
+		return thingwithgetthingsoftype
+	end
+	if function == "GetTypeOfThing"
+		return thingwithgettypeofthing
+	end
+	if function == "InteractWith"
+		return thingwithinteractwith
+	end
+	if function == "IntToChar"
+		return thingwithinttochar
+	end
+	if function == "MovePerson"
+		return thingwithmoveperson
+	end
+	if function == "RegisterSeller"
+		return thingwithregisterseller
+	end
+	if function == "SetNumericData"
+		return thingwithsetnumericdata
+	end
+	if function == "SetPosition"
+		return thingwithsetposition
+	end
+	if function == "SetRain"
+		return thingwithsetweather
+	end
+	if function == "Sleep"
+		return thingwithsleep
+	end
+	if function == "StringContains"
+		return thingwithstringcontains
+	end
+	if function == "ZapPerson"
+		return thingwithzapperson
+	end
+	if function == "ZapPersonGently"
+		return thingwithzappersongently
+	end
+end
+
+# returns true if thing has a certain function
+bool hasfunction(string thing, string function)
+	return Connect(thing).HasFunction(function)
+end
+
+# delayby
+void delayby(number delayduration)
+	Connect(thingwiththefunction("Sleep")).Sleep(delayduration)
+end
+
+# copy to clipboard
+void copy(value)
+	Connect(thingwiththefunction("CopyToClipboard")).CopyToClipboard(value)
+end
+
+### mathematics ###
+# returns the answer of base raised to the power of exponent
+number power(number base, number exponent)
+	number answer = 1
+	loop from 0 to exponent - 1
+		answer *= base
+	end
+	return answer
+end
+
+### data manipulation ###
+# returns true if a character is uppercase
+bool isuppercase(var character)
+	string connect = Connect(thingwiththefunction("CharToInt"))
+	return connect.CharToInt(character) >= -32 && connect.CharToInt(character) <= -7
+end
+
+# coverts uppercase characters to lowercase characters
+string uppercasetolowercase(var text)
+	string lowered = ""
+	loop character in text
+		if isuppercase(character)
+			lowered += Connect(thingwiththefunction("IntToChar")).IntToChar(Connect(thingwiththefunction("CharToInt")).CharToInt(character) + 32)
+		else
+			lowered += character
+		end
+	end
+	return lowered
+end
+
+# converts the first character of a string to a number
+number charactertonumber(string character)
+	return Connect(thingwiththefunction("CharToInt")).CharToInt(character)
+end
+
+# slices a string
+string slice(string inputstring, number index, string lastcharacter)
+	string outputslice = ""
+	loop
+		if inputstring[index] == lastcharacter
+			break
+		else
+			outputslice += inputstring[index]
+		end
+		index++
+	end
+	return outputslice
+end
+
+# converts a string to a number
+number stringtonumber(string inputstring)
+	number outputnumber = 0
+	number currentnumber = 0
+	bool isnegative = false
+	number stringlength = Count(inputstring) - 1
+	loop character in inputstring
+		if character == "-"
+			isnegative = true
+		else
+			currentnumber = charactertonumber(character) + 49
+			if stringlength != 0
+				currentnumber *= power(10, stringlength)
+			end
+			outputnumber += currentnumber
+		end
+		stringlength--
+	end
+	if isnegative
+		outputnumber *= -1
+	end
+	return outputnumber
+end
+
+# converts an array to a string
+string arraytostring(array list)
+	string stringified = ""
+	loop element in list
+		stringified += element
+	end
+	return stringified
+end
+
+# returns true if a string is present in a string
+bool stringhas(string whole, string section)
+	return Connect(thingwiththefunction("StringContains")).StringContains(whole, section)
+end
+
+### things ###
+# returns the category of a string
+string categoryof(string thing)
+	return Connect(thingwiththefunction("GetTypeOfThing")).GetTypeOfThing(thing)
+end
+
+# returns true if a string is a person
+bool stringisaperson(string person)
+	return categoryof(person) == "character"
+end
+
+# returns an array of things of certain category
+array anarrayofthingsincategory(string category)
+	return Connect(thingwiththefunction("GetThingsOfType")).GetThingsOfType(category)
+end
+
+# returns a string of things of certain category, delimited by delimiter
+string astringofthingsincategory(string category, string delimiter)
+	string listofthings = ""
+	loop anarrayofthingsincategory(category)
+		listofthings += @ + delimiter
+	end
+	return listofthings
+end
+
+# returns a string of a position of a thing in standard format
+string standardpositionof(string thing)
+	return Connect(thingwiththefunction("GetPosition")).GetPosition(thing)
+end
+
+# returns an array of a position of a thing
+array arrayofpositionof(string inputstring)
+	string position = standardpositionof(inputstring)
+	string room = roomof(inputstring)
+	number roomnamelength = Count(room)
+	string x = slice(position, 21 + roomnamelength, ",")
+	string y = slice(position, 22 + roomnamelength + Count(x), ")")
+	return [room, stringtonumber(x), stringtonumber(y)]
+end
+
+# returns a string of a position of thing, delimited by delimiter
+string stringofpositionof(string inputstring, string delimiter)
+	string position = standardpositionof(inputstring)
+	string room = roomof(inputstring)
+	number roomnamelength = Count(room)
+	string x = slice(position, 21 + roomnamelength, ",")
+	string y = slice(position, 22 + roomnamelength + Count(x), ")")
+	return room + delimiter + stringtonumber(x) + delimiter + stringtonumber(y)
+end
+
+# returns the x coordinate of a thing
+number xof(string inputstring)
+	return stringtonumber(slice(standardpositionof(inputstring), 21 + Count(roomof(inputstring)), ","))
+end
+
+# returns the y coordinate of a thing
+number yof(string inputstring)
+	string position = standardpositionof(inputstring)
+	number roomnamelength = Count(roomof(inputstring))
+	return stringtonumber(slice(position, 22 + roomnamelength + Count(slice(position, 21 + roomnamelength, ",")), ")"))
+end
+
+# returns an array of everything in the world
+array anarrayofeverything()
+	array list = []
+	loop room in anarrayofallrooms()
+		loop anarrayofthingsin(room)
+			Append(list, @)
+		end
+	end
+	return list
+end
+
+# returns a string of everything in the world, delimited by delimiter
+string astringofeverything(string delimiter)
+	string list = ""
+	loop room in anarrayofallrooms()
+		loop anarrayofthingsin(room)
+			list += @ + delimiter
+		end
+	end
+	return list
+end
+
+# returns a string of everything in the world and their positions, delimited by delimiter
+string astringofeverythingandtheirpositions(string delimiter)
+	string list = ""
+	loop room in anarrayofallrooms()
+		loop anarrayofthingsin(room)
+			list += @ + delimiter + roomof(@) + delimiter + xof(@) + delimiter + yof(@) + ". "
+		end
+	end
+	return list
+end
+
+# returns an array of things with names containing the search string
+array arraysearchforthing(string searchstring)
+	array list = []
+	loop anarrayofallrooms()
+		loop thing in anarrayofthingsin(@)
+			if stringhas(uppercasetolowercase(thing), uppercasetolowercase(searchstring))
+				Append(list, thing)
+			end
+		end
+	end
+	return list
+end
+
+# returns a string of things with names containing the search string, delimited by delimiter
+string stringsearchforthing(string searchstring, string delimiter)
+	string list = ""
+	loop anarrayofallrooms()
+		loop thing in anarrayofthingsin(@)
+			if stringhas(uppercasetolowercase(thing), uppercasetolowercase(searchstring))
+				list += thing + delimiter
+			end
+		end
+	end
+	return list
+end
+
+# returns a data value of a thing
+void thedataof(string thing, string stat)
+	return Connect(thingwiththefunction("GetNumericData")).GetNumericData(thing, stat)
+end
+
+# returns a person's sleepiness
+number thesleepinessof(string person)
+	return thedataof(person, "sleepiness")
+end
+
+# returns a person's walkspeed
+number thewalkspeedof(string person)
+	return thedataof(person, "walkSpeed")
+end
+
+# returns a person's corruption
+number thecorruptionof(string person)
+	return thedataof(person, "corruption")
+end
+
+# returns a person's drunkenness
+number thedrunkennessof(string person)
+	return thedataof(person, "drunkenness")
+end
+
+# returns a person's smelliness
+number thesmellinessof(string person)
+	return thedataof(person, "smelliness")
+end
+
+# returns a person's charisma
+number thecharismaof(string person)
+	return thedataof(person, "charisma")
+end
+
+# returns a person's happiness
+number thehappinessof(string person)
+	return thedataof(person, "happiness")
+end
+
+# returns a person's supremacy
+number thesupremacyof(string person)
+	return thedataof(person, "supremacy")
+end
+
+# set a person's stat
+void setthedataof(string thing, string stat, var value)
+	Connect(thingwiththefunction("SetNumericData")).SetNumericData(thing, stat, value)
+end
+
+# set a person's sleepiness
+void setthesleepinessof(string person, number value)
+	setthedataof(person, "sleepiness", value)
+end
+
+# set a person's sleepiness
+void setthewalkspeedof(string person, number value)
+	setthedataof(person, "walkSpeed", value)
+end
+
+# set a person's corruption
+void setthecorruptionof(string person, number value)
+	setthedataof(person, "sleepiness", value)
+end
+
+# set a person's drunkenness
+void setthedrunkennessof(string person, number value)
+	setthedataof(person, "drunkenness", value)
+end
+
+# set a person's smelliness
+void setthesmellinessof(string person, number value)
+	setthedataof(person, "smelliness", value)
+end
+
+# set a person's charisma
+void setthecharismaof(string person, number value)
+	setthedataof(person, "charisma", value)
+end
+
+# set a person's happiness
+void setthehappinessof(string person, number value)
+	setthedataof(person, "happiness", value)
+end
+
+# set a person's supremacy
+void setthesupremacyof(string person, number value)
+	setthedataof(person, "supremacy", value)
+end
+
+# zaps a person (makes person sleep)
+void zap(string person)
+	moveitemtothing(thingwiththefunction("ZapPerson"), person)
+	Connect(thingwiththefunction("ZapPerson").ZapPerson(person))
+end
+
+# gently zaps a person (stuns person)
+void gentlyzap(string person)
+	Connect(thingwiththefunction("ZapPersonGently")).ZapPersonGently(person)
+end
+
+# zaps people in an array
+void zapallinarray(array zaptargets, number zapduration, number delayduration)
+	if Count(zaptargets) != 0
+		loop from 0 to zapduration
+			loop zaptargets
+				zap(@)
+			end
+			delayby(delayduration)
+		end
+	end	
+end
+
+# gently zaps people in an array
+void gentlyzapallinarray(array gentlyzaptargets, number zapduration, number delayduration)
+	if Count(gentlyzaptargets) != 0
+		loop from 0 to zapduration
+			loop gentlyzaptargets
+				gentlyzap(@)
+			end
+			delayby(delayduration)
+		end
+	end
+end
+
+# zaps other people in the room the user is in
+void zapothersinroom(number zapduration, number delayduration)
+	array list = anarrayofpeoplenear(GetUser())
+	if Count(list) != 0
+		loop from 0 to zapduration
+			loop list
+				zap(@)
+			end
+			delayby(delayduration)
+		end
+	end	
+end
+
+# gently zaps other people in the room the user is in
+void gentlyzapothersinroom(number zapduration, number delayduration)
+	array list = anarrayofpeoplenear(GetUser())
+	if Count(list) != 0
+		loop from 0 to zapduration
+			loop list
+				gentlyzap(@)
+			end
+			delayby(delayduration)
+		end
+	end	
+end
+
+# cause a person to interact with a thing
+void interact(string person, string thing)
+	Connect(thingwiththefunction("InteractWith")).InteractWith(person, thing)
+end
+
+### cash ###
+# return a person's balance
+number thebalanceof(string person)
+	return Connect(thingwiththefunction("GetBalanceForPerson")).GetBalanceForPerson(person)
+end
+
+# changes person's balance by a value
+void changethebalanceof(string person, number cash)
+	Connect(thingwiththefunction("ChangeBalance")).ChangeBalance(person, cash)
+end
+
+# returns the difference between a number and a person's balance 
+number thebalancedifferencebetween(string person, number value)
+	return value - thebalanceof(person)
+end
+
+# sets how much cash a person has
+void setcash(string person, number cash)
+	changethebalanceof(person, thebalancedifferencebetween(person, cash))
+end
+
+# registers cash to Wellspringer server under a person's name 
+void register(string person, number cash)
+	Connect(thingwiththefunction("RegisterSeller")).RegisterSeller(person, cash)
+end
+
+### environment ###
+# returns the weather value
+number theweathervalue()
+	Connect(thingwiththefunction("GetRain")).GetRain()
+end
+
+# sets the weather value
+void settheweathervalue(number value)
+	if theweathervalue() != value
+		Connect(thingwiththefunction("SetRain")).SetRain(value)
+	end
+end
+
+# sets actual weather
+void setweather(number choice)
+	if choice == 1
+		if theweathervalue() >= 25
+			settheweathervalue(0)
+		end
+	end
+	if choice == 2
+		if theweathervalue() >= 100 || theweathervalue() <=24 
+			settheweathervalue(25)
+		end
+	end
+	if choice == 3
+		if theweathervalue() >= 200 || theweathervalue() <= 99
+			settheweathervalue(100)
+		end
+	end
+	if choice == 4
+		if theweathervalue() <= 199
+			settheweathervalue(200)
+		end
+	end
+end
+
+### rooms ###
+# return string containing current room of person
+string roomof(string person)
+	return Connect(thingwiththefunction("GetRoom")).GetRoom(person)
+end
+
+# returns an array of all rooms
+array anarrayofallrooms()
+	return Connect(thingwiththefunction("GetAllRooms")).GetAllRooms()
+end
+
+# returns true if a string is a room
+bool isroom(string room)
+	if roomof(room) == "" && Count(anarrayofthingsin(room)) != 0
+	end
+end
+
+# returns an array of rooms with names containing the search string
+array arraysearchforroom(string searchstring)
+	array list = []
+	loop room in anarrayofallrooms()
+		if stringhas(uppercasetolowercase(room), uppercasetolowercase(searchstring))
+			Append(list, room)
+		end
+	end
+	return list
+end
+
+# returns a string of rooms with names containing the search string, delimited by delimiter
+string stringsearchforroom(string searchstring, string delimiter)
+	string list = ""
+	loop room in anarrayofallrooms()
+		if stringhas(uppercasetolowercase(room), uppercasetolowercase(searchstring))
+			list += room + delimiter
+		end
+	end
+	return list
+end
+
+# returns an array of all items in a room
+array anarrayofthingsin(string room)
+	return Connect(thingwiththefunction("GetThingsInRoom")).GetThingsInRoom(room)
+end
+
+# returns an array of all people in a room
+array anarrayofpeoplein(string room)
+	array list = []
+	loop anarrayofthingsin(room)
+		if stringisaperson(@)
+			Append(list, @)
+		end
+	end
+	return list
+end
+
+# returns an array of all the people in a room that a person is in, except for that person
+array anarrayofpeoplenear(string person)
+	array list = []
+	loop anarrayofpeoplein(roomof(person))
+		if stringisaperson(@) && @ != person
+			Append(list, @)
+		end
+	end
+	return list
+end
+
+### teleport ###
+# move item to thing
+void moveitemtothing(string item, string thing)
+	Connect(thingwiththefunction("SetPosition")).SetPosition(item, thing)
+end
+
+# move person to thing
+void movepersontothing(string person, string thing)
+	moveitemtothing(thingwiththefunction("MovePerson"), person)
+	Connect(thingwiththefunction("MovePerson")).MovePerson(person, thing)
+end
+
+# move item to room
+void moveitemtoroom(string item, string room, number index)
+	array thingsinroom = anarrayofthingsin(room)
+	moveitemtothing(item, thingsinroom[index])
+end
+
+# move person to room
+void movepersontoroom(string person, string room, number index)
+	array thingsinroom = anarrayofthingsin(room)
+	movepersontothing(person, thingsinroom[index])
+end
