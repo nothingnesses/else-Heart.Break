@@ -1,5 +1,5 @@
 # else-Heart.Break
-Awesome code for items in the game [else Heart.Break()](http://elseheartbreak.com/ "else Heart.Break() Homepage").
+Awesome code for items in the game [else Heart.Break()](http://elseheartbreak.com/ "else Heart.Break() Homepage"). This README is outdated.
 
 # Purpose
 The codes are pretty well-commented so reading the comments should give a pretty good gist of what the codes do. There is a separate Drink Manual to be used as a guide when using the Drink code. In general though:
