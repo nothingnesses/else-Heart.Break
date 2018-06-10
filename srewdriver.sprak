@@ -1,0 +1,6 @@
+SetMaxTime(-2)
+SetMhz(500)
+array APIs = ["arcade","door", "floppy", "internet", "memory"]
+loop APIs
+	EnableAPI(@)
+end
