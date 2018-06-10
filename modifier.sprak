@@ -1,0 +1,16 @@
+bool Allow(string target, number level)
+	# pc can be the name of any other computer as long as that computer is coded with computer.sprak and isn't used in the thingwiththefunction() function in the computer.sprak, otherwise connections to that computer will be blocked when the functions are used
+	string pc = Connect("Yvonne_ArcadeMachine2")
+	if pc.categoryof(target) == "door"
+		if pc.load(target + "_lock_state") != "unlocked"
+			pc.unlock(target)
+			pc.save(target + "_lock_state", "unlocked")
+			Connect(target).Say(target + " unlocked.")
+		else
+			pc.lock(target)
+			pc.save(target + "_lock_state", "locked")
+			Connect(target).Say(target + " locked.")
+		end
+	end
+	return true
+end
