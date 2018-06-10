@@ -733,7 +733,7 @@ end
 # zaps a person (makes person sleep)
 void zap(string person)
 	moveitemtothing(thingwiththefunction("ZapPerson"), person)
-	Connect(thingwiththefunction("ZapPerson")).ZapPerson(person))
+	Connect(thingwiththefunction("ZapPerson")).ZapPerson(person)
 end
 
 # gently zaps a person (stuns person)
