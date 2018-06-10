@@ -1,0 +1,307 @@
+#################
+### variables ###
+#################
+# pc can be the name of any other computer as long as that computer is coded with computer.sprak and isn't used in the thingwiththefunction() function in the computer.sprak, otherwise connections to that computer will be blocked when the functions are used
+string pc = Connect("Yvonne_ArcadeMachine2")
+array movethese = []
+string destination = ""
+number index = 0
+# 98 is max sleepiness before falling asleep at 99
+number sleepiness = 0
+array wheres = []
+bool copying = false
+array whatsin = []
+array interactors = []
+string interactwith = ""
+bool zapothersinroomswitch = false
+bool gentlyzapothersinroomswitch = false
+number walkspeed = 10
+number weather = 0
+array zaptargets = []
+array gentlyzaptargets = []
+array setstatsfor = [GetUser()]
+array saystatsof = []
+number delayduration = 1
+array searchforthings = []
+array searchforrooms = []
+number cash = 999
+array givecashto = [GetUser()]
+# zapduration does not seem to be accurate
+number zapduration = 60
+number cashforwellspring = 999
+string wellspringcashsender = GetUser()
+number corruption = 0
+number drunkenness = 0
+number smelliness = 0
+number charisma = 0
+number happiness = 0
+number supremacy = 0
+array getlistsofthingsincategories = []
+bool getalistofeverything = false
+bool getalistofeverythingandtheirpositions = false
+string saylist = ""
+
+############
+### main ###
+############
+### stats ###
+if Count(setstatsfor) != 0
+	loop setstatsfor
+		if pc.stringisaperson(@)
+			if pc.thesleepinessof(@) != sleepiness
+				pc.setthesleepinessof(@, sleepiness)
+				saylist += "The sleepiness of " + @ + " was set to " + sleepiness + ". "
+			end
+			if pc.thewalkspeedof(@) != walkspeed
+				pc.setthewalkspeedof(@, walkspeed)
+				saylist += "The walking speed of " + @ + " was set to " + walkspeed + ". "
+			end
+			if pc.thecorruptionof(@) != corruption
+				pc.setthecorruptionof(@, corruption)
+				saylist += "The corruption of " + @ + " was set to " + corruption + ". "
+			end
+			if pc.thedrunkennessof(@) != drunkenness
+				pc.setthedrunkennessof(@, drunkenness)
+				saylist += "The drunkenness of " + @ + " was set to " + drunkenness + ". "
+			end
+			if pc.thesmellinessof(@) != smelliness
+				pc.setthesmellinessof(@, smelliness)
+				saylist += "The smelliness of " + @ + " was set to " + smelliness + ". "
+			end
+			if pc.thecharismaof(@) != charisma
+				pc.setthecharismaof(@, charisma)
+				saylist += "The charisma of " + @ + " was set to " + charisma + ". "
+			end
+			if pc.thehappinessof(@) != happiness
+				pc.setthehappinessof(@, happiness)
+				saylist += "The happiness of " + @ + " was set to " + happiness + ". "
+			end
+			if pc.thesupremacyof(@) != supremacy
+				pc.setthesupremacyof(@, supremacy)
+				saylist += "The supremacy of " + @ + " was set to " + supremacy + ". "
+			end
+		else
+			saylist += @ + " is not a valid setstatsfor value. Use an array containing strings delimited by commas, each containing the name of a person. "
+		end
+	end
+end
+
+if Count(saystatsof) != 0
+	loop saystatsof
+		if pc.stringisaperson(@)
+			saylist += @ + ": Sleepiness - " + pc.thesleepinessof(@) + ", Corruption - " + pc.thecorruptionof(@) + ", Drunkenness - " + pc.thedrunkennessof(@) + ", Smelliness - " + pc.thesmellinessof(@) + ", Charisma - " + pc.thecharismaof(@) + ", Happiness - " + pc.thehappinessof(@) + ", Supremacy - " + pc.thesupremacyof(@) + ". "
+		else
+			saylist += @ + " is not a valid saystatsof value. Use an array containing strings delimited by commas, each containing the name of a person. "
+		end
+	end
+end
+
+### positions of things ###
+if Count(wheres) != 0
+	loop wheres
+		saylist += @ + " is at " + pc.stringofpositionof(@, ", ") + ". "
+	end
+end
+
+### finance ###
+if cashforwellspring > 0
+	if pc.stringisaperson(wellspringcashsender)
+		pc.register(wellspringcashsender, cashforwellspring)
+	else
+		saylist += wellspringcashsender + " is not a valid wellspringcashsender value. Use a string containing the name of a person. "
+	end
+end
+
+if Count(givecashto) != 0
+	string recipientlist = ""
+	loop givecashto
+		if pc.stringisaperson(@)
+			if pc.thebalancedifferencebetween(@, cash) != 0
+				pc.setcash(@, cash)
+				recipientlist += @ + ", "
+			end
+		else
+			saylist += @ + " is not a valid givecashto value. Use an array containing strings delimited by commas, each containing the name of a person. "
+		end
+	end
+	if recipientlist != 0
+		saylist += "For " + recipientlist + "cash was set to: $" + cash + ". "
+	end
+end
+
+### weather ###
+if weather != 0
+	if weather >= 1 && weather <= 4
+		pc.setweather(weather)
+		if weather == 1
+			saylist += "Weather set to sunny. "
+		end
+		if weather == 2
+			saylist += "Weather set to drizzly. "
+		end
+		if weather == 3
+			saylist += "Weather set to rainy. "
+		end
+		if weather == 4
+			saylist += "Weather set to stormy. "
+		end
+	else
+		saylist += weather + " is not a valid weather value. Use integers >= 0 and <= 4. "
+	end
+end
+
+### interact ###
+if Count(interactors) != 0 && interactwith != ""
+	string interactorlist = ""
+	loop interactors
+		if pc.stringisaperson(@)
+			pc.interact(@, interactwith)
+			interactorlist += @ + ", "
+		else
+			saylist += @ + " is not a valid interactors value. Use an array containing strings delimited by commas, each containing the name of a person. "
+		end
+	end
+	if interactorlist != ""
+		saylist += interactorlist + " now interacting with" + interactwith + ". "
+	end
+end
+
+### teleport ###
+if Count(movethese) != 0 && destination != ""
+	loop movethese
+		if pc.isroom(destination) == true
+			if index < 0
+				saylist += index + " is not a valid index. Use integers >= 0. "
+			else
+				if pc.stringisaperson(@)
+					if pc.hasfunction(pc.thingwiththefunction("MovePerson"), "MovePerson")
+						pc.movepersontoroom(@, destination, index)
+					else
+						saylist += pc.thingwiththefunction("MovePerson") + " does not have MovePerson(). "
+					end
+				else
+					pc.moveitemtoroom(@, destination, index)
+				end
+			end
+		else
+			if pc.stringisaperson(@)
+				if pc.hasfunction(pc.thingwiththefunction("MovePerson"), "MovePerson")
+					pc.movepersontothing(@, destination)
+				else
+					saylist += pc.thingwiththefunction("MovePerson") + " does not have MovePerson(). "
+				end
+			else
+				pc.moveitemtothing(@, destination)
+			end
+		end
+	end
+end
+
+### search rooms ###
+if Count(searchforrooms) != 0
+	string list = ""
+	loop searchforrooms
+		list += pc.stringsearchforroom(@, ", ") + ". "
+	end
+	saylist += "Search for " + searchforrooms + " returned: " + list + "."
+end
+
+### search things ###
+if Count(searchforthings) != 0
+	string list = ""
+	loop searchforthings
+		list += pc.stringsearchforthing(@, ", ") + ". "
+	end
+	saylist += "Search for " + searchforthings + " returned: " + list + "."
+end
+
+### list things ###
+if Count(whatsin) != 0
+	loop whatsin
+		if pc.isroom(@) == true
+			saylist += @ + " contains: " + pc.anarrayofthingsin(@) + ". "
+		else
+			saylist += @ + " is not a valid whatsin value. Use an array containing strings delimited by commas, each containing the name of a room. "
+		end
+	end
+end
+
+if Count(getlistsofthingsincategories) != 0
+	loop getlistsofthingsincategories
+		saylist += @ + " list: " + pc.astringofthingsincategory(@, ", ") + ". "
+	end
+end
+
+if getalistofeverything
+	saylist += "World contains: " + pc.astringofeverything(", ") + ". "
+end
+
+if getalistofeverythingandtheirpositions
+	saylist += "World contains: " + pc.astringofeverythingandtheirpositions(" - ") + ". "
+end
+
+### zap ###
+if Count(zaptargets) != 0
+	if zapduration <= 0
+		saylist += zapduration + " is not a valid zapduration value. Use numbers > 0. "
+	else
+		if pc.hasfunction(pc.thingwiththefunction("ZapPerson"), "ZapPerson")
+			loop zaptargets
+				array actualtargets = []
+				if pc.stringisaperson(@)
+					Append(actualtargets, @)
+				else
+					saylist += @ + " is not a valid zaptargets value. Use an array containing strings delimited by commas, each containing the name of a person. "
+				end
+				pc.zapallinarray(actualtargets, zapduration, delayduration)
+			end
+		else
+			saylist += pc.thingwiththefunction("ZapPerson") + " does not have ZapPerson(). "
+		end
+	end
+end
+
+if Count(gentlyzaptargets) != 0
+	if zapduration <= 0
+		saylist += zapduration + " is not a valid zapduration value. Use numbers > 0. "
+	else
+		loop gentlyzaptargets
+			array actualtargets = []
+			if pc.stringisaperson(@)
+				Append(actualtargets, @)
+			else
+				saylist += @ + " is not a valid gentlyzaptargets value. Use strings delimited by commas, each containing the name of a person. "
+			end
+			pc.gentlyzapallinarray(actualtargets, zapduration, delayduration)
+		end
+	end
+end
+
+if zapothersinroomswitch
+	if pc.hasfunction(pc.thingwiththefunction("ZapPerson"), "ZapPerson")
+		if zapduration <= 0
+			saylist += zapduration + " is not a valid zapduration value. Use numbers > 0. "
+		else
+			pc.zapothersinroom(zapduration, delayduration)
+		end
+	else
+		saylist += pc.thingwiththefunction("ZapPerson") + " does not have ZapPerson(). "
+	end
+end
+
+if gentlyzapothersinroomswitch
+	if zapduration <= 0
+		saylist += zapduration + " is not a valid zapduration value. Use numbers > 0. "
+	else
+		pc.gentlyzapothersinroom(zapduration, delayduration)
+	end
+end
+
+if saylist != ""
+	if copying
+		pc.copy(saylist)
+		Say("Copied: " + saylist)
+	else
+		Say(saylist)
+	end
+end
