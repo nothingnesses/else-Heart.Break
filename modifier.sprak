@@ -1,6 +1,10 @@
 bool Allow(string target, number level)
+	bool copying = false
 	# pc can be the name of any other computer as long as that computer is coded with computer.sprak and isn't used in the thingwiththefunction() function in the computer.sprak, otherwise connections to that computer will be blocked when the functions are used
 	string pc = Connect("Yvonne_ArcadeMachine2")
+	if copying
+		pc.copy(target)
+	end
 	if pc.categoryof(target) == "door"
 		if pc.load(target + "_lock_state") != "unlocked"
 			pc.unlock(target)
