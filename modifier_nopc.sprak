@@ -1,4 +1,8 @@
 bool Allow(string target, number level)
+	bool copying = false
+	if copying
+		Connect("Hotel_ServerBasement_Extractor_1").CopyToClipboard(target)
+	end
 	if Connect("PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1").GetTypeOfThing(target) == "door"
 		# Hotel_Lobby_ComputerCashier can be replaced with the name of any other computer with the Memory API enabled and lock_state can be replaced with any other name you wish to use instead. Be sure to replace all occurences in the modifier's code.
 		if Connect("Hotel_Lobby_ComputerCashier").LoadMemory(target + "_lock_state") != "unlocked" 
