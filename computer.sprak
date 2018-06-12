@@ -1,7 +1,7 @@
 #################
 ### functions ###
 #################
-# returns the required thing for a function
+# returns the required thing that provides a function
 array thingwiththefunction(string function)
 	string bank = "FinanceComputer"
 	string weather = "MeteorologyServer"
@@ -121,7 +121,8 @@ array thingwiththefunction(string function)
 	end
 end
 
-string supply(string function)#
+# returns the proper prefix that supplies a function
+string supply(string function)
 	return Connect(thingwiththefunction(function))
 end
 
