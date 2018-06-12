@@ -1,8 +1,6 @@
 #################
 ### variables ###
 #################
-# pc can be the name of any other computer as long as that computer isn't used in the thingwiththefunction() function in the computer code, otherwise connections to that computer will be blocked when the functions are used
-string pc = Connect("Yvonne_ArcadeMachine2")
 array movethese = []
 string destination = ""
 number index = 0
@@ -21,7 +19,7 @@ array zaptargets = []
 array gentlyzaptargets = []
 array setstatsfor = [GetUser()]
 array saystatsof = []
-number delayduration = 1
+number delayduration = 0
 array searchforthings = []
 array searchforrooms = []
 number cash = 999
@@ -309,7 +307,7 @@ end
 #################
 ### functions ###
 #################
-# returns the required thing for a function
+# returns the required thing that provides a function
 array thingwiththefunction(string function)
 	string bank = "FinanceComputer"
 	string weather = "MeteorologyServer"
@@ -332,17 +330,13 @@ array thingwiththefunction(string function)
 	string thingwithgettypeofthing = supercomputer
 	string thingwithinteractwith = supercomputer
 	string thingwithinttochar = supercomputer
-	string thingwithloadmemory = memorystore
-	string thingwithlock = locktoggler
 	string thingwithmoveperson = largerecorder
 	string thingwithregisterseller = "Wellspringer"
-	string thingwithsavememory = memorystore
 	string thingwithsetnumericdata = ultracomputer
 	string thingwithsetposition = supercomputer
 	string thingwithsetweather = weather
 	string thingwithsleep = largerecorder
 	string thingwithstringcontains = largerecorder
-	string thingwithunlock = locktoggler
 	string thingwithzapperson = largerecorder
 	string thingwithzappersongently = ultracomputer
 	
@@ -429,7 +423,8 @@ array thingwiththefunction(string function)
 	end
 end
 
-string supply(string function)#
+# returns the proper prefix that supplies a function
+string supply(string function)
 	return Connect(thingwiththefunction(function))
 end
 
