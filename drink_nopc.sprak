@@ -388,11 +388,20 @@ array thingwiththefunction(string function)
 	if function == "IntToChar"
 		return thingwithinttochar
 	end
+	if function == "LoadMemory"
+		return thingwithloadmemory
+	end
+	if function == "Lock"
+		return thingwithlock
+	end
 	if function == "MovePerson"
 		return thingwithmoveperson
 	end
 	if function == "RegisterSeller"
 		return thingwithregisterseller
+	end
+	if function == "SaveMemory"
+		return thingwithsavememory
 	end
 	if function == "SetNumericData"
 		return thingwithsetnumericdata
@@ -409,12 +418,19 @@ array thingwiththefunction(string function)
 	if function == "StringContains"
 		return thingwithstringcontains
 	end
+	if function == "Unlock"
+		return thingwithunlock
+	end
 	if function == "ZapPerson"
 		return thingwithzapperson
 	end
 	if function == "ZapPersonGently"
 		return thingwithzappersongently
 	end
+end
+
+string supply(string function)#
+	return Connect(thingwiththefunction(function))
 end
 
 # returns true if thing has a certain function
@@ -424,12 +440,12 @@ end
 
 # delayby
 void delayby(number delayduration)
-	Connect(thingwiththefunction("Sleep")).Sleep(delayduration)
+	supply("Sleep").Sleep(delayduration)
 end
 
 # copy to clipboard
 void copy(value)
-	Connect(thingwiththefunction("CopyToClipboard")).CopyToClipboard(value)
+	supply("CopyToClipboard").CopyToClipboard(value)
 end
 
 ### mathematics ###
@@ -445,7 +461,7 @@ end
 ### data manipulation ###
 # returns true if a character is uppercase
 bool isuppercase(var character)
-	string connect = Connect(thingwiththefunction("CharToInt"))
+	string connect = supply("CharToInt")
 	return connect.CharToInt(character) >= -32 && connect.CharToInt(character) <= -7
 end
 
@@ -454,7 +470,7 @@ string uppercasetolowercase(var text)
 	string lowered = ""
 	loop character in text
 		if isuppercase(character)
-			lowered += Connect(thingwiththefunction("IntToChar")).IntToChar(Connect(thingwiththefunction("CharToInt")).CharToInt(character) + 32)
+			lowered += supply("IntToChar").IntToChar(supply("CharToInt").CharToInt(character) + 32)
 		else
 			lowered += character
 		end
@@ -464,7 +480,7 @@ end
 
 # converts the first character of a string to a number
 number charactertonumber(string character)
-	return Connect(thingwiththefunction("CharToInt")).CharToInt(character)
+	return supply("CharToInt").CharToInt(character)
 end
 
 # slices a string
@@ -516,13 +532,13 @@ end
 
 # returns true if a string is present in a string
 bool stringhas(string whole, string section)
-	return Connect(thingwiththefunction("StringContains")).StringContains(whole, section)
+	return supply("StringContains").StringContains(whole, section)
 end
 
 ### things ###
 # returns the category of a string
 string categoryof(string thing)
-	return Connect(thingwiththefunction("GetTypeOfThing")).GetTypeOfThing(thing)
+	return supply("GetTypeOfThing").GetTypeOfThing(thing)
 end
 
 # returns true if a string is a person
@@ -532,7 +548,7 @@ end
 
 # returns an array of things of certain category
 array anarrayofthingsincategory(string category)
-	return Connect(thingwiththefunction("GetThingsOfType")).GetThingsOfType(category)
+	return supply("GetThingsOfType").GetThingsOfType(category)
 end
 
 # returns a string of things of certain category, delimited by delimiter
@@ -546,7 +562,7 @@ end
 
 # returns a string of a position of a thing in standard format
 string standardpositionof(string thing)
-	return Connect(thingwiththefunction("GetPosition")).GetPosition(thing)
+	return supply("GetPosition").GetPosition(thing)
 end
 
 # returns an array of a position of a thing
@@ -642,7 +658,7 @@ end
 
 # returns a data value of a thing
 void thedataof(string thing, string stat)
-	return Connect(thingwiththefunction("GetNumericData")).GetNumericData(thing, stat)
+	return supply("GetNumericData").GetNumericData(thing, stat)
 end
 
 # returns a person's sleepiness
@@ -687,7 +703,7 @@ end
 
 # set a person's stat
 void setthedataof(string thing, string stat, var value)
-	Connect(thingwiththefunction("SetNumericData")).SetNumericData(thing, stat, value)
+	supply("SetNumericData").SetNumericData(thing, stat, value)
 end
 
 # set a person's sleepiness
@@ -733,12 +749,12 @@ end
 # zaps a person (makes person sleep)
 void zap(string person)
 	moveitemtothing(thingwiththefunction("ZapPerson"), person)
-	Connect(thingwiththefunction("ZapPerson")).ZapPerson(person)
+	supply("ZapPerson").ZapPerson(person)
 end
 
 # gently zaps a person (stuns person)
 void gentlyzap(string person)
-	Connect(thingwiththefunction("ZapPersonGently")).ZapPersonGently(person)
+	supply("ZapPersonGently").ZapPersonGently(person)
 end
 
 # zaps people in an array
@@ -793,18 +809,18 @@ end
 
 # cause a person to interact with a thing
 void interact(string person, string thing)
-	Connect(thingwiththefunction("InteractWith")).InteractWith(person, thing)
+	supply("InteractWith").InteractWith(person, thing)
 end
 
 ### cash ###
 # return a person's balance
 number thebalanceof(string person)
-	return Connect(thingwiththefunction("GetBalanceForPerson")).GetBalanceForPerson(person)
+	return supply("GetBalanceForPerson").GetBalanceForPerson(person)
 end
 
 # changes person's balance by a value
 void changethebalanceof(string person, number cash)
-	Connect(thingwiththefunction("ChangeBalance")).ChangeBalance(person, cash)
+	supply("ChangeBalance").ChangeBalance(person, cash)
 end
 
 # returns the difference between a number and a person's balance 
@@ -819,19 +835,19 @@ end
 
 # registers cash to Wellspringer server under a person's name 
 void register(string person, number cash)
-	Connect(thingwiththefunction("RegisterSeller")).RegisterSeller(person, cash)
+	supply("RegisterSeller").RegisterSeller(person, cash)
 end
 
 ### environment ###
 # returns the weather value
 number theweathervalue()
-	Connect(thingwiththefunction("GetRain")).GetRain()
+	supply("GetRain").GetRain()
 end
 
 # sets the weather value
 void settheweathervalue(number value)
 	if theweathervalue() != value
-		Connect(thingwiththefunction("SetRain")).SetRain(value)
+		supply("SetRain").SetRain(value)
 	end
 end
 
@@ -862,12 +878,12 @@ end
 ### rooms ###
 # return string containing current room of person
 string roomof(string person)
-	return Connect(thingwiththefunction("GetRoom")).GetRoom(person)
+	return supply("GetRoom").GetRoom(person)
 end
 
 # returns an array of all rooms
 array anarrayofallrooms()
-	return Connect(thingwiththefunction("GetAllRooms")).GetAllRooms()
+	return supply("GetAllRooms").GetAllRooms()
 end
 
 # returns true if a string is a room
@@ -901,7 +917,7 @@ end
 
 # returns an array of all items in a room
 array anarrayofthingsin(string room)
-	return Connect(thingwiththefunction("GetThingsInRoom")).GetThingsInRoom(room)
+	return supply("GetThingsInRoom").GetThingsInRoom(room)
 end
 
 # returns an array of all people in a room
@@ -929,13 +945,13 @@ end
 ### teleport ###
 # move item to thing
 void moveitemtothing(string item, string thing)
-	Connect(thingwiththefunction("SetPosition")).SetPosition(item, thing)
+	supply("SetPosition").SetPosition(item, thing)
 end
 
 # move person to thing
 void movepersontothing(string person, string thing)
 	moveitemtothing(thingwiththefunction("MovePerson"), person)
-	Connect(thingwiththefunction("MovePerson")).MovePerson(person, thing)
+	supply("MovePerson").MovePerson(person, thing)
 end
 
 # move item to room
