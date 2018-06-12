@@ -596,7 +596,8 @@ end
 
 # returns true if a string is a room
 bool isroom(string room)
-	if roomof(room) == "" && Count(anarrayofthingsin(room)) != 0
+	if roomof(room) == ""
+		return true
 	end
 end
 
