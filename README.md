@@ -9,6 +9,7 @@ The codes are pretty well-commented so reading the comments should give a pretty
 * computer.sprak allows computers coded by it to connect to other objects and provide functions to other objects connected to it.
 
 * drink.sprak and drink_nopc.sprak allows any drink coded with it when drunk to:
+    * Lock/unlock all the doors near/not near Sebastian.
     * Teleport anyone or anything to anyone or anything or anyplace.
     * Find the position of anything in the world, copy the results if required.
     * Get the names of everything and everyone in the room and copy the results if required.
