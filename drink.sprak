@@ -251,6 +251,7 @@ if lockdoorsnearswitch
 end
 
 if unlockdoorsnearswitch
+	pc.unlockdoorsnear()
 	saylist += "Doors in " + pc.roomof(GetUser()) + " have been unlocked. "
 end
 
