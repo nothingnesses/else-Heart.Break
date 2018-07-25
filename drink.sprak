@@ -6,15 +6,19 @@ string pc = Connect("Yvonne_ArcadeMachine2")
 array movethese = []
 string destination = ""
 number index = 0
+lockdoorsnearswitch = false
+unlockdoorsnearswitch = false
+lockdoorsnotnearswitch = false
+unlockdoorsnotnearswitch = false
 # 98 is max sleepiness before falling asleep at 99
 number sleepiness = 0
-array wheres = []
-bool copying = false
 array whatsin = []
+bool copying = false
+array wheres = []
 array interactors = []
 string interactwith = ""
-bool zapothersinroomswitch = false
-bool gentlyzapothersinroomswitch = false
+bool zapothersnearswitch = false
+bool gentlyzapothersnearswitch = false
 number walkspeed = 10
 number weather = 0
 array zaptargets = []
@@ -240,6 +244,26 @@ if getalistofeverythingandtheirpositions
 	saylist += "World contains: " + pc.astringofeverythingandtheirpositions(" - ") + ". "
 end
 
+### lock/unlock doors ###
+if lockdoorsnearswitch
+	pc.lockdoorsnear()
+	saylist += "Doors in " + pc.roomof(GetUser()) + " have been locked. "
+end
+
+if unlockdoorsnearswitch
+	saylist += "Doors in " + pc.roomof(GetUser()) + " have been unlocked. "
+end
+
+if lockdoorsnotnearswitch
+	pc.lockdoorsnotnear()
+	saylist += "Doors everywhere except for those in " + pc.roomof(GetUser()) + " have been locked. "
+end
+
+if unlockdoorsnotnearswitch
+	pc.unlockdoorsnotnear()
+	saylist += "Doors everywhere except for those in " + pc.roomof(GetUser()) + " have been unlocked. "
+end
+
 ### zap ###
 if Count(zaptargets) != 0
 	if zapduration <= 0
@@ -277,23 +301,23 @@ if Count(gentlyzaptargets) != 0
 	end
 end
 
-if zapothersinroomswitch
+if zapothersnearswitch
 	if pc.hasfunction(pc.thingwiththefunction("ZapPerson"), "ZapPerson")
 		if zapduration <= 0
 			saylist += zapduration + " is not a valid zapduration value. Use numbers > 0. "
 		else
-			pc.zapothersinroom(zapduration, delayduration)
+			pc.zapothersnear(zapduration, delayduration)
 		end
 	else
 		saylist += pc.thingwiththefunction("ZapPerson") + " does not have ZapPerson(). "
 	end
 end
 
-if gentlyzapothersinroomswitch
+if gentlyzapothersnearswitch
 	if zapduration <= 0
 		saylist += zapduration + " is not a valid zapduration value. Use numbers > 0. "
 	else
-		pc.gentlyzapothersinroom(zapduration, delayduration)
+		pc.gentlyzapothersnear(zapduration, delayduration)
 	end
 end
 
