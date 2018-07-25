@@ -369,6 +369,86 @@ void unlock(string door)
 	supply("Unlock").Unlock(door)
 end
 
+# locks all doors in room
+void lockdoorsinroom(string room)
+	loop anarrayofthingsin(room)
+		if (categoryof(@) == "door")
+			lock(@)
+		end
+	end
+end
+
+# unlocks all doors in room
+void unlockdoorsinroom(string room)
+	loop anarrayofthingsin(room)
+		if (categoryof(@) == "door")
+			unlock(@)
+		end
+	end
+end
+
+# locks all doors in room containing a person
+void lockdoorsinroomof(string person)
+	lockdoorsinroom(roomof(person))
+end
+
+# unlocks all doors in room containing a person
+void unlockdoorsinroomof(string person)
+	unlockdoorsinroom(roomof(person))
+end
+
+# locks all doors in rooms not containing a person
+void lockdoorsinroomsnotcontaining(string person)
+	loop anarrayofallrooms()
+		if (@ != roomof(person))
+			lockdoorsinroom(@)
+		end
+	end
+end
+
+# unlocks all doors in rooms not containing a person
+void unlockdoorsinroomsnotcontaining(string person)
+	loop anarrayofallrooms()
+		if (@ != roomof(person))
+			unlockdoorsinroom(@)
+		end
+	end
+end
+
+# locks all doors in room containing the user
+void lockdoorsnear()
+	lockdoorsinroomof(GetUser())
+end
+
+# unlocks all doors in room containing the user
+void unlockdoorsnear(string person)
+	unlockdoorsinroomof(GetUser())
+end
+
+# locks all doors in rooms not containing the user
+void lockdoorsnotnear(string person)
+	lockdoorsinroomsnotcontaining(GetUser())
+end
+
+# unlocks all doors in rooms not containing the user
+void unlockdoorsnotnear(string person)
+	unlockdoorsinroomsnotcontaining(GetUser())
+end
+
+# locks all doors
+void lockalldoors()
+	loop anarrayofthingsincategory("door")
+		lock(@)
+	end
+end
+
+# unlocks all doors
+void unlockalldoors()
+	loop anarrayofthingsincategory("door")
+		unlock(@)
+	end
+end
+
 # returns a data value of a thing
 void thedataof(string thing, string stat)
 	return supply("GetNumericData").GetNumericData(thing, stat)
@@ -495,7 +575,7 @@ void gentlyzapallinarray(array gentlyzaptargets, number zapduration, number dela
 end
 
 # zaps other people in the room the user is in
-void zapothersinroom(number zapduration, number delayduration)
+void zapothersnear(number zapduration, number delayduration)
 	array list = anarrayofpeoplenear(GetUser())
 	if Count(list) != 0
 		loop from 0 to zapduration
@@ -508,7 +588,7 @@ void zapothersinroom(number zapduration, number delayduration)
 end
 
 # gently zaps other people in the room the user is in
-void gentlyzapothersinroom(number zapduration, number delayduration)
+void gentlyzapothersnear(number zapduration, number delayduration)
 	array list = anarrayofpeoplenear(GetUser())
 	if Count(list) != 0
 		loop from 0 to zapduration
