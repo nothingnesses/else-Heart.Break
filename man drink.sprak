@@ -10,9 +10,17 @@ sleepiness accepts an integer. Drinking causes the Sleepiness of anyone in the s
 
 index accepts an integer with a value >= 0 and represents an item in target room that is used in moveitemtoroom() and movepersontoroom() functions as an item in the room to teleport the content(s) of the movethese variable to.
 
-wheres accepts an array containing strings, each of which contains the name of any person or item whose current position(s) are displayed after the user drinks.
+lockdoorsnearswitch accepts a boolean and, if set to true, locks all doors in the room where the user is currently inside of.
+
+unlockdoorsnearswitch accepts a boolean and, if set to true, unlocks all doors in the room where the user is currently inside of.
+
+lockdoorsnotnearswitch accepts a boolean and, if set to true, locks all doors in all the other rooms that the user is currently not inside of.
+
+unlockdoorsnotnearswitch accepts a boolean and, if set to true, unlocks all doors all the other rooms that the user is currently not inside of.
 
 copying, when set to true, causes wheres, thingsin, searchforthings or searchforrooms' last result(s) to be copied to clipboard after the user drinks.
+
+wheres accepts an array containing strings, each of which contains the name of any person or item whose current position(s) are displayed after the user drinks.
 
 whatsin accepts an array containing strings, each of which contains the name of any room, the current contents of which are displayed,after after the user drinks.
 
