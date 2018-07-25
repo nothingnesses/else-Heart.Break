@@ -4,15 +4,19 @@
 array movethese = []
 string destination = ""
 number index = 0
+lockdoorsnearswitch = false
+unlockdoorsnearswitch = false
+lockdoorsnotnearswitch = false
+unlockdoorsnotnearswitch = false
 # 98 is max sleepiness before falling asleep at 99
 number sleepiness = 0
-array wheres = []
-bool copying = false
 array whatsin = []
+bool copying = false
+array wheres = []
 array interactors = []
 string interactwith = ""
-bool zapothersinroomswitch = false
-bool gentlyzapothersinroomswitch = false
+bool zapothersnearswitch = false
+bool gentlyzapothersnearswitch = false
 number walkspeed = 10
 number weather = 0
 array zaptargets = []
@@ -238,6 +242,27 @@ if getalistofeverythingandtheirpositions
 	saylist += "World contains: " + astringofeverythingandtheirpositions(" - ") + ". "
 end
 
+### lock/unlock doors ###
+if lockdoorsnearswitch
+	lockdoorsnear()
+	saylist += "Doors in " + roomof(GetUser()) + " have been locked. "
+end
+
+if unlockdoorsnearswitch
+	unlockdoorsnear()
+	saylist += "Doors in " + roomof(GetUser()) + " have been unlocked. "
+end
+
+if lockdoorsnotnearswitch
+	lockdoorsnotnear()
+	saylist += "Doors everywhere except for those in " + pc.roomof(GetUser()) + " have been locked. "
+end
+
+if unlockdoorsnotnearswitch
+	pc.unlockdoorsnotnear()
+	saylist += "Doors everywhere except for those in " + pc.roomof(GetUser()) + " have been unlocked. "
+end
+
 ### zap ###
 if Count(zaptargets) != 0
 	if zapduration <= 0
@@ -275,23 +300,23 @@ if Count(gentlyzaptargets) != 0
 	end
 end
 
-if zapothersinroomswitch
+if zapothersnearswitch
 	if hasfunction(thingwiththefunction("ZapPerson"), "ZapPerson")
 		if zapduration <= 0
 			saylist += zapduration + " is not a valid zapduration value. Use numbers > 0. "
 		else
-			zapothersinroom(zapduration, delayduration)
+			zapothersnear(zapduration, delayduration)
 		end
 	else
 		saylist += thingwiththefunction("ZapPerson") + " does not have ZapPerson(). "
 	end
 end
 
-if gentlyzapothersinroomswitch
+if gentlyzapothersnearswitch
 	if zapduration <= 0
 		saylist += zapduration + " is not a valid zapduration value. Use numbers > 0. "
 	else
-		gentlyzapothersinroom(zapduration, delayduration)
+		gentlyzapothersnear(zapduration, delayduration)
 	end
 end
 
@@ -651,6 +676,96 @@ string stringsearchforthing(string searchstring, string delimiter)
 	return list
 end
 
+# locks doors
+void lock(string door)
+	supply("Lock").Lock(door)
+end
+
+# unlocks doors
+void unlock(string door)
+	supply("Unlock").Unlock(door)
+end
+
+# locks all doors in room
+void lockdoorsinroom(string room)
+	loop anarrayofthingsin(room)
+		if (categoryof(@) == "door")
+			lock(@)
+		end
+	end
+end
+
+# unlocks all doors in room
+void unlockdoorsinroom(string room)
+	loop anarrayofthingsin(room)
+		if (categoryof(@) == "door")
+			unlock(@)
+		end
+	end
+end
+
+# locks all doors in room containing a person
+void lockdoorsinroomof(string person)
+	lockdoorsinroom(roomof(person))
+end
+
+# unlocks all doors in room containing a person
+void unlockdoorsinroomof(string person)
+	unlockdoorsinroom(roomof(person))
+end
+
+# locks all doors in rooms not containing a person
+void lockdoorsinroomsnotcontaining(string person)
+	loop anarrayofallrooms()
+		if (@ != roomof(person))
+			lockdoorsinroom(@)
+		end
+	end
+end
+
+# unlocks all doors in rooms not containing a person
+void unlockdoorsinroomsnotcontaining(string person)
+	loop anarrayofallrooms()
+		if (@ != roomof(person))
+			unlockdoorsinroom(@)
+		end
+	end
+end
+
+# locks all doors in room containing the user
+void lockdoorsnear()
+	lockdoorsinroomof(GetUser())
+end
+
+# unlocks all doors in room containing the user
+void unlockdoorsnear(string person)
+	unlockdoorsinroomof(GetUser())
+end
+
+# locks all doors in rooms not containing the user
+void lockdoorsnotnear(string person)
+	lockdoorsinroomsnotcontaining(GetUser())
+end
+
+# unlocks all doors in rooms not containing the user
+void unlockdoorsnotnear(string person)
+	unlockdoorsinroomsnotcontaining(GetUser())
+end
+
+# locks all doors
+void lockalldoors()
+	loop anarrayofthingsincategory("door")
+		lock(@)
+	end
+end
+
+# unlocks all doors
+void unlockalldoors()
+	loop anarrayofthingsincategory("door")
+		unlock(@)
+	end
+end
+
 # returns a data value of a thing
 void thedataof(string thing, string stat)
 	return supply("GetNumericData").GetNumericData(thing, stat)
@@ -777,7 +892,7 @@ void gentlyzapallinarray(array gentlyzaptargets, number zapduration, number dela
 end
 
 # zaps other people in the room the user is in
-void zapothersinroom(number zapduration, number delayduration)
+void zapothersnear(number zapduration, number delayduration)
 	array list = anarrayofpeoplenear(GetUser())
 	if Count(list) != 0
 		loop from 0 to zapduration
@@ -790,7 +905,7 @@ void zapothersinroom(number zapduration, number delayduration)
 end
 
 # gently zaps other people in the room the user is in
-void gentlyzapothersinroom(number zapduration, number delayduration)
+void gentlyzapothersnear(number zapduration, number delayduration)
 	array list = anarrayofpeoplenear(GetUser())
 	if Count(list) != 0
 		loop from 0 to zapduration
