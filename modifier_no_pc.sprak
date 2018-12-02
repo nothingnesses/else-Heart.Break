@@ -1,0 +1,60 @@
+############
+### main ###
+############
+bool Allow(string target, number level)
+	if supply("GetTypeOfThing").GetTypeOfThing(target) == "door"
+		if supply("LoadMemory").LoadMemory(target + "_lock_state") != "unlocked" 
+			supply("Unlock").Unlock(target)
+			Connect(target).Say(target + " unlocked.")
+			supply("SaveMemory").SaveMemory(target + "_lock_state", "unlocked")
+		else
+			supply("Lock").Lock(target)
+			Connect(target).Say(target + " locked.")
+			supply("SaveMemory").SaveMemory("lock_state", "locked")
+		end
+	end
+#	Uncomment to copy the name of target to clipboard.
+#	supply("CopyToClipboard").CopyToClipboard(target)
+	return true
+end
+
+#################
+### functions ###
+#################
+#	returns the name of thing that provides function
+array thing_with_function(string function)
+#	Hotel_Lobby_ComputerCashier can be replaced with the name of any other computer with the Memory API enabled and lock_state can be replaced with any other name you wish to use instead. Be sure to replace all occurences in the modifier's code.
+	string server_door_lock = "Hotel_Lobby_ComputerCashier"
+	string server_1 = "PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1"
+	string server_data_storage = "Hotel_Lobby_ComputerCashier"
+	string thing_with_copy_to_clipboard = "Hotel_ServerBasement_Extractor_1"
+	string thing_with_get_type_of_thing = server_1
+	string thing_with_load_memory = server_data_storage
+	string thing_with_lock = server_door_lock
+	string thing_with_save_memory = server_data_storage
+	string thing_with_unlock = server_door_lock
+
+	if function == "CopyToClipboard"
+		return thing_with_copy_to_clipboard
+	end
+	if function == "GetTypeOfThing"
+		return thing_with_get_type_of_thing
+	end
+	if function == "LoadMemory"
+		return thing_with_load_memory
+	end
+	if function == "Lock"
+		return thing_with_lock
+	end
+	if function == "SaveMemory"
+		return thing_with_save_memory
+	end
+	if function == "Unlock"
+		return thing_with_unlock
+	end
+end
+
+#	returns the proper prefix that supplies function
+string supply(string function)
+	return Connect(thing_with_function(function))
+end
