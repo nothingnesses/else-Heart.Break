@@ -1,101 +1,99 @@
 #################
 ### variables ###
 #################
-# pc can be the name of any other computer as long as that computer is coded with computer.sprak and isn't used in the thingwiththefunction() function in the computer.sprak, otherwise connections to that computer will be blocked when the functions are used
+#	pc can be the name of any other computer as long as that computer is coded with server.sprak and isn't used in the thing_with_function() function in the server.sprak, otherwise connections to that computer will be blocked when the functions are used
 string pc = Connect("Yvonne_ArcadeMachine2")
-array movethese = []
+array move_these = []
 string destination = ""
 number index = 0
-lockdoorsnearswitch = false
-unlockdoorsnearswitch = false
-lockdoorsnotnearswitch = false
-unlockdoorsnotnearswitch = false
-# 98 is max sleepiness before falling asleep at 99
+bool lock_doors_near_switch = false
+bool unlock_doors_near_switch = false
+#	98 is max sleepiness before falling asleep at 99
 number sleepiness = 0
-array whatsin = []
+array whats_in = []
 bool copying = false
 array wheres = []
 array interactors = []
-string interactwith = ""
-bool zapothersnearswitch = false
-bool gentlyzapothersnearswitch = false
-number walkspeed = 10
+string interactee = ""
+bool zap_others_near_switch = false
+bool gently_zap_others_near_switch = false
+number walk_speed = 10
 number weather = 0
-array zaptargets = []
-array gentlyzaptargets = []
-array setstatsfor = [GetUser()]
-array saystatsof = []
-number delayduration = 0
-array searchforthings = []
-array searchforrooms = []
+array zap_targets = []
+array gently_zap_targets = []
+array set_stats_for = [GetUser()]
+array say_stats_of = []
+number delay_duration = 0
+array search_for_things = []
+array search_for_rooms = []
 number cash = 999
-array givecashto = [GetUser()]
-# zapduration does not seem to be accurate
-number zapduration = 60
-number cashforwellspring = 999
-string wellspringcashsender = GetUser()
+array give_cash_to = [GetUser()]
+#	zap_duration does not seem to be accurate
+number zap_duration = 60
+number cash_for_wellspring = 999
+string wellspring_cash_sender = GetUser()
 number corruption = 0
 number drunkenness = 0
 number smelliness = 0
 number charisma = 0
 number happiness = 0
 number supremacy = 0
-array getlistsofthingsincategories = []
-bool getalistofeverything = false
-bool getalistofeverythingandtheirpositions = false
-string saylist = ""
+array get_lists_of_things_in_categories = []
+bool get_a_list_of_everything = false
+bool get_a_list_of_everything_and_their_positions = false
+string say_list = ""
 
 ############
 ### main ###
 ############
 ### stats ###
-if Count(setstatsfor) != 0
-	loop setstatsfor
-		if pc.stringisaperson(@)
-			if pc.thesleepinessof(@) != sleepiness
-				pc.setthesleepinessof(@, sleepiness)
-				saylist += "The sleepiness of " + @ + " was set to " + sleepiness + ". "
+if Count(set_stats_for) != 0
+	loop set_stats_for
+		if pc.string_is_a_person(@)
+			if pc.the_sleepiness_of(@) != sleepiness
+				pc.set_the_sleepiness_of(@, sleepiness)
+				say_list += "The sleepiness of " + @ + " was set to " + sleepiness + ". "
 			end
-			if pc.thewalkspeedof(@) != walkspeed
-				pc.setthewalkspeedof(@, walkspeed)
-				saylist += "The walking speed of " + @ + " was set to " + walkspeed + ". "
+			if pc.the_walk_speed_of(@) != walk_speed
+				pc.set_the_walk_speed_of(@, walk_speed)
+				say_list += "The walking speed of " + @ + " was set to " + walk_speed + ". "
 			end
-			if pc.thecorruptionof(@) != corruption
-				pc.setthecorruptionof(@, corruption)
-				saylist += "The corruption of " + @ + " was set to " + corruption + ". "
+			if pc.the_corruption_of(@) != corruption
+				pc.set_the_corruption_of(@, corruption)
+				say_list += "The corruption of " + @ + " was set to " + corruption + ". "
 			end
-			if pc.thedrunkennessof(@) != drunkenness
-				pc.setthedrunkennessof(@, drunkenness)
-				saylist += "The drunkenness of " + @ + " was set to " + drunkenness + ". "
+			if pc.the_drunkenness_of(@) != drunkenness
+				pc.set_the_drunkenness_of(@, drunkenness)
+				say_list += "The drunkenness of " + @ + " was set to " + drunkenness + ". "
 			end
-			if pc.thesmellinessof(@) != smelliness
-				pc.setthesmellinessof(@, smelliness)
-				saylist += "The smelliness of " + @ + " was set to " + smelliness + ". "
+			if pc.the_smelliness_of(@) != smelliness
+				pc.set_the_smelliness_of(@, smelliness)
+				say_list += "The smelliness of " + @ + " was set to " + smelliness + ". "
 			end
-			if pc.thecharismaof(@) != charisma
-				pc.setthecharismaof(@, charisma)
-				saylist += "The charisma of " + @ + " was set to " + charisma + ". "
+			if pc.the_charisma_of(@) != charisma
+				pc.set_the_charisma_of(@, charisma)
+				say_list += "The charisma of " + @ + " was set to " + charisma + ". "
 			end
-			if pc.thehappinessof(@) != happiness
-				pc.setthehappinessof(@, happiness)
-				saylist += "The happiness of " + @ + " was set to " + happiness + ". "
+			if pc.the_happiness_of(@) != happiness
+				pc.set_the_happiness_of(@, happiness)
+				say_list += "The happiness of " + @ + " was set to " + happiness + ". "
 			end
-			if pc.thesupremacyof(@) != supremacy
-				pc.setthesupremacyof(@, supremacy)
-				saylist += "The supremacy of " + @ + " was set to " + supremacy + ". "
+			if pc.the_supremacy_of(@) != supremacy
+				pc.set_the_supremacy_of(@, supremacy)
+				say_list += "The supremacy of " + @ + " was set to " + supremacy + ". "
 			end
 		else
-			saylist += @ + " is not a valid setstatsfor value. Use an array containing strings delimited by commas, each containing the name of a person. "
+			say_list += @ + " is not a valid set_stats_for value. Use an array containing strings delimited by commas, each containing the name of a person. "
 		end
 	end
 end
 
-if Count(saystatsof) != 0
-	loop saystatsof
-		if pc.stringisaperson(@)
-			saylist += @ + ": Sleepiness - " + pc.thesleepinessof(@) + ", Corruption - " + pc.thecorruptionof(@) + ", Drunkenness - " + pc.thedrunkennessof(@) + ", Smelliness - " + pc.thesmellinessof(@) + ", Charisma - " + pc.thecharismaof(@) + ", Happiness - " + pc.thehappinessof(@) + ", Supremacy - " + pc.thesupremacyof(@) + ". "
+if Count(say_stats_of) != 0
+	loop say_stats_of
+		if pc.string_is_a_person(@)
+			say_list += @ + ": Sleepiness - " + pc.the_sleepiness_of(@) + ", Corruption - " + pc.the_corruption_of(@) + ", Drunkenness - " + pc.the_drunkenness_of(@) + ", Smelliness - " + pc.the_smelliness_of(@) + ", Charisma - " + pc.the_charisma_of(@) + ", Happiness - " + pc.the_happiness_of(@) + ", Supremacy - " + pc.the_supremacy_of(@) + ". "
 		else
-			saylist += @ + " is not a valid saystatsof value. Use an array containing strings delimited by commas, each containing the name of a person. "
+			say_list += @ + " is not a valid say_stats_of value. Use an array containing strings delimited by commas, each containing the name of a person. "
 		end
 	end
 end
@@ -103,230 +101,220 @@ end
 ### positions of things ###
 if Count(wheres) != 0
 	loop wheres
-		saylist += @ + " is at " + pc.stringofpositionof(@, ", ") + ". "
+		say_list += @ + " is at " + pc.string_of_position_of(@, ", ") + ". "
 	end
 end
 
 ### finance ###
-if cashforwellspring > 0
-	if pc.stringisaperson(wellspringcashsender)
-		pc.register(wellspringcashsender, cashforwellspring)
+if cash_for_wellspring > 0
+	if pc.string_is_a_person(wellspring_cash_sender)
+		pc.register(wellspring_cash_sender, cash_for_wellspring)
 	else
-		saylist += wellspringcashsender + " is not a valid wellspringcashsender value. Use a string containing the name of a person. "
+		say_list += wellspring_cash_sender + " is not a valid wellspring_cash_sender value. Use a string containing the name of a person. "
 	end
 end
 
-if Count(givecashto) != 0
-	string recipientlist = ""
-	loop givecashto
-		if pc.stringisaperson(@)
-			if pc.thebalancedifferencebetween(@, cash) != 0
-				pc.setcash(@, cash)
-				recipientlist += @ + ", "
+if Count(give_cash_to) != 0
+	string recipient_list = ""
+	loop give_cash_to
+		if pc.string_is_a_person(@)
+			if pc.the_balance_difference_between(@, cash) != 0
+				pc.set_cash(@, cash)
+				recipient_list += @ + ", "
 			end
 		else
-			saylist += @ + " is not a valid givecashto value. Use an array containing strings delimited by commas, each containing the name of a person. "
+			say_list += @ + " is not a valid give_cash_to value. Use an array containing strings delimited by commas, each containing the name of a person. "
 		end
 	end
-	if recipientlist != 0
-		saylist += "For " + recipientlist + "cash was set to: $" + cash + ". "
+	if recipient_list != 0
+		say_list += "For " + recipient_list + ", cash was set to: $" + cash + ". "
 	end
 end
 
 ### weather ###
 if weather != 0
 	if weather >= 1 && weather <= 4
-		pc.setweather(weather)
+		pc.set_weather(weather)
 		if weather == 1
-			saylist += "Weather set to sunny. "
+			say_list += "Weather set to sunny. "
 		end
 		if weather == 2
-			saylist += "Weather set to drizzly. "
+			say_list += "Weather set to drizzly. "
 		end
 		if weather == 3
-			saylist += "Weather set to rainy. "
+			say_list += "Weather set to rainy. "
 		end
 		if weather == 4
-			saylist += "Weather set to stormy. "
+			say_list += "Weather set to stormy. "
 		end
 	else
-		saylist += weather + " is not a valid weather value. Use integers >= 0 and <= 4. "
+		say_list += weather + " is not a valid weather value. Use integers >= 0 and <= 4. "
 	end
 end
 
 ### interact ###
-if Count(interactors) != 0 && interactwith != ""
-	string interactorlist = ""
+if Count(interactors) != 0 && interactee != ""
+	string interactor_list = ""
 	loop interactors
-		if pc.stringisaperson(@)
-			pc.interact(@, interactwith)
-			interactorlist += @ + ", "
+		if pc.string_is_a_person(@)
+			pc.interact_with(@, interactee)
+			interactor_list += @ + ", "
 		else
-			saylist += @ + " is not a valid interactors value. Use an array containing strings delimited by commas, each containing the name of a person. "
+			say_list += @ + " is not a valid interactors value. Use an array containing strings delimited by commas, each containing the name of a person. "
 		end
 	end
-	if interactorlist != ""
-		saylist += interactorlist + " now interacting with" + interactwith + ". "
+	if interactor_list != ""
+		say_list += interactor_list + " now interacting with" + interactee + ". "
 	end
 end
 
 ### teleport ###
-if Count(movethese) != 0 && destination != ""
-	loop movethese
-		if pc.isroom(destination) == true
+if Count(move_these) != 0 && destination != ""
+	loop move_these
+		if pc.is_room(destination) == true
 			if index < 0
-				saylist += index + " is not a valid index. Use integers >= 0. "
+				say_list += index + " is not a valid index. Use integers >= 0. "
 			else
-				if pc.stringisaperson(@)
-					if pc.hasfunction(pc.thingwiththefunction("MovePerson"), "MovePerson")
-						pc.movepersontoroom(@, destination, index)
+				if pc.string_is_a_person(@)
+					if pc.has_function(pc.thing_with_function("MovePerson"), "MovePerson")
+						pc.move_person_to_room(@, destination, index)
 					else
-						saylist += pc.thingwiththefunction("MovePerson") + " does not have MovePerson(). "
+						say_list += pc.thing_with_function("MovePerson") + " does not have MovePerson(). "
 					end
 				else
-					pc.moveitemtoroom(@, destination, index)
+					pc.move_item_to_room(@, destination, index)
 				end
 			end
 		else
-			if pc.stringisaperson(@)
-				if pc.hasfunction(pc.thingwiththefunction("MovePerson"), "MovePerson")
-					pc.movepersontothing(@, destination)
+			if pc.string_is_a_person(@)
+				if pc.has_function(pc.thing_with_function("MovePerson"), "MovePerson")
+					pc.move_person_to_thing(@, destination)
 				else
-					saylist += pc.thingwiththefunction("MovePerson") + " does not have MovePerson(). "
+					say_list += pc.thing_with_function("MovePerson") + " does not have MovePerson(). "
 				end
 			else
-				pc.moveitemtothing(@, destination)
+				pc.move_item_to_thing(@, destination)
 			end
 		end
 	end
 end
 
 ### search rooms ###
-if Count(searchforrooms) != 0
+if Count(search_for_rooms) != 0
 	string list = ""
-	loop searchforrooms
-		list += pc.stringsearchforroom(@, ", ") + ". "
+	loop search_for_rooms
+		list += pc.string_search_for_room(@, ", ") + ". "
 	end
-	saylist += "Search for " + searchforrooms + " returned: " + list + "."
+	say_list += "Search for " + search_for_rooms + " returned: " + list + "."
 end
 
 ### search things ###
-if Count(searchforthings) != 0
+if Count(search_for_things) != 0
 	string list = ""
-	loop searchforthings
-		list += pc.stringsearchforthing(@, ", ") + ". "
+	loop search_for_things
+		list += pc.string_search_for_thing(@, ", ") + ". "
 	end
-	saylist += "Search for " + searchforthings + " returned: " + list + "."
+	say_list += "Search for " + search_for_things + " returned: " + list + "."
 end
 
 ### list things ###
-if Count(whatsin) != 0
-	loop whatsin
-		if pc.isroom(@) == true
-			saylist += @ + " contains: " + pc.anarrayofthingsin(@) + ". "
+if Count(whats_in) != 0
+	loop whats_in
+		if pc.is_room(@) == true
+			say_list += @ + " contains: " + pc.array_of_things_in(@) + ". "
 		else
-			saylist += @ + " is not a valid whatsin value. Use an array containing strings delimited by commas, each containing the name of a room. "
+			say_list += @ + " is not a valid whats_in value. Use an array containing strings delimited by commas, each containing the name of a room. "
 		end
 	end
 end
 
-if Count(getlistsofthingsincategories) != 0
-	loop getlistsofthingsincategories
-		saylist += @ + " list: " + pc.astringofthingsincategory(@, ", ") + ". "
+if Count(get_lists_of_things_in_categories) != 0
+	loop get_lists_of_things_in_categories
+		say_list += @ + " list: " + pc.string_of_things_in_category(@, ", ") + ". "
 	end
 end
 
-if getalistofeverything
-	saylist += "World contains: " + pc.astringofeverything(", ") + ". "
+if get_a_list_of_everything
+	say_list += "World contains: " + pc.string_of_everything(", ") + ". "
 end
 
-if getalistofeverythingandtheirpositions
-	saylist += "World contains: " + pc.astringofeverythingandtheirpositions(" - ") + ". "
+if get_a_list_of_everything_and_their_positions
+	say_list += "World contains: " + pc.string_of_everything_and_their_positions(" - ") + ". "
 end
 
 ### lock/unlock doors ###
-if lockdoorsnearswitch
-	pc.lockdoorsnear()
-	saylist += "Doors in " + pc.roomof(GetUser()) + " have been locked. "
+if lock_doors_near_switch
+	pc.lock_doors_near()
+	say_list += "Doors in " + pc.room_of(GetUser()) + " have been locked. "
 end
 
-if unlockdoorsnearswitch
-	pc.unlockdoorsnear()
-	saylist += "Doors in " + pc.roomof(GetUser()) + " have been unlocked. "
-end
-
-if lockdoorsnotnearswitch
-	pc.lockdoorsnotnear()
-	saylist += "Doors everywhere except for those in " + pc.roomof(GetUser()) + " have been locked. "
-end
-
-if unlockdoorsnotnearswitch
-	pc.unlockdoorsnotnear()
-	saylist += "Doors everywhere except for those in " + pc.roomof(GetUser()) + " have been unlocked. "
+if unlock_doors_near_switch
+	pc.unlock_doors_near()
+	say_list += "Doors in " + pc.room_of(GetUser()) + " have been unlocked. "
 end
 
 ### zap ###
-if Count(zaptargets) != 0
-	if zapduration <= 0
-		saylist += zapduration + " is not a valid zapduration value. Use numbers > 0. "
+if Count(zap_targets) != 0
+	if zap_duration <= 0
+		say_list += zap_duration + " is not a valid zap_duration value. Use numbers > 0. "
 	else
-		if pc.hasfunction(pc.thingwiththefunction("ZapPerson"), "ZapPerson")
-			loop zaptargets
-				array actualtargets = []
-				if pc.stringisaperson(@)
-					Append(actualtargets, @)
+		if pc.has_function(pc.thing_with_function("ZapPerson"), "ZapPerson")
+			loop zap_targets
+				array actual_targets = []
+				if pc.string_is_a_person(@)
+					Append(actual_targets, @)
 				else
-					saylist += @ + " is not a valid zaptargets value. Use an array containing strings delimited by commas, each containing the name of a person. "
+					say_list += @ + " is not a valid zap_targets value. Use an array containing strings delimited by commas, each containing the name of a person. "
 				end
-				pc.zapallinarray(actualtargets, zapduration, delayduration)
+				pc.zap_all_in_array(actual_targets, zap_duration, delay_duration)
 			end
 		else
-			saylist += pc.thingwiththefunction("ZapPerson") + " does not have ZapPerson(). "
+			say_list += pc.thing_with_function("ZapPerson") + " does not have ZapPerson(). "
 		end
 	end
 end
 
-if Count(gentlyzaptargets) != 0
-	if zapduration <= 0
-		saylist += zapduration + " is not a valid zapduration value. Use numbers > 0. "
+if Count(gently_zap_targets) != 0
+	if zap_duration <= 0
+		say_list += zap_duration + " is not a valid zap_duration value. Use numbers > 0. "
 	else
-		loop gentlyzaptargets
-			array actualtargets = []
-			if pc.stringisaperson(@)
-				Append(actualtargets, @)
+		loop gently_zap_targets
+			array actual_targets = []
+			if pc.string_is_a_person(@)
+				Append(actual_targets, @)
 			else
-				saylist += @ + " is not a valid gentlyzaptargets value. Use strings delimited by commas, each containing the name of a person. "
+				say_list += @ + " is not a valid gently_zap_targets value. Use strings delimited by commas, each containing the name of a person. "
 			end
-			pc.gentlyzapallinarray(actualtargets, zapduration, delayduration)
+			pc.gently_zap_all_in_array(actual_targets, zap_duration, delay_duration)
 		end
 	end
 end
 
-if zapothersnearswitch
-	if pc.hasfunction(pc.thingwiththefunction("ZapPerson"), "ZapPerson")
-		if zapduration <= 0
-			saylist += zapduration + " is not a valid zapduration value. Use numbers > 0. "
+if zap_others_near_switch
+	if pc.has_function(pc.thing_with_function("ZapPerson"), "ZapPerson")
+		if zap_duration <= 0
+			say_list += zap_duration + " is not a valid zap_duration value. Use numbers > 0. "
 		else
-			pc.zapothersnear(zapduration, delayduration)
+			pc.zap_others_near(zap_duration, delay_duration)
 		end
 	else
-		saylist += pc.thingwiththefunction("ZapPerson") + " does not have ZapPerson(). "
+		say_list += pc.thing_with_function("ZapPerson") + " does not have ZapPerson(). "
 	end
 end
 
-if gentlyzapothersnearswitch
-	if zapduration <= 0
-		saylist += zapduration + " is not a valid zapduration value. Use numbers > 0. "
+if gently_zap_others_near_switch
+	if zap_duration <= 0
+		say_list += zap_duration + " is not a valid zap_duration value. Use numbers > 0. "
 	else
-		pc.gentlyzapothersnear(zapduration, delayduration)
+		pc.gently_zap_others_near(zap_duration, delay_duration)
 	end
 end
 
-if saylist != ""
+if say_list != ""
 	if copying
-		pc.copy(saylist)
-		Say("Copied: " + saylist)
+		pc.copy(say_list)
+		Say("Copied: " + say_list)
 	else
-		Say(saylist)
+		Say(say_list)
 	end
 end
