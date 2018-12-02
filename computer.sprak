@@ -1,148 +1,149 @@
 #################
 ### functions ###
 #################
-# returns the required thing that provides a function
-array thingwiththefunction(string function)
-	string bank = "FinanceComputer"
-	string weather = "MeteorologyServer"
-	string locktoggler = "Hotel_Lobby_ComputerCashier"
-	string largerecorder = "PoliceOfficeInterior_LargeRecorder_LargeRecorder_1"
-	string supercomputer = "PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1"
-	string ultracomputer = "Heart"
-	string memorystore = "Hotel_Lobby_ComputerCashier"
-	string thingwithchangebalance = bank
-	string thingwithchartoint = supercomputer
-	string thingwithcopytoclipboard = "Hotel_ServerBasement_Extractor_1"
-	string thingwithgetallrooms = supercomputer
-	string thingwithgetbalanceforperson = bank
-	string thingwithgetnumericdata = ultracomputer
-	string thingwithgetposition = supercomputer
-	string thingwithgetrain = weather
-	string thingwithgetroom = supercomputer
-	string thingwithgetthingsoftype = supercomputer
-	string thingwithgetthingsinroom = supercomputer
-	string thingwithgettypeofthing = supercomputer
-	string thingwithinteractwith = supercomputer
-	string thingwithinttochar = supercomputer
-	string thingwithloadmemory = memorystore
-	string thingwithlock = locktoggler
-	string thingwithmoveperson = largerecorder
-	string thingwithregisterseller = "Wellspringer"
-	string thingwithsavememory = memorystore
-	string thingwithsetnumericdata = ultracomputer
-	string thingwithsetposition = supercomputer
-	string thingwithsetweather = weather
-	string thingwithsleep = largerecorder
-	string thingwithstringcontains = largerecorder
-	string thingwithunlock = locktoggler
-	string thingwithzapperson = largerecorder
-	string thingwithzappersongently = ultracomputer
+#	returns the name of thing that provides function
+array thing_with_function(string function)
+	string server_bank = "FinanceComputer"
+	string server_wellspring = "Wellspringer"
+	string server_meteorology = "MeteorologyServer"
+	string server_door_lock = "Hotel_Lobby_ComputerCashier"
+	string server_large_recorder = "PoliceOfficeInterior_LargeRecorder_LargeRecorder_1"
+	string server_1 = "PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1"
+	string server_2 = "Heart"
+	string server_data_storage = "Hotel_Lobby_ComputerCashier"
+	string thing_with_change_balance = server_bank
+	string thing_with_char_to_int = server_1
+	string thing_with_copy_to_clipboard = "Hotel_ServerBasement_Extractor_1"
+	string thing_with_get_all_rooms = server_1
+	string thing_with_get_balance_for_person = server_bank
+	string thing_with_get_numeric_data = server_2
+	string thing_with_get_position = server_1
+	string thing_with_get_rain = server_meteorology
+	string thing_with_get_room = server_1
+	string thing_with_get_things_of_type = server_1
+	string thing_with_get_things_in_room = server_1
+	string thing_with_get_type_of_thing = server_1
+	string thing_with_interact_with = server_1
+	string thing_with_int_to_char = server_1
+	string thing_with_load_memory = server_data_storage
+	string thing_with_lock = server_door_lock
+	string thing_with_move_person = server_large_recorder
+	string thing_with_register_seller = server_wellspring
+	string thing_with_save_memory = server_data_storage
+	string thing_with_set_numeric_data = server_2
+	string thing_with_set_position = server_1
+	string thing_with_set_weather = server_meteorology
+	string thing_with_sleep = server_large_recorder
+	string thing_with_string_contains = server_large_recorder
+	string thing_with_unlock = server_door_lock
+	string thing_with_zap_person = server_large_recorder
+	string thing_with_zap_person_gently = server_2
 	
 	if function == "ChangeBalance"
-		return thingwithchangebalance
+		return thing_with_change_balance
 	end
 	if function == "CharToInt"
-		return thingwithchartoint
+		return thing_with_char_to_int
 	end
 	if function == "CopyToClipboard"
-		return thingwithcopytoclipboard
+		return thing_with_copy_to_clipboard
 	end
 	if function == "GetAllRooms"
-		return thingwithgetallrooms
+		return thing_with_get_all_rooms
 	end
 	if function == "GetBalanceForPerson"
-		return thingwithgetbalanceforperson
+		return thing_with_get_balance_for_person
 	end
 	if function == "GetNumericData"
-		return thingwithgetnumericdata
+		return thing_with_get_numeric_data
 	end
 	if function == "GetPosition"
-		return thingwithgetposition
+		return thing_with_get_position
 	end
 	if function == "GetRain"
-		return thingwithgetrain
+		return thing_with_get_rain
 	end
 	if function == "GetRoom"
-		return thingwithgetroom
+		return thing_with_get_room
 	end
 	if function == "GetThingsInRoom"
-		return thingwithgetthingsinroom
+		return thing_with_get_things_in_room
 	end
 	if function == "GetThingsOfType"
-		return thingwithgetthingsoftype
+		return thing_with_get_things_of_type
 	end
 	if function == "GetTypeOfThing"
-		return thingwithgettypeofthing
+		return thing_with_get_type_of_thing
 	end
 	if function == "InteractWith"
-		return thingwithinteractwith
+		return thing_with_interact_with
 	end
 	if function == "IntToChar"
-		return thingwithinttochar
+		return thing_with_int_to_char
 	end
 	if function == "LoadMemory"
-		return thingwithloadmemory
+		return thing_with_load_memory
 	end
 	if function == "Lock"
-		return thingwithlock
+		return thing_with_lock
 	end
 	if function == "MovePerson"
-		return thingwithmoveperson
+		return thing_with_move_person
 	end
 	if function == "RegisterSeller"
-		return thingwithregisterseller
+		return thing_with_register_seller
 	end
 	if function == "SaveMemory"
-		return thingwithsavememory
+		return thing_with_save_memory
 	end
 	if function == "SetNumericData"
-		return thingwithsetnumericdata
+		return thing_with_set_numeric_data
 	end
 	if function == "SetPosition"
-		return thingwithsetposition
+		return thing_with_set_position
 	end
 	if function == "SetRain"
-		return thingwithsetweather
+		return thing_with_set_weather
 	end
 	if function == "Sleep"
-		return thingwithsleep
+		return thing_with_sleep
 	end
 	if function == "StringContains"
-		return thingwithstringcontains
+		return thing_with_string_contains
 	end
 	if function == "Unlock"
-		return thingwithunlock
+		return thing_with_unlock
 	end
 	if function == "ZapPerson"
-		return thingwithzapperson
+		return thing_with_zap_person
 	end
 	if function == "ZapPersonGently"
-		return thingwithzappersongently
+		return thing_with_zap_person_gently
 	end
 end
 
-# returns the proper prefix that supplies a function
+#	returns the proper prefix that supplies function
 string supply(string function)
-	return Connect(thingwiththefunction(function))
+	return Connect(thing_with_function(function))
 end
 
-# returns true if thing has a certain function
-bool hasfunction(string thing, string function)
+#	returns true if "thing" has function
+bool has_function(string thing, string function)
 	return Connect(thing).HasFunction(function)
 end
 
-# delayby
-void delayby(number delayduration)
-	supply("Sleep").Sleep(delayduration)
+#	delays script execution by delay_duration
+void delay_by(number delay_duration)
+	supply("Sleep").Sleep(delay_duration)
 end
 
-# copy to clipboard
+#	copies content of value to clipboard
 void copy(value)
 	supply("CopyToClipboard").CopyToClipboard(value)
 end
 
 ### mathematics ###
-# returns the answer of base raised to the power of exponent
+#	returns the answer of base raised to the power of exponent
 number power(number base, number exponent)
 	number answer = 1
 	loop from 0 to exponent - 1
@@ -152,17 +153,17 @@ number power(number base, number exponent)
 end
 
 ### data manipulation ###
-# returns true if a character is uppercase
-bool isuppercase(var character)
+#	returns true if a character is uppercase
+bool is_uppercase(var character)
 	string connect = supply("CharToInt")
 	return connect.CharToInt(character) >= -32 && connect.CharToInt(character) <= -7
 end
 
-# coverts uppercase characters to lowercase characters
-string uppercasetolowercase(var text)
+#	coverts uppercase characters to lowercase characters
+string uppercase_to_lowercase(var text)
 	string lowered = ""
 	loop character in text
-		if isuppercase(character)
+		if is_uppercase(character)
 			lowered += supply("IntToChar").IntToChar(supply("CharToInt").CharToInt(character) + 32)
 		else
 			lowered += character
@@ -171,36 +172,36 @@ string uppercasetolowercase(var text)
 	return lowered
 end
 
-# converts the first character of a string to a number
-number charactertonumber(string character)
+#	converts the first character of a string to a number
+number character_to_number(string character)
 	return supply("CharToInt").CharToInt(character)
 end
 
-# slices a string
-string slice(string inputstring, number index, string lastcharacter)
+#	slices a string
+string slice(string input_string, number index, string lastcharacter)
 	string outputslice = ""
 	loop
-		if inputstring[index] == lastcharacter
+		if input_string[index] == lastcharacter
 			break
 		else
-			outputslice += inputstring[index]
+			outputslice += input_string[index]
 		end
 		index++
 	end
 	return outputslice
 end
 
-# converts a string to a number
-number stringtonumber(string inputstring)
+#	converts a string to a number
+number string_to_number(string input_string)
 	number outputnumber = 0
 	number currentnumber = 0
 	bool isnegative = false
-	number stringlength = Count(inputstring) - 1
-	loop character in inputstring
+	number stringlength = Count(input_string) - 1
+	loop character in input_string
 		if character == "-"
 			isnegative = true
 		else
-			currentnumber = charactertonumber(character) + 49
+			currentnumber = character_to_number(character) + 49
 			if stringlength != 0
 				currentnumber *= power(10, stringlength)
 			end
@@ -214,8 +215,8 @@ number stringtonumber(string inputstring)
 	return outputnumber
 end
 
-# converts an array to a string
-string arraytostring(array list)
+#	converts an array to a string
+string array_to_string(array list)
 	string stringified = ""
 	loop element in list
 		stringified += element
@@ -223,122 +224,122 @@ string arraytostring(array list)
 	return stringified
 end
 
-# returns true if a string is present in a string
-bool stringhas(string whole, string section)
+#	returns true if a string is present in a string
+bool string_has(string whole, string section)
 	return supply("StringContains").StringContains(whole, section)
 end
 
-# saves a piece of data to memorystore variable set in thingwiththefunction() using key
+#	saves a piece of data to server_data_storage variable set in thing_with_function() using key
 void save(var key, var data)
 	return supply("SaveMemory").SaveMemory(key, data)
 end
 
-# loads a piece of data to memorystore variable set in thingwiththefunction() using key
+#	loads a piece of data to server_data_storage variable set in thing_with_function() using key
 void load(var key)
 	return supply("LoadMemory").LoadMemory(key)
 end
 
 ### things ###
-# returns the category of a string
-string categoryof(string thing)
+#	returns the category of a string
+string category_of(string thing)
 	return supply("GetTypeOfThing").GetTypeOfThing(thing)
 end
 
-# returns true if a string is a person
-bool stringisaperson(string person)
-	return categoryof(person) == "character"
+#	returns true if a string is a person
+bool string_is_a_person(string person)
+	return category_of(person) == "character"
 end
 
-# returns an array of things of certain category
-array anarrayofthingsincategory(string category)
+#	returns an array of things of certain category
+array array_of_things_in_category(string category)
 	return supply("GetThingsOfType").GetThingsOfType(category)
 end
 
-# returns a string of things of certain category, delimited by delimiter
-string astringofthingsincategory(string category, string delimiter)
-	string listofthings = ""
-	loop anarrayofthingsincategory(category)
-		listofthings += @ + delimiter
+#	returns a string of things of certain category, delimited by delimiter
+string string_of_things_in_category(string category, string delimiter)
+	string list_of_things = ""
+	loop array_of_things_in_category(category)
+		list_of_things += @ + delimiter
 	end
-	return listofthings
+	return list_of_things
 end
 
-# returns a string of a position of a thing in standard format
-string standardpositionof(string thing)
+#	returns a string of a position of a thing in standard format
+string standard_position_of(string thing)
 	return supply("GetPosition").GetPosition(thing)
 end
 
-# returns an array of a position of a thing
-array arrayofpositionof(string inputstring)
-	string position = standardpositionof(inputstring)
-	string room = roomof(inputstring)
-	number roomnamelength = Count(room)
-	string x = slice(position, 21 + roomnamelength, ",")
-	string y = slice(position, 22 + roomnamelength + Count(x), ")")
-	return [room, stringtonumber(x), stringtonumber(y)]
+#	returns an array of a position of a thing
+array array_of_position_of(string input_string)
+	string position = standard_position_of(input_string)
+	string room = room_of(input_string)
+	number room_name_length = Count(room)
+	string x = slice(position, 21 + room_name_length, ",")
+	string y = slice(position, 22 + room_name_length + Count(x), ")")
+	return [room, string_to_number(x), string_to_number(y)]
 end
 
-# returns a string of a position of thing, delimited by delimiter
-string stringofpositionof(string inputstring, string delimiter)
-	string position = standardpositionof(inputstring)
-	string room = roomof(inputstring)
-	number roomnamelength = Count(room)
-	string x = slice(position, 21 + roomnamelength, ",")
-	string y = slice(position, 22 + roomnamelength + Count(x), ")")
-	return room + delimiter + stringtonumber(x) + delimiter + stringtonumber(y)
+#	returns a string of a position of thing, delimited by delimiter
+string string_of_position_of(string input_string, string delimiter)
+	string position = standard_position_of(input_string)
+	string room = room_of(input_string)
+	number room_name_length = Count(room)
+	string x = slice(position, 21 + room_name_length, ",")
+	string y = slice(position, 22 + room_name_length + Count(x), ")")
+	return room + delimiter + string_to_number(x) + delimiter + string_to_number(y)
 end
 
-# returns the x coordinate of a thing
-number xof(string inputstring)
-	return stringtonumber(slice(standardpositionof(inputstring), 21 + Count(roomof(inputstring)), ","))
+#	returns the x coordinate of a thing
+number x_of(string input_string)
+	return string_to_number(slice(standard_position_of(input_string), 21 + Count(room_of(input_string)), ","))
 end
 
-# returns the y coordinate of a thing
-number yof(string inputstring)
-	string position = standardpositionof(inputstring)
-	number roomnamelength = Count(roomof(inputstring))
-	return stringtonumber(slice(position, 22 + roomnamelength + Count(slice(position, 21 + roomnamelength, ",")), ")"))
+#	returns the y coordinate of a thing
+number y_of(string input_string)
+	string position = standard_position_of(input_string)
+	number room_name_length = Count(room_of(input_string))
+	return string_to_number(slice(position, 22 + room_name_length + Count(slice(position, 21 + room_name_length, ",")), ")"))
 end
 
-# returns an array of everything in the world
-array anarrayofeverything()
+#	returns an array of everything in the world
+array array_of_everything()
 	array list = []
-	loop room in anarrayofallrooms()
-		loop anarrayofthingsin(room)
+	loop room in array_of_all_rooms()
+		loop array_of_things_in(room)
 			Append(list, @)
 		end
 	end
 	return list
 end
 
-# returns a string of everything in the world, delimited by delimiter
-string astringofeverything(string delimiter)
+#	returns a string of everything in the world, delimited by delimiter
+string string_of_everything(string delimiter)
 	string list = ""
-	loop room in anarrayofallrooms()
-		loop anarrayofthingsin(room)
+	loop room in array_of_all_rooms()
+		loop array_of_things_in(room)
 			list += @ + delimiter
 		end
 	end
 	return list
 end
 
-# returns a string of everything in the world and their positions, delimited by delimiter
-string astringofeverythingandtheirpositions(string delimiter)
+#	returns a string of everything in the world and their positions, delimited by delimiter
+string string_of_everything_and_their_positions(string delimiter)
 	string list = ""
-	loop room in anarrayofallrooms()
-		loop anarrayofthingsin(room)
-			list += @ + delimiter + roomof(@) + delimiter + xof(@) + delimiter + yof(@) + ". "
+	loop room in array_of_all_rooms()
+		loop array_of_things_in(room)
+			list += @ + delimiter + room_of(@) + delimiter + x_of(@) + delimiter + y_of(@) + ". "
 		end
 	end
 	return list
 end
 
-# returns an array of things with names containing the search string
-array arraysearchforthing(string searchstring)
+#	returns an array of things with names containing the search string
+array array_search_for_thing(string search_string)
 	array list = []
-	loop anarrayofallrooms()
-		loop thing in anarrayofthingsin(@)
-			if stringhas(uppercasetolowercase(thing), uppercasetolowercase(searchstring))
+	loop array_of_all_rooms()
+		loop thing in array_of_things_in(@)
+			if string_has(uppercase_to_lowercase(thing), uppercase_to_lowercase(search_string))
 				Append(list, thing)
 			end
 		end
@@ -346,12 +347,12 @@ array arraysearchforthing(string searchstring)
 	return list
 end
 
-# returns a string of things with names containing the search string, delimited by delimiter
-string stringsearchforthing(string searchstring, string delimiter)
+#	returns a string of things with names containing the search string, delimited by delimiter
+string string_search_for_thing(string search_string, string delimiter)
 	string list = ""
-	loop anarrayofallrooms()
-		loop thing in anarrayofthingsin(@)
-			if stringhas(uppercasetolowercase(thing), uppercasetolowercase(searchstring))
+	loop array_of_all_rooms()
+		loop thing in array_of_things_in(@)
+			if string_has(uppercase_to_lowercase(thing), uppercase_to_lowercase(search_string))
 				list += thing + delimiter
 			end
 		end
@@ -359,376 +360,348 @@ string stringsearchforthing(string searchstring, string delimiter)
 	return list
 end
 
-# locks doors
+#	locks doors
 void lock(string door)
 	supply("Lock").Lock(door)
 end
 
-# unlocks doors
+#	unlocks doors
 void unlock(string door)
 	supply("Unlock").Unlock(door)
 end
 
-# locks all doors in room
-void lockdoorsinroom(string room)
-	loop anarrayofthingsin(room)
-		if (categoryof(@) == "door")
+#	locks all doors in room
+void lock_doors_in_room(string room)
+	loop array_of_things_in(room)
+		if (category_of(@) == "door")
 			lock(@)
 		end
 	end
 end
 
-# unlocks all doors in room
-void unlockdoorsinroom(string room)
-	loop anarrayofthingsin(room)
-		if (categoryof(@) == "door")
+#	unlocks all doors in room
+void unlock_doors_in_room(string room)
+	loop array_of_things_in(room)
+		if (category_of(@) == "door")
 			unlock(@)
 		end
 	end
 end
 
-# locks all doors in room containing a person
-void lockdoorsinroomof(string person)
-	lockdoorsinroom(roomof(person))
+#	locks all doors in room containing a person
+void lock_doors_in_room_of(string person)
+	lock_doors_in_room(room_of(person))
 end
 
-# unlocks all doors in room containing a person
-void unlockdoorsinroomof(string person)
-	unlockdoorsinroom(roomof(person))
+#	unlocks all doors in room containing a person
+void unlock_doors_in_room_of(string person)
+	unlock_doors_in_room(room_of(person))
 end
 
-# locks all doors in rooms not containing a person
-void lockdoorsinroomsnotcontaining(string person)
-	loop anarrayofallrooms()
-		if (@ != roomof(person))
-			lockdoorsinroom(@)
-		end
-	end
+#	locks all doors in room containing the user
+void lock_doors_near()
+	lock_doors_in_room_of(GetUser())
 end
 
-# unlocks all doors in rooms not containing a person
-void unlockdoorsinroomsnotcontaining(string person)
-	loop anarrayofallrooms()
-		if (@ != roomof(person))
-			unlockdoorsinroom(@)
-		end
-	end
+#	unlocks all doors in room containing the user
+void unlock_doors_near()
+	unlock_doors_in_room_of(GetUser())
 end
 
-# locks all doors in room containing the user
-void lockdoorsnear()
-	lockdoorsinroomof(GetUser())
-end
-
-# unlocks all doors in room containing the user
-void unlockdoorsnear(string person)
-	unlockdoorsinroomof(GetUser())
-end
-
-# locks all doors in rooms not containing the user
-void lockdoorsnotnear(string person)
-	lockdoorsinroomsnotcontaining(GetUser())
-end
-
-# unlocks all doors in rooms not containing the user
-void unlockdoorsnotnear(string person)
-	unlockdoorsinroomsnotcontaining(GetUser())
-end
-
-# locks all doors
-void lockalldoors()
-	loop anarrayofthingsincategory("door")
+#	locks all doors
+void lock_all_doors()
+	loop array_of_things_in_category("door")
 		lock(@)
 	end
 end
 
-# unlocks all doors
-void unlockalldoors()
-	loop anarrayofthingsincategory("door")
+#	unlocks all doors
+void unlock_all_doors()
+	loop array_of_things_in_category("door")
 		unlock(@)
 	end
 end
 
-# returns a data value of a thing
-void thedataof(string thing, string stat)
+#	returns a data value of a thing
+void the_data_of(string thing, string stat)
 	return supply("GetNumericData").GetNumericData(thing, stat)
 end
 
-# returns a person's sleepiness
-number thesleepinessof(string person)
-	return thedataof(person, "sleepiness")
+#	returns a person's sleepiness
+number the_sleepiness_of(string person)
+	return the_data_of(person, "sleepiness")
 end
 
-# returns a person's walkspeed
-number thewalkspeedof(string person)
-	return thedataof(person, "walkSpeed")
+#	returns a person's walk_speed
+number the_walk_speed_of(string person)
+	return the_data_of(person, "walkSpeed")
 end
 
-# returns a person's corruption
-number thecorruptionof(string person)
-	return thedataof(person, "corruption")
+#	returns a person's corruption
+number the_corruption_of(string person)
+	return the_data_of(person, "corruption")
 end
 
-# returns a person's drunkenness
-number thedrunkennessof(string person)
-	return thedataof(person, "drunkenness")
+#	returns a person's drunkenness
+number the_drunkenness_of(string person)
+	return the_data_of(person, "drunkenness")
 end
 
-# returns a person's smelliness
-number thesmellinessof(string person)
-	return thedataof(person, "smelliness")
+#	returns a person's smelliness
+number the_smelliness_of(string person)
+	return the_data_of(person, "smelliness")
 end
 
-# returns a person's charisma
-number thecharismaof(string person)
-	return thedataof(person, "charisma")
+#	returns a person's charisma
+number the_charisma_of(string person)
+	return the_data_of(person, "charisma")
 end
 
-# returns a person's happiness
-number thehappinessof(string person)
-	return thedataof(person, "happiness")
+#	returns a person's happiness
+number the_happiness_of(string person)
+	return the_data_of(person, "happiness")
 end
 
-# returns a person's supremacy
-number thesupremacyof(string person)
-	return thedataof(person, "supremacy")
+#	returns a person's supremacy
+number the_supremacy_of(string person)
+	return the_data_of(person, "supremacy")
 end
 
-# set a person's stat
-void setthedataof(string thing, string stat, var value)
+#	set a person's stat
+void set_the_data_of(string thing, string stat, var value)
 	supply("SetNumericData").SetNumericData(thing, stat, value)
 end
 
-# set a person's sleepiness
-void setthesleepinessof(string person, number value)
-	setthedataof(person, "sleepiness", value)
+#	set a person's sleepiness
+void set_the_sleepiness_of(string person, number value)
+	set_the_data_of(person, "sleepiness", value)
 end
 
-# set a person's sleepiness
-void setthewalkspeedof(string person, number value)
-	setthedataof(person, "walkSpeed", value)
+#	set a person's sleepiness
+void set_the_walk_speed_of(string person, number value)
+	set_the_data_of(person, "walkSpeed", value)
 end
 
-# set a person's corruption
-void setthecorruptionof(string person, number value)
-	setthedataof(person, "sleepiness", value)
+#	set a person's corruption
+void set_the_corruption_of(string person, number value)
+	set_the_data_of(person, "sleepiness", value)
 end
 
-# set a person's drunkenness
-void setthedrunkennessof(string person, number value)
-	setthedataof(person, "drunkenness", value)
+#	set a person's drunkenness
+void set_the_drunkenness_of(string person, number value)
+	set_the_data_of(person, "drunkenness", value)
 end
 
-# set a person's smelliness
-void setthesmellinessof(string person, number value)
-	setthedataof(person, "smelliness", value)
+#	set a person's smelliness
+void set_the_smelliness_of(string person, number value)
+	set_the_data_of(person, "smelliness", value)
 end
 
-# set a person's charisma
-void setthecharismaof(string person, number value)
-	setthedataof(person, "charisma", value)
+#	set a person's charisma
+void set_the_charisma_of(string person, number value)
+	set_the_data_of(person, "charisma", value)
 end
 
-# set a person's happiness
-void setthehappinessof(string person, number value)
-	setthedataof(person, "happiness", value)
+#	set a person's happiness
+void set_the_happiness_of(string person, number value)
+	set_the_data_of(person, "happiness", value)
 end
 
-# set a person's supremacy
-void setthesupremacyof(string person, number value)
-	setthedataof(person, "supremacy", value)
+#	set a person's supremacy
+void set_the_supremacy_of(string person, number value)
+	set_the_data_of(person, "supremacy", value)
 end
 
-# zaps a person (makes person sleep)
+#	zaps a person (makes person sleep)
 void zap(string person)
-	moveitemtothing(thingwiththefunction("ZapPerson"), person)
+	move_item_to_thing(thing_with_function("ZapPerson"), person)
 	supply("ZapPerson").ZapPerson(person)
 end
 
-# gently zaps a person (stuns person)
-void gentlyzap(string person)
+#	gently zaps a person (stuns person)
+void gently_zap(string person)
 	supply("ZapPersonGently").ZapPersonGently(person)
 end
 
-# zaps people in an array
-void zapallinarray(array zaptargets, number zapduration, number delayduration)
-	if Count(zaptargets) != 0
-		loop from 0 to zapduration
-			loop zaptargets
+#	zaps people in an array
+void zap_all_in_array(array zap_targets, number zap_duration, number delay_duration)
+	if Count(zap_targets) != 0
+		loop from 0 to zap_duration
+			loop zap_targets
 				zap(@)
 			end
-			delayby(delayduration)
+			delay_by(delay_duration)
 		end
 	end	
 end
 
-# gently zaps people in an array
-void gentlyzapallinarray(array gentlyzaptargets, number zapduration, number delayduration)
-	if Count(gentlyzaptargets) != 0
-		loop from 0 to zapduration
-			loop gentlyzaptargets
-				gentlyzap(@)
+#	gently zaps people in an array
+void gently_zap_all_in_array(array gently_zap_targets, number zap_duration, number delay_duration)
+	if Count(gently_zap_targets) != 0
+		loop from 0 to zap_duration
+			loop gently_zap_targets
+				gently_zap(@)
 			end
-			delayby(delayduration)
+			delay_by(delay_duration)
 		end
 	end
 end
 
-# zaps other people in the room the user is in
-void zapothersnear(number zapduration, number delayduration)
-	array list = anarrayofpeoplenear(GetUser())
+#	zaps other people in the room the user is in
+void zap_others_near(number zap_duration, number delay_duration)
+	array list = array_of_people_near(GetUser())
 	if Count(list) != 0
-		loop from 0 to zapduration
+		loop from 0 to zap_duration
 			loop list
 				zap(@)
 			end
-			delayby(delayduration)
+			delay_by(delay_duration)
 		end
 	end	
 end
 
-# gently zaps other people in the room the user is in
-void gentlyzapothersnear(number zapduration, number delayduration)
-	array list = anarrayofpeoplenear(GetUser())
+#	gently zaps other people in the room the user is in
+void gently_zap_others_near(number zap_duration, number delay_duration)
+	array list = array_of_people_near(GetUser())
 	if Count(list) != 0
-		loop from 0 to zapduration
+		loop from 0 to zap_duration
 			loop list
-				gentlyzap(@)
+				gently_zap(@)
 			end
-			delayby(delayduration)
+			delay_by(delay_duration)
 		end
 	end	
 end
 
-# cause a person to interact with a thing
-void interact(string person, string thing)
+#	cause a person to interact with a thing
+void interact_with(string person, string thing)
 	supply("InteractWith").InteractWith(person, thing)
 end
 
 ### cash ###
-# return a person's balance
-number thebalanceof(string person)
+#	return a person's balance
+number the_balance_of(string person)
 	return supply("GetBalanceForPerson").GetBalanceForPerson(person)
 end
 
-# changes person's balance by a value
-void changethebalanceof(string person, number cash)
+#	changes person's balance by a value
+void change_the_balance_of(string person, number cash)
 	supply("ChangeBalance").ChangeBalance(person, cash)
 end
 
-# returns the difference between a number and a person's balance 
-number thebalancedifferencebetween(string person, number value)
-	return value - thebalanceof(person)
+#	returns the difference between a number and a person's balance 
+number the_balance_difference_between(string person, number value)
+	return value - the_balance_of(person)
 end
 
-# sets how much cash a person has
-void setcash(string person, number cash)
-	changethebalanceof(person, thebalancedifferencebetween(person, cash))
+#	sets how much cash a person has
+void set_cash(string person, number cash)
+	change_the_balance_of(person, the_balance_difference_between(person, cash))
 end
 
-# registers cash to Wellspringer server under a person's name 
+#	registers cash to Wellspringer server under a person's name 
 void register(string person, number cash)
 	supply("RegisterSeller").RegisterSeller(person, cash)
 end
 
 ### environment ###
-# returns the weather value
-number theweathervalue()
+#	returns the weather value
+number the_weather_value()
 	supply("GetRain").GetRain()
 end
 
-# sets the weather value
-void settheweathervalue(number value)
-	if theweathervalue() != value
+#	sets the weather value
+void set_the_weather_value(number value)
+	if the_weather_value() != value
 		supply("SetRain").SetRain(value)
 	end
 end
 
-# sets actual weather
-void setweather(number choice)
+#	sets actual weather
+void set_weather(number choice)
 	if choice == 1
-		if theweathervalue() >= 25
-			settheweathervalue(0)
+		if the_weather_value() >= 25
+			set_the_weather_value(0)
 		end
 	end
 	if choice == 2
-		if theweathervalue() >= 100 || theweathervalue() <=24 
-			settheweathervalue(25)
+		if the_weather_value() >= 100 || the_weather_value() <=24 
+			set_the_weather_value(25)
 		end
 	end
 	if choice == 3
-		if theweathervalue() >= 200 || theweathervalue() <= 99
-			settheweathervalue(100)
+		if the_weather_value() >= 200 || the_weather_value() <= 99
+			set_the_weather_value(100)
 		end
 	end
 	if choice == 4
-		if theweathervalue() <= 199
-			settheweathervalue(200)
+		if the_weather_value() <= 199
+			set_the_weather_value(200)
 		end
 	end
 end
 
 ### rooms ###
-# return string containing current room of person
-string roomof(string person)
+#	return string containing current room of person
+string room_of(string person)
 	return supply("GetRoom").GetRoom(person)
 end
 
-# returns an array of all rooms
-array anarrayofallrooms()
+#	returns an array of all rooms
+array array_of_all_rooms()
 	return supply("GetAllRooms").GetAllRooms()
 end
 
-# returns true if a string is a room
-bool isroom(string room)
-	if roomof(room) == ""
+#	returns true if a string is a room
+bool is_room(string room)
+	if room_of(room) == ""
 		return true
 	end
 end
 
-# returns an array of rooms with names containing the search string
-array arraysearchforroom(string searchstring)
+#	returns an array of rooms with names containing the search string
+array array_search_for_room(string search_string)
 	array list = []
-	loop room in anarrayofallrooms()
-		if stringhas(uppercasetolowercase(room), uppercasetolowercase(searchstring))
+	loop room in array_of_all_rooms()
+		if string_has(uppercase_to_lowercase(room), uppercase_to_lowercase(search_string))
 			Append(list, room)
 		end
 	end
 	return list
 end
 
-# returns a string of rooms with names containing the search string, delimited by delimiter
-string stringsearchforroom(string searchstring, string delimiter)
+#	returns a string of rooms with names containing the search string, delimited by delimiter
+string string_search_for_room(string search_string, string delimiter)
 	string list = ""
-	loop room in anarrayofallrooms()
-		if stringhas(uppercasetolowercase(room), uppercasetolowercase(searchstring))
+	loop room in array_of_all_rooms()
+		if string_has(uppercase_to_lowercase(room), uppercase_to_lowercase(search_string))
 			list += room + delimiter
 		end
 	end
 	return list
 end
 
-# returns an array of all items in a room
-array anarrayofthingsin(string room)
+#	returns an array of all items in a room
+array array_of_things_in(string room)
 	return supply("GetThingsInRoom").GetThingsInRoom(room)
 end
 
-# returns an array of all people in a room
-array anarrayofpeoplein(string room)
+#	returns an array of all people in a room
+array array_of_people_in(string room)
 	array list = []
-	loop anarrayofthingsin(room)
-		if stringisaperson(@)
+	loop array_of_things_in(room)
+		if string_is_a_person(@)
 			Append(list, @)
 		end
 	end
 	return list
 end
 
-# returns an array of all the people in a room that a person is in, except for that person
-array anarrayofpeoplenear(string person)
+#	returns an array of all the people in a room that a person is in, except for that person
+array array_of_people_near(string person)
 	array list = []
-	loop anarrayofpeoplein(roomof(person))
-		if stringisaperson(@) && @ != person
+	loop array_of_people_in(room_of(person))
+		if string_is_a_person(@) && @ != person
 			Append(list, @)
 		end
 	end
@@ -736,25 +709,25 @@ array anarrayofpeoplenear(string person)
 end
 
 ### teleport ###
-# move item to thing
-void moveitemtothing(string item, string thing)
+#	move item to thing
+void move_item_to_thing(string item, string thing)
 	supply("SetPosition").SetPosition(item, thing)
 end
 
-# move person to thing
-void movepersontothing(string person, string thing)
-	moveitemtothing(thingwiththefunction("MovePerson"), person)
+#	move person to thing
+void move_person_to_thing(string person, string thing)
+	move_item_to_thing(thing_with_function("MovePerson"), person)
 	supply("MovePerson").MovePerson(person, thing)
 end
 
-# move item to room
-void moveitemtoroom(string item, string room, number index)
-	array thingsinroom = anarrayofthingsin(room)
-	moveitemtothing(item, thingsinroom[index])
+#	move item to room
+void move_item_to_room(string item, string room, number index)
+	array things_in_room = array_of_things_in(room)
+	move_item_to_thing(item, things_in_room[index])
 end
 
-# move person to room
-void movepersontoroom(string person, string room, number index)
-	array thingsinroom = anarrayofthingsin(room)
-	movepersontothing(person, thingsinroom[index])
+#	move person to room
+void move_person_to_room(string person, string room, number index)
+	array things_in_room = array_of_things_in(room)
+	move_person_to_thing(person, things_in_room[index])
 end
