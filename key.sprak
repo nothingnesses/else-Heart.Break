@@ -1,19 +1,20 @@
-# mode accepts an integer with a value >= 1 <= 5 and alters the order in which values in the range are tried.
+#	mode accepts an integer with a value >= 1 <= 5 and alters the order in which values in the range are tried.
 number mode = 0
-# list accepts an array containing integer values separated by a comma and space each and together delimited by square brackets.
+#	list accepts an array containing integer values separated by a comma and space each and together delimited by square brackets.
 array list = [-1, 0, 13, 344, 666, 1111, 1234, 1337, 2358, 4991, 5611, 7471, 7472, 9788, 34711, 45914, 54321, 112358, 424242, 38984312]
-# denominator accepts an integer with a value > 0 and is used as a constant in modes 3 and 4.
+#	denominator accepts an integer with a value > 0 and is used as a constant in modes 3 and 4.
 number denominator = 100
-# max accepts an integer with a value > min and represents the upper limit of the range of numbers to be tried.
+#	max accepts an integer with a value > min and represents the upper limit of the range of numbers to be tried.
 number max = 100000
-# max accepts an integer with a value < max and represents the lower limit of the range of numbers to be tried.
+#	max accepts an integer with a value < max and represents the lower limit of the range of numbers to be tried.
 number min = 0
-# increment accepts an integer with a positive value and is used as a constant in mode 6. The value I used is the a prime number nearest to (max + min) / 4 which seems to produce random enough values.
+#	increment accepts an integer with a positive value and is used as a constant in mode 6. The value I used is the a prime number nearest to (max + min) / 4 which seems to produce random enough values.
 number increment = 24989
-# seed accepts an integer with a value < max and represents the starting value used in the PRNG.
+#	seed accepts an integer with a value < max and represents the starting value used in the PRNG.
 number seed = max - 1
 
-if mode == 0 # Tries values in the list array.
+#	Tries values in the list array.
+if mode == 0
 	loop value in list
 		if Toggle(value) == true
 			break
@@ -21,7 +22,8 @@ if mode == 0 # Tries values in the list array.
 	end
 end
 
-if mode == 1 # Tries values in the range in order.
+#	Tries values in the range in order.
+if mode == 1
 	loop value from min to max
 		if Toggle(value) == true
 			break
@@ -29,7 +31,8 @@ if mode == 1 # Tries values in the range in order.
 	end
 end
 
-if mode == 2 # Tries values in the range in reverse.
+#	Tries values in the range in reverse.
+if mode == 2
 	loop value from min to max
 		if Toggle((min + max) - value) == true
 			break
@@ -37,7 +40,8 @@ if mode == 2 # Tries values in the range in reverse.
 	end
 end
 
-if mode == 3 # Alternates between the remaining untried highest and lowest values in the range until the middle or correct value is reached.
+#	Alternates between the remaining untried highest and lowest values in the range until the middle or correct value is reached.
+if mode == 3
 	loop value from min to max
 		if (Mod(value, 2) == 0)
 			value = max - value
@@ -51,7 +55,8 @@ if mode == 3 # Alternates between the remaining untried highest and lowest value
 	end
 end
 
-if mode == 4 # Divides the range by denominator and tries values in each fragment in reverse, doing so until the correct value is reached or the range is exhausted.
+#	Divides the range by denominator and tries values in each fragment in reverse, doing so until the correct value is reached or the range is exhausted.
+if mode == 4
 	loop numerator from 1 to denominator
 		loop value from Int(((numerator - 1) * (max - min)) / denominator) to Int((numerator * (max - min)) / denominator)
 			if Toggle((Int((numerator * (max - min)) / denominator) + Int(((numerator - 1) * (max - min)) / denominator)) - value) == true
@@ -62,7 +67,8 @@ if mode == 4 # Divides the range by denominator and tries values in each fragmen
 	end
 end
 
-if mode == 5 # Divides the range by denominator and alternates between the remaining untried highest and lowest values for each fragment, moving to the next fragment when the middle value of the current fragment is reached, doing so until the correct value is reached or the range is exhausted.
+#	Divides the range by denominator and alternates between the remaining untried highest and lowest values for each fragment, moving to the next fragment when the middle value of the current fragment is reached, doing so until the correct value is reached or the range is exhausted.
+if mode == 5
 	loop numerator from 1 to denominator
 		loop value from Int(((numerator - 1) * (max - min)) / denominator) to Int((numerator * (max - min)) / denominator)
 			if (Mod(value, 2) == 0)
@@ -79,7 +85,8 @@ if mode == 5 # Divides the range by denominator and alternates between the remai
 	end
 end
 
-if mode == 6 # Tries values in the range in pseudo-random order using a form of linear congruential generator.
+#	Tries values in the range in pseudo-random order using a form of linear congruential generator.
+if mode == 6
 	loop
 		seed = Mod((seed + increment), max)
 		if Toggle(seed) == true
