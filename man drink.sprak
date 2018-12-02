@@ -2,80 +2,80 @@ The default values for the variables in drink.sprak causes 999 money to be regis
 
 The following shows the variables in the drink code, what value types/values they accept and what they do after the user drinks: 
 
-movethese accepts an array containing strings, each of which contains the name of any person or item to be teleported after the user drinks.
+move_these accepts an array containing strings, each of which contains the name of any person or item to be teleported after the user drinks.
 
 destination accepts a string containing the name of any person, item or room to teleport to after the user drinks.
 
-sleepiness accepts an integer. Drinking causes the Sleepiness of anyone in the setstatsfor array to be set to the value of the sleepiness variable.
+sleepiness accepts an integer. Drinking causes the Sleepiness of anyone in the set_stats_for array to be set to the value of the sleepiness variable.
 
-index accepts an integer with a value >= 0 and represents an item in target room that is used in moveitemtoroom() and movepersontoroom() functions as an item in the room to teleport the content(s) of the movethese variable to.
+index accepts an integer with a value >= 0 and represents an item in target room that is used in move_item_to_room() and move_person_to_room() functions as an item in the room to teleport the content(s) of the move_these variable to.
 
-lockdoorsnearswitch accepts a boolean and, if set to true, locks all doors in the room where the user is currently inside of.
+lock_doors_near_switch accepts a boolean and, if set to true, locks all doors in the room where the user is currently inside of.
 
-unlockdoorsnearswitch accepts a boolean and, if set to true, unlocks all doors in the room where the user is currently inside of.
+unlock_doors_near_switch accepts a boolean and, if set to true, unlocks all doors in the room where the user is currently inside of.
 
-lockdoorsnotnearswitch accepts a boolean and, if set to true, locks all doors in all the other rooms that the user is currently not inside of.
+lock_doors_not_near_switch accepts a boolean and, if set to true, locks all doors in all the other rooms that the user is currently not inside of.
 
-unlockdoorsnotnearswitch accepts a boolean and, if set to true, unlocks all doors all the other rooms that the user is currently not inside of.
+unlock_doors_not_near_switch accepts a boolean and, if set to true, unlocks all doors all the other rooms that the user is currently not inside of.
 
-copying, when set to true, causes wheres, thingsin, searchforthings or searchforrooms' last result(s) to be copied to clipboard after the user drinks.
+copying, when set to true, causes wheres, thingsin, search_for_things or search_for_rooms' last result(s) to be copied to clipboard after the user drinks.
 
 wheres accepts an array containing strings, each of which contains the name of any person or item whose current position(s) are displayed after the user drinks.
 
-whatsin accepts an array containing strings, each of which contains the name of any room, the current contents of which are displayed,after after the user drinks.
+whats_in accepts an array containing strings, each of which contains the name of any room, the current contents of which are displayed,after after the user drinks.
 
-interactors accepts an array containing strings, each of which contains the name of any person who will then interact with the content of the interactwith string after the user drinks.
+interactors accepts an array containing strings, each of which contains the name of any person who will then interact with the content of the interactee string after the user drinks.
 
-interactwith accepts a string containing the name of any person or item who will be interacted with by the content(s) of the incteractors array after the user drinks.
+interactee accepts a string containing the name of any person or item who will be interacted with by the content(s) of the incteractors array after the user drinks.
 
 zapothersinroomswitch, when set to true, causes anyone in the same room as the user to be zapped (and consequently fall asleep) after the user drinks.
 
-gentlyzapothersinroomswitch, when set to true, causes anyone in the same room as the user to be gently zapped (stuns them, but does not make them sleep) after the user drinks.
+gently_zapothersinroomswitch, when set to true, causes anyone in the same room as the user to be gently zapped (stuns them, but does not make them sleep) after the user drinks.
 
-walkspeed accepts an integer. Drinking causes the walkSpeed of anyone in the setstatsfor array to be set to the value of the walkspeed variable.
+walk_speed accepts an integer. Drinking causes the walkSpeed of anyone in the set_stats_for array to be set to the value of the walk_speed variable.
 
 weather accepts an integer with a value >= 1 <= 4 and, when drinking, causes the severity of the weather to be changed according to the value; 1 = Sunny, 2 = Drizzly, 3 = Rainy, 4 = Stormy.
 
-zaptargets accepts an array containing strings, each of which contains the name of any person who will be zapped after the user drinks.
+zap_targets accepts an array containing strings, each of which contains the name of any person who will be zapped after the user drinks.
 
-zaptargets accepts an array containing strings, each of which contains the name of any person who will be gently zapped after the user drinks.
+zap_targets accepts an array containing strings, each of which contains the name of any person who will be gently zapped after the user drinks.
 
-setstatsfor accepts an array containing strings, each of which contains the name of any person. This is used in conjuction with the sleepiness, corruption, drunkenness, smelliness, charisma, supremacy and happiness variables to set those stats for anyone in the setstatsfor array after the user drinks.
+set_stats_for accepts an array containing strings, each of which contains the name of any person. This is used in conjuction with the sleepiness, corruption, drunkenness, smelliness, charisma, supremacy and happiness variables to set those stats for anyone in the set_stats_for array after the user drinks.
 
 saystatsfor accepts an array containing strings, each of which contains the name of any person, whose stats are displayed after the user drinks.
 
-delayduration accepts an integer >= 0 and represents the duration of delay that the searchforrooms, searchforthings, zap and gentlyzap functions use.
+delay_duration accepts an integer >= 0 and represents the duration of delay that the search_for_rooms, search_for_things, zap and gently_zap functions use.
 
-searchforthings accepts an array containing strings. After the user drinks, causes valid person or item names containing the string as well as the respective positions to be returned if found. 
+search_for_things accepts an array containing strings. After the user drinks, causes valid person or item names containing the string as well as the respective positions to be returned if found. 
 
-searchforrooms accepts an array containing strings. After the user drinks, causes valid room names containing the strings to be returned if found.
+search_for_rooms accepts an array containing strings. After the user drinks, causes valid room names containing the strings to be returned if found.
 
-cash accepts an integer. After the user drinks, the amount of cash of anyone in the givecashto array is changed to its value. You generally don't want its value to be too large because the money is added incrementally and not all at once which means a large value takes a long time to be set. 
+cash accepts an integer. After the user drinks, the amount of cash of anyone in the give_cash_to array is changed to its value. You generally don't want its value to be too large because the money is added incrementally and not all at once which means a large value takes a long time to be set. 
 
-givecashto accepts an array containing strings, each of which contains the name of any person whose cash is set to the value of the cash variable after the user drinks.
+give_cash_to accepts an array containing strings, each of which contains the name of any person whose cash is set to the value of the cash variable after the user drinks.
 
-zapduration accepts an integer >= 0 and its value defines the duration of the zap and gentlyzap functions.
+zap_duration accepts an integer >= 0 and its value defines the duration of the zap and gently_zap functions.
 
-cashforwellspring accepts an integer and, when drinking, causes cash equal to its value to be registered by the content of the wellspringcashsender variable to Wellspringer. You generally don't want to set this to a large value either for similar reasons as above.
+cash_for_wellspring accepts an integer and, when drinking, causes cash equal to its value to be registered by the content of the wellspring_cash_sender variable to Wellspringer. You generally don't want to set this to a large value either for similar reasons as above.
 
-wellspringcashsender accepts a string containing the name of any person and is used in conjunction with the above to register cash to Wellspringer.
+wellspring_cash_sender accepts a string containing the name of any person and is used in conjunction with the above to register cash to Wellspringer.
 
-corruption accepts an integer. Drinking causes the Corruption of anyone in the setstatsfor array to be set to the value of the corruption variable.
+corruption accepts an integer. Drinking causes the Corruption of anyone in the set_stats_for array to be set to the value of the corruption variable.
 
-drunkenness accepts an integer. Drinking causes the Drunkenness of anyone in the setstatsfor array to be set to the value of the drunkenness variable.
+drunkenness accepts an integer. Drinking causes the Drunkenness of anyone in the set_stats_for array to be set to the value of the drunkenness variable.
 
-smelliness accepts an integer. Drinking causes the Smelliness of anyone in the setstatsfor array to be set to the value of the smelliness variable.
+smelliness accepts an integer. Drinking causes the Smelliness of anyone in the set_stats_for array to be set to the value of the smelliness variable.
 
-charisma accepts an integer. Drinking causes the Charisma of anyone in the setstatsfor array to be set to the value of the charisma variable.
+charisma accepts an integer. Drinking causes the Charisma of anyone in the set_stats_for array to be set to the value of the charisma variable.
 
-supremacy accepts an integer. Drinking causes the Supremacy of anyone in the setstatsfor array to be set to the value of the supremacy variable.
+supremacy accepts an integer. Drinking causes the Supremacy of anyone in the set_stats_for array to be set to the value of the supremacy variable.
 
-happiness accepts an integer. Drinking causes the Happiness of anyone in the setstatsfor array to be set to the value of the happiness variable.
+happiness accepts an integer. Drinking causes the Happiness of anyone in the set_stats_for array to be set to the value of the happiness variable.
 
-getlistsofthingsincategories accepts an array containing strings, each of which are names of categories of objects. Lists of things in these categories are displayed after the user drinks.
+get_lists_of_things_in_categories accepts an array containing strings, each of which are names of categories of objects. Lists of things in these categories are displayed after the user drinks.
 
-getalistofeverything, if set to true, displays a list of everything after the user drinks. The script takes a while to finish so it's best to pause the game and wait for it as the game runs scripts quicker when paused.
+get_a_list_of_everything, if set to true, displays a list of everything after the user drinks. The script takes a while to finish so it's best to pause the game and wait for it as the game runs scripts quicker when paused.
 
-getalistofeverythingandtheirpositions, if set to true, displays a list of everything and their positions after the user drinks. The script takes a while to finish so it's best to pause the game and wait for it as the game runs scripts quicker when paused.
+get_a_list_of_everything_and_their_positions, if set to true, displays a list of everything and their positions after the user drinks. The script takes a while to finish so it's best to pause the game and wait for it as the game runs scripts quicker when paused.
 
-saylist is a string that doesn't need to be edited. It's content is changed when other functions are activated and is then displayed after the other functions after the user drinks.
+say_list is a string that doesn't need to be edited. It's content is changed when other functions are activated and is then displayed after the other functions after the user drinks.
