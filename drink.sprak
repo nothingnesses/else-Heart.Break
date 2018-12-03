@@ -127,7 +127,7 @@ if Count(give_cash_to) != 0
 		end
 	end
 	if recipient_list != 0
-		say_list += "For " + recipient_list + ", cash was set to: $" + cash + ". "
+		say_list += "For " + recipient_list + "cash was set to: $" + cash + ". "
 	end
 end
 
