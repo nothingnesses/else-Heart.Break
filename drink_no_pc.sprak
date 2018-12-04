@@ -329,7 +329,6 @@ end
 #################
 #	returns the name of thing that provides function
 string thing_with_function(string function)
-	string server_0 = Name()
 	string server_1 = "PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1"
 	string server_2 = "Heart"
 	string server_bank = "FinanceComputer"
@@ -339,7 +338,7 @@ string thing_with_function(string function)
 	string server_meteorology = "MeteorologyServer"
 	string server_wellspring = "Wellspringer"
 	string thing_with_change_balance = server_bank
-	string thing_with_char_to_int = server_0
+	string thing_with_char_to_int = server_1
 	string thing_with_copy_to_clipboard = "Hotel_ServerBasement_Extractor_1"
 	string thing_with_get_all_rooms = server_1
 	string thing_with_get_balance_for_person = server_bank
@@ -351,10 +350,12 @@ string thing_with_function(string function)
 	string thing_with_get_things_in_room = server_1
 	string thing_with_get_type_of_thing = server_1
 	string thing_with_interact_with = server_1
-	string thing_with_int_to_char = server_0
+	string thing_with_int_to_char = server_1
+	string thing_with_load_memory = server_data_storage
 	string thing_with_lock = server_door_lock
 	string thing_with_move_person = server_large_recorder
 	string thing_with_register_seller = server_wellspring
+	string thing_with_save_memory = server_data_storage
 	string thing_with_set_numeric_data = server_2
 	string thing_with_set_position = server_1
 	string thing_with_set_weather = server_meteorology
@@ -406,6 +407,9 @@ string thing_with_function(string function)
 	if function == "IntToChar"
 		return thing_with_int_to_char
 	end
+	if function == "LoadMemory"
+		return thing_with_load_memory
+	end
 	if function == "Lock"
 		return thing_with_lock
 	end
@@ -414,6 +418,9 @@ string thing_with_function(string function)
 	end
 	if function == "RegisterSeller"
 		return thing_with_register_seller
+	end
+	if function == "SaveMemory"
+		return thing_with_save_memory
 	end
 	if function == "SetNumericData"
 		return thing_with_set_numeric_data
@@ -546,6 +553,16 @@ end
 #	returns true if a string is present in a string
 bool string_has(string whole, string section)
 	return supply("StringContains").StringContains(whole, section)
+end
+
+#	saves a piece of data to server_data_storage variable set in thing_with_function() using key
+void save(var key, var data)
+	return supply("SaveMemory").SaveMemory(key, data)
+end
+
+#	loads a piece of data to server_data_storage variable set in thing_with_function() using key
+void load(var key)
+	return supply("LoadMemory").LoadMemory(key)
 end
 
 ### things ###
