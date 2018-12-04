@@ -41,6 +41,7 @@ number supremacy = 0
 array get_lists_of_things_in_categories = []
 bool get_a_list_of_everything = false
 bool get_a_list_of_everything_and_their_positions = false
+bool saving = true
 string say_list = ""
 
 ############
@@ -212,7 +213,7 @@ end
 if Count(search_for_things) != 0
 	string list = ""
 	loop search_for_things
-		list += pc.string_search_for_thing(@, ", ") + ". "
+		list += pc.string_search_for_thing_with_position(@, ", ", " || ") + ". "
 	end
 	say_list += "Search for " + search_for_things + " returned: " + list + "."
 end
@@ -311,10 +312,13 @@ if gently_zap_others_near_switch
 end
 
 if say_list != ""
+	Say(say_list)
 	if copying
 		pc.copy(say_list)
-		Say("Copied: " + say_list)
-	else
-		Say(say_list)
+		Say("Copied output.")
+	end
+	if saving
+		pc.save("output_drink", say_list)
+		Say("Saved output to " + pc.thing_with_function("SaveMemory") + ' using key "output_drink".')
 	end
 end
