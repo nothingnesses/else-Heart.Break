@@ -30,6 +30,7 @@ string thing_with_function(string function)
 	string thing_with_lock = server_door_lock
 	string thing_with_move_person = server_large_recorder
 	string thing_with_register_seller = server_wellspring
+	string thing_with_remove = server_0
 	string thing_with_save_memory = server_data_storage
 	string thing_with_set_numeric_data = server_2
 	string thing_with_set_position = server_1
@@ -93,6 +94,9 @@ string thing_with_function(string function)
 	end
 	if function == "RegisterSeller"
 		return thing_with_register_seller
+	end
+	if function == "Remove"
+		return thing_with_remove
 	end
 	if function == "SaveMemory"
 		return thing_with_save_memory
@@ -245,23 +249,9 @@ array array_element_insert(array_old, index_insertion, value)
 	return array_new
 end
 
-#	accepts an array and returns an array with the same elements except for one in a chosen index which is deleted
-void array_element_delete(array_old, index_deletion)
-	number array_old_amount = Count(array_old) - 1
-	array array_new = []
-	number index_a = 0
-	loop array_old
-		if index_a < index_deletion
-			Append(array_new, @)
-		end
-		index_a ++
-	end
-	if index_deletion < array_old_amount
-		loop x from (index_deletion + 1) to array_old_amount
-			Append(array_new, array_old[x])
-		end
-	end
-	return array_new
+#	removes the element in the chosen index of an array
+void array_element_delete(array, index_deletion)
+	supply("Remove").Remove(array, index_deletion)
 end
 
 #	returns true if a string is present in a string
