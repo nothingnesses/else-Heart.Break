@@ -42,6 +42,7 @@ array get_lists_of_things_in_categories = []
 bool get_a_list_of_everything = false
 bool get_a_list_of_everything_and_their_positions = false
 bool saving = true
+string memory_key_output_drink = "output_drink"
 string pc = Connect(server)
 string say_list = ""
 
@@ -313,13 +314,15 @@ if gently_zap_others_near_switch
 end
 
 if say_list != ""
-	Say(say_list)
+	if !(copying || saving)
+		Say(say_list)
+	end
 	if copying
 		pc.copy(say_list)
-		Say("Copied output.")
+		Say("Copied: " + say_list)
 	end
 	if saving
-		pc.save("output_drink", say_list)
-		Say('Saved output to "' + pc.thing_with_function("SaveMemory") + '" using key "output_drink".')
+		pc.save(memory_key_output_drink, say_list)
+		Say('The following was saved to "' + pc.thing_with_function("SaveMemory") + '" using the key "' + memory_key_output_drink + '": ' + say_list)
 	end
 end
