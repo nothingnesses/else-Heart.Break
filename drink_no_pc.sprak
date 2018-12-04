@@ -40,6 +40,7 @@ array get_lists_of_things_in_categories = []
 bool get_a_list_of_everything = false
 bool get_a_list_of_everything_and_their_positions = false
 bool saving = true
+string memory_key_output_drink = "output_drink"
 string say_list = ""
 
 ############
@@ -310,14 +311,16 @@ if gently_zap_others_near_switch
 end
 
 if say_list != ""
-	Say(say_list)
+	if !(copying || saving)
+		Say(say_list)
+	end
 	if copying
 		copy(say_list)
-		Say("Copied output.")
+		Say("Copied: " + say_list)
 	end
 	if saving
-		save("output_drink", say_list)
-		Say('Saved output to "' + thing_with_function("SaveMemory") + '" using key "output_drink".')
+		save(memory_key_output_drink, say_list)
+		Say('The following was saved to "' + thing_with_function("SaveMemory") + '" using the key "' + memory_key_output_drink + '": ' + say_list)
 	end
 end
 
@@ -326,6 +329,7 @@ end
 #################
 #	returns the name of thing that provides function
 string thing_with_function(string function)
+	string server_0 = Name()
 	string server_1 = "PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1"
 	string server_2 = "Heart"
 	string server_bank = "FinanceComputer"
@@ -335,7 +339,7 @@ string thing_with_function(string function)
 	string server_meteorology = "MeteorologyServer"
 	string server_wellspring = "Wellspringer"
 	string thing_with_change_balance = server_bank
-	string thing_with_char_to_int = server_1
+	string thing_with_char_to_int = server_0
 	string thing_with_copy_to_clipboard = "Hotel_ServerBasement_Extractor_1"
 	string thing_with_get_all_rooms = server_1
 	string thing_with_get_balance_for_person = server_bank
@@ -347,7 +351,7 @@ string thing_with_function(string function)
 	string thing_with_get_things_in_room = server_1
 	string thing_with_get_type_of_thing = server_1
 	string thing_with_interact_with = server_1
-	string thing_with_int_to_char = server_1
+	string thing_with_int_to_char = server_0
 	string thing_with_lock = server_door_lock
 	string thing_with_move_person = server_large_recorder
 	string thing_with_register_seller = server_wellspring
