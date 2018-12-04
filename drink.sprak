@@ -1,8 +1,8 @@
 #################
 ### variables ###
 #################
-#	pc can be the name of any other computer as long as that computer is coded with server.sprak and isn't used in the thing_with_function() function in the server.sprak, otherwise connections to that computer will be blocked when the functions are used
-string pc = Connect("Yvonne_ArcadeMachine2")
+#	server can be the name of any other computer as long as that computer is coded with server.sprak and isn't used in the thing_with_function() function in the server.sprak, otherwise connections to that computer will be blocked when the functions are used
+string server = "Yvonne_ArcadeMachine2"
 array move_these = []
 string destination = ""
 number index = 0
@@ -42,6 +42,7 @@ array get_lists_of_things_in_categories = []
 bool get_a_list_of_everything = false
 bool get_a_list_of_everything_and_their_positions = false
 bool saving = true
+string pc = Connect(server)
 string say_list = ""
 
 ############
