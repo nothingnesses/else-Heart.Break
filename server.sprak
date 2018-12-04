@@ -3,6 +3,7 @@
 #################
 #	returns the name of thing that provides function
 string thing_with_function(string function)
+	string server_0 = Name()
 	string server_1 = "PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1"
 	string server_2 = "Heart"
 	string server_bank = "FinanceComputer"
@@ -12,7 +13,7 @@ string thing_with_function(string function)
 	string server_meteorology = "MeteorologyServer"
 	string server_wellspring = "Wellspringer"
 	string thing_with_change_balance = server_bank
-	string thing_with_char_to_int = server_1
+	string thing_with_char_to_int = server_0
 	string thing_with_copy_to_clipboard = "Hotel_ServerBasement_Extractor_1"
 	string thing_with_get_all_rooms = server_1
 	string thing_with_get_balance_for_person = server_bank
@@ -24,7 +25,7 @@ string thing_with_function(string function)
 	string thing_with_get_things_in_room = server_1
 	string thing_with_get_type_of_thing = server_1
 	string thing_with_interact_with = server_1
-	string thing_with_int_to_char = server_1
+	string thing_with_int_to_char = server_0
 	string thing_with_load_memory = server_data_storage
 	string thing_with_lock = server_door_lock
 	string thing_with_move_person = server_large_recorder
@@ -222,6 +223,45 @@ string array_to_string(array list)
 		stringified += element
 	end
 	return stringified
+end
+
+#	accepts an array and returns an array with the same elements in addition to an element inserted at a chosen index
+array array_element_insert(array_old, index_insertion, value)
+	number array_old_amount = Count(array_old) - 1
+	array array_new = []
+	number index_a = 0
+	loop array_old
+		if index_a < index_insertion
+			Append(array_new, @)
+		end
+		index_a ++
+	end
+	Append(array_new, value)
+	if index_insertion < array_old_amount
+		loop x from index_insertion to array_old_amount
+			Append(array_new, array_old[x])
+		end
+	end
+	return array_new
+end
+
+#	accepts an array and returns an array with the same elements except for one in a chosen index which is deleted
+void array_element_delete(array_old, index_deletion)
+	number array_old_amount = Count(array_old) - 1
+	array array_new = []
+	number index_a = 0
+	loop array_old
+		if index_a < index_deletion
+			Append(array_new, @)
+		end
+		index_a ++
+	end
+	if index_deletion < array_old_amount
+		loop x from (index_deletion + 1) to array_old_amount
+			Append(array_new, array_old[x])
+		end
+	end
+	return array_new
 end
 
 #	returns true if a string is present in a string
