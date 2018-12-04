@@ -39,6 +39,7 @@ number supremacy = 0
 array get_lists_of_things_in_categories = []
 bool get_a_list_of_everything = false
 bool get_a_list_of_everything_and_their_positions = false
+bool saving = true
 string say_list = ""
 
 ############
@@ -210,7 +211,7 @@ end
 if Count(search_for_things) != 0
 	string list = ""
 	loop search_for_things
-		list += string_search_for_thing(@, ", ") + ". "
+		list += string_search_for_thing_with_position(@, ", ", " || ") + ". "
 	end
 	say_list += "Search for " + search_for_things + " returned: " + list + "."
 end
@@ -309,11 +310,14 @@ if gently_zap_others_near_switch
 end
 
 if say_list != ""
+	Say(say_list)
 	if copying
 		copy(say_list)
-		Say("Copied: " + say_list)
-	else
-		Say(say_list)
+		Say("Copied output.")
+	end
+	if saving
+		save("output_drink", say_list)
+		Say("Saved output to " + thing_with_function("SaveMemory") + ' using key "output_drink".')
 	end
 end
 
@@ -655,6 +659,19 @@ string string_search_for_thing(string search_string, string delimiter)
 		loop thing in array_of_things_in(@)
 			if string_has(uppercase_to_lowercase(thing), uppercase_to_lowercase(search_string))
 				list += thing + delimiter
+			end
+		end
+	end
+	return list
+end
+
+#	returns a string of things with names containing the search string and their positions, delimited by delimiter
+string string_search_for_thing_with_position(string search_string, string delimiter_position, string delimiter_thing)
+	string list = ""
+	loop array_of_all_rooms()
+		loop thing in array_of_things_in(@)
+			if string_has(uppercase_to_lowercase(thing), uppercase_to_lowercase(search_string))
+				list += thing + delimiter_position + string_of_position_of(thing, delimiter_position) + delimiter_thing
 			end
 		end
 	end
