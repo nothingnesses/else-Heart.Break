@@ -360,6 +360,19 @@ string string_search_for_thing(string search_string, string delimiter)
 	return list
 end
 
+#	returns a string of things with names containing the search string and their positions, delimited by delimiter
+string string_search_for_thing_with_position(string search_string, string delimiter_position, string delimiter_thing)
+	string list = ""
+	loop array_of_all_rooms()
+		loop thing in array_of_things_in(@)
+			if string_has(uppercase_to_lowercase(thing), uppercase_to_lowercase(search_string))
+				list += thing + delimiter_position + string_of_position_of(thing, delimiter_position) + delimiter_thing
+			end
+		end
+	end
+	return list
+end
+
 #	locks doors
 void lock(string door)
 	supply("Lock").Lock(door)
