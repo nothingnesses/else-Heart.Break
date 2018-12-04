@@ -317,7 +317,7 @@ if say_list != ""
 	end
 	if saving
 		save("output_drink", say_list)
-		Say("Saved output to " + thing_with_function("SaveMemory") + ' using key "output_drink".')
+		Say('Saved output to "' + thing_with_function("SaveMemory") + '" using key "output_drink".')
 	end
 end
 
