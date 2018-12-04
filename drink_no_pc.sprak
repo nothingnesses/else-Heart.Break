@@ -325,7 +325,7 @@ end
 ### functions ###
 #################
 #	returns the name of thing that provides function
-array thing_with_function(string function)
+string thing_with_function(string function)
 	string server_1 = "PoliceOfficeInterior_MinistryOfficeWorkstationComputer_1"
 	string server_2 = "Heart"
 	string server_bank = "FinanceComputer"
