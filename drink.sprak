@@ -94,7 +94,7 @@ end
 if Count(say_stats_of) != 0
 	loop say_stats_of
 		if pc.string_is_a_person(@)
-			say_list += @ + ": Sleepiness - " + pc.the_sleepiness_of(@) + ", Corruption - " + pc.the_corruption_of(@) + ", Drunkenness - " + pc.the_drunkenness_of(@) + ", Smelliness - " + pc.the_smelliness_of(@) + ", Charisma - " + pc.the_charisma_of(@) + ", Happiness - " + pc.the_happiness_of(@) + ", Supremacy - " + pc.the_supremacy_of(@) + ". "
+			say_list += @ + ": Sleepiness = " + pc.the_sleepiness_of(@) + ", Corruption = " + pc.the_corruption_of(@) + ", Drunkenness = " + pc.the_drunkenness_of(@) + ", Smelliness = " + pc.the_smelliness_of(@) + ", Charisma = " + pc.the_charisma_of(@) + ", Happiness = " + pc.the_happiness_of(@) + ", Supremacy = " + pc.the_supremacy_of(@) + ". "
 		else
 			say_list += @ + " is not a valid say_stats_of value. Use an array containing strings delimited by commas, each containing the name of a person. "
 		end
