@@ -91,7 +91,7 @@ end
 if Count(say_stats_of) != 0
 	loop say_stats_of
 		if string_is_a_person(@)
-			say_list += @ + ": Sleepiness - " + the_sleepiness_of(@) + ", Corruption - " + the_corruption_of(@) + ", Drunkenness - " + the_drunkenness_of(@) + ", Smelliness - " + the_smelliness_of(@) + ", Charisma - " + the_charisma_of(@) + ", Happiness - " + the_happiness_of(@) + ", Supremacy - " + the_supremacy_of(@) + ". "
+			say_list += @ + ": Sleepiness = " + the_sleepiness_of(@) + ", Corruption = " + the_corruption_of(@) + ", Drunkenness = " + the_drunkenness_of(@) + ", Smelliness = " + the_smelliness_of(@) + ", Charisma = " + the_charisma_of(@) + ", Happiness = " + the_happiness_of(@) + ", Supremacy = " + the_supremacy_of(@) + ". "
 		else
 			say_list += @ + " is not a valid say_stats_of value. Use an array containing strings delimited by commas, each containing the name of a person. "
 		end
@@ -504,41 +504,41 @@ number character_to_number(string character)
 end
 
 #	slices a string
-string slice(string input_string, number index, string lastcharacter)
-	string outputslice = ""
+string slice(string input_string, number index, string last_character)
+	string output_slice = ""
 	loop
-		if input_string[index] == lastcharacter
+		if input_string[index] == last_character
 			break
 		else
-			outputslice += input_string[index]
+			output_slice += input_string[index]
 		end
 		index++
 	end
-	return outputslice
+	return output_slice
 end
 
 #	converts a string to a number
 number string_to_number(string input_string)
-	number outputnumber = 0
-	number currentnumber = 0
-	bool isnegative = false
-	number stringlength = Count(input_string) - 1
+	number output_number = 0
+	number current_number = 0
+	bool is_negative = false
+	number string_length = Count(input_string) - 1
 	loop character in input_string
 		if character == "-"
-			isnegative = true
+			is_negative = true
 		else
-			currentnumber = character_to_number(character) + 49
-			if stringlength != 0
-				currentnumber *= power(10, stringlength)
+			current_number = character_to_number(character) + 49
+			if string_length != 0
+				current_number *= power(10, string_length)
 			end
-			outputnumber += currentnumber
+			output_number += current_number
 		end
-		stringlength--
+		string_length--
 	end
-	if isnegative
-		outputnumber *= -1
+	if is_negative
+		output_number *= -1
 	end
-	return outputnumber
+	return output_number
 end
 
 #	converts an array to a string
