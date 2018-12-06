@@ -250,8 +250,8 @@ array array_element_insert(array_old, index_insertion, value)
 end
 
 #	removes the element in the chosen index of an array
-void array_element_delete(array, index_deletion)
-	supply("Remove").Remove(array, index_deletion)
+void array_element_delete(array_old, index_deletion)
+	supply("Remove").Remove(array_old, index_deletion)
 end
 
 #	returns true if a string is present in a string
